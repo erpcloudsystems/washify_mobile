@@ -61,43 +61,6 @@ abstract class AppTheme {
           labelSmall: TextStyle(fontSize: 12.sp),
         ),
 
-        // Text Form Field theme
-        inputDecorationTheme: InputDecorationTheme(
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(18)),
-          contentPadding: const EdgeInsets.all(8),
-          hintStyle: TextStyle(
-            fontSize: 18.sp,
-          ),
-          labelStyle: TextStyle(
-            fontSize: 18.sp,
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(18),
-            borderSide: const BorderSide(width: .5),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(18),
-            borderSide: const BorderSide(width: .8),
-          ),
-          disabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(18),
-            borderSide: const BorderSide(color: ColorsManager.grey, width: .8),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(18),
-            borderSide: const BorderSide(color: ColorsManager.red, width: .8),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(18),
-          ),
-          prefixIconColor: Colors.grey.shade600,
-          suffixIconColor: ColorsManager.mainColor,
-          errorStyle: TextStyle(
-            color: ColorsManager.red,
-            fontSize: 14.sp,
-          ),
-        ),
-
         // Icons
         iconTheme: IconThemeData(
           size: 22.sp,

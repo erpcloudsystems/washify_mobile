@@ -9,6 +9,8 @@ class StringsManager {
   static const String create = 'Create';
   static const String profile = 'Profile';
   static const String login = 'Login';
+  static const String loginDescription =
+      'Welcome back. Enter your credentials to access your account';
   static const String id = 'ID';
   static const String phoneNumber = 'Phone number';
   static const String address = 'Address';
@@ -39,4 +41,33 @@ class StringsManager {
   static const String ok = 'OK';
   static const String notData = 'No data';
   static const String logout = 'Logout';
+  static const String locate = 'Locate';
+  static const String chooseYourTerritory = 'Choose your territory...';
+  static const String next = 'Next';
+  static const String emailAddress = 'Email Address';
+  static const String keepMeSignedIn = 'Keep me signed in';
+  static const String kContinue = 'Continue';
+  static const String doNotHaveAnAccount = "Don't have an account?";
+  static const String signUpHere = 'Sign up here';
+  static const String signUp = 'Sign up';
+  static const String signUpDescription =
+      'We’ll get you up and running so you can verify your personal information and customize your account.';
+  static const String firstName = 'First Name';
+  static const String lastName = 'Last Name';
+  static const String phone = 'Phone';
+  static const String createPassword = 'Create Password';
+  static const String confirmPassword = 'Confirm Password';
+  static const String rememberMe = 'Remember Me';
+  static const String howDidYouFindAboutUs =
+      'How did you find about us? (optional)';
+  static const String alreadyHaveAnAccount = 'Already have an account?';
+  static const String loginHere = 'Login here';
+  static const String services = 'Services';
+  static const String chooseYourMonthlySubscription = 'Choose your monthly subscription...';
+  static const String orSignUpWith = 'or sign up with';
+  static const String subscribe = 'Subscribe';
+  static const String google = 'Google';
+  static const String signUpWithGoogle = 'Sign up with Google';
+  static const String facebook = 'Facebook';
+  static const String signUpWithFacebook = 'Sign up with Facebook';
 }

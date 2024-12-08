@@ -24,7 +24,7 @@ class CustomElevatedButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          minimumSize: Size(double.infinity, 55.h),
+          minimumSize: Size(double.infinity, 44.h),
           backgroundColor:
               elevatedButtonStyle == CustomElevatedButtonStyle.primary
                   ? ColorsManager.mainColor
@@ -39,7 +39,7 @@ class CustomElevatedButton extends StatelessWidget {
               width: .7,
             ),
             borderRadius: BorderRadius.circular(
-              22.r,
+              4.r,
             ),
           ),
         ),
@@ -49,7 +49,6 @@ class CustomElevatedButton extends StatelessWidget {
                 title,
                 style: TextStyle(
                   fontSize: 18.sp,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
       ),

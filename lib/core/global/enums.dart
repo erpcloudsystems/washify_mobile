@@ -3,3 +3,7 @@ enum CustomElevatedButtonStyle {
   secondary,
 }
 
+enum SignUpWithSocialWidgetStyle{
+  login,
+  signUp,
+}

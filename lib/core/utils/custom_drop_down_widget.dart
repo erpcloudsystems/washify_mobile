@@ -40,59 +40,62 @@ class _CustomDropDownFormFieldState extends State<CustomDropDownFormField> {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonFormField<String>(
-      hint: Text(
-        widget.hint,
-        style: TextStyle(
-          fontSize: 18.sp,
+    return SizedBox(
+      height: 45.h,
+      child: DropdownButtonFormField<String>(
+        hint: Text(
+          widget.hint,
+          style: TextStyle(
+            fontSize: 12.sp,
+          ),
         ),
-      ),
-      validator: widget.validator ??
-          (value) {
-            if (value == null || value.trim().isEmpty) {
-              return StringsManager.emptyValidator;
+        validator: widget.validator ??
+            (value) {
+              if (value == null || value.trim().isEmpty) {
+                return StringsManager.emptyValidator;
+              }
+              return null;
+            },
+        decoration: InputDecoration(
+          border: const OutlineInputBorder(
+            borderSide: BorderSide(
+              color: ColorsManager.mainColor,
+            ),
+          ),
+          prefixIcon: widget.prefixIcon != null
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FaIcon(
+                      widget.prefixIcon,
+                      size: 20.sp,
+                    ),
+                  ],
+                )
+              : null,
+        ),
+        value: _selected,
+        items: widget.dropDownList.map((e) {
+          return DropdownMenuItem<String>(
+            value: e,
+            child: Text(
+              e,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          );
+        }).toList(),
+        onChanged: (String? newValue) {
+          setState(() {
+            _selected = newValue;
+            if (widget.selectedValue != null) {
+              widget.selectedValue!(newValue);
             }
-            return null;
-          },
-      decoration: InputDecoration(
-        border: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: ColorsManager.mainColor,
-          ),
-        ),
-        prefixIcon: widget.prefixIcon != null
-            ? Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  FaIcon(
-                    widget.prefixIcon,
-                    size: 20.sp,
-                  ),
-                ],
-              )
-            : null,
+            if (widget.onChanged != null) {
+              widget.onChanged!(newValue);
+            }
+          });
+        },
       ),
-      value: _selected,
-      items: widget.dropDownList.map((e) {
-        return DropdownMenuItem<String>(
-          value: e,
-          child: Text(
-            e,
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-        );
-      }).toList(),
-      onChanged: (String? newValue) {
-        setState(() {
-          _selected = newValue;
-          if (widget.selectedValue != null) {
-            widget.selectedValue!(newValue);
-          }
-          if (widget.onChanged != null) {
-            widget.onChanged!(newValue);
-          }
-        });
-      },
     );
   }
 }
