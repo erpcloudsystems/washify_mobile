@@ -1,0 +1,5 @@
+enum CustomElevatedButtonStyle {
+  primary,
+  secondary,
+}
+
