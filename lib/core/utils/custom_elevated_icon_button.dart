@@ -7,30 +7,39 @@ class CustomElevatedIconButton extends StatelessWidget {
   const CustomElevatedIconButton({
     super.key,
     required this.title,
-    required this.iconData,
+    this.iconData,
+    this.icon,
+    this.textStyle,
+    this.size,
   });
   final String title;
-  final IconData iconData;
+  final IconData? iconData;
+  final Icon? icon;
+  final TextStyle? textStyle;
+  final Size? size;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       onPressed: () {},
       label: Text(
         title,
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 11.sp,
-        ),
+        style: textStyle ??
+            TextStyle(
+              color: Colors.black,
+              fontSize: 11.sp,
+            ),
         maxLines: 1,
       ),
-      icon: Icon(
-        iconData,
-        size: 16,
-        color: Colors.black,
-      ),
+      icon: iconData != null
+          ? Icon(
+              iconData,
+              size: 16,
+              color: Colors.black,
+            )
+          : icon,
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.white,
-        minimumSize: Size(double.infinity, 32.h),
+        minimumSize: size ?? Size(double.infinity, 32.h),
         shape: RoundedRectangleBorder(
           side: const BorderSide(
             color: ColorsManager.grey,

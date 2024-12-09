@@ -1,15 +1,10 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottie/lottie.dart';
 import 'package:washify_mobile/core/router/app_routes.dart';
 import 'package:washify_mobile/core/router/route_services.dart';
 
-import '../resources/colors_managers.dart';
 import '../resources/image_paths.dart';
-import '../resources/strings_manager.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -39,30 +34,10 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            LottieBuilder.asset(
-              ImagePaths.loadingLottiePath,
+            Image.asset(
+              ImagePaths.splashLogoPath,
               width: 250.w,
             ),
-            const Gutter.extraLarge(),
-            AnimatedTextKit(
-              animatedTexts: [
-                ColorizeAnimatedText(
-                  StringsManager.erpCloudSystems,
-                  textStyle: Theme.of(context)
-                      .textTheme
-                      .titleLarge!
-                      .copyWith(fontSize: 30),
-                  colors: [
-                    ColorsManager.mainColor,
-                    ColorsManager.secondaryColor,
-                  ],
-                ),
-              ],
-              totalRepeatCount: 4,
-              pause: const Duration(milliseconds: 100),
-              displayFullTextOnTap: true,
-              stopPauseOnTap: true,
-            )
           ],
         ),
       ),

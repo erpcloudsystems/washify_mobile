@@ -5,11 +5,11 @@ import 'package:washify_mobile/core/resources/colors_managers.dart';
 import 'package:washify_mobile/core/resources/strings_manager.dart';
 import 'package:washify_mobile/core/utils/custom_drop_down_widget.dart';
 import 'package:washify_mobile/core/utils/custom_elevated_button.dart';
-import 'package:washify_mobile/core/utils/custom_text_form_field.dart';
 import '../../../../core/router/app_routes.dart';
 import '../../../../core/router/route_services.dart';
 import '../widgets/or_sign_up_with_divider.dart';
 import '../widgets/progress_bar_widget.dart';
+import '../widgets/sign_up_form.dart';
 import '../widgets/sign_up_with_social_widget.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -45,91 +45,7 @@ class SignUpScreen extends StatelessWidget {
                 const GutterSmall(),
                 const OrSignUpWithDivider(),
                 const GutterSmall(),
-                Form(
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Flexible(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  StringsManager.firstName,
-                                  style: Theme.of(context).textTheme.bodyMedium,
-                                ),
-                                const GutterTiny(),
-                                const CustomTextFormField(),
-                              ],
-                            ),
-                          ),
-                          const Gutter(),
-                          Flexible(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  StringsManager.lastName,
-                                  style: Theme.of(context).textTheme.bodyMedium,
-                                ),
-                                const GutterTiny(),
-                                const CustomTextFormField(),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      const Gutter(),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            StringsManager.emailAddress,
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                          const GutterTiny(),
-                          const CustomTextFormField(),
-                        ],
-                      ),
-                      const Gutter(),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            StringsManager.phone,
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                          const GutterTiny(),
-                          const CustomTextFormField(),
-                        ],
-                      ),
-                      const Gutter(),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            StringsManager.createPassword,
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                          const GutterTiny(),
-                          const CustomTextFormField(),
-                        ],
-                      ),
-                      const Gutter(),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            StringsManager.confirmPassword,
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                          const GutterTiny(),
-                          const CustomTextFormField(),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                const SignUpForm(),
                 Row(
                   children: [
                     Checkbox.adaptive(

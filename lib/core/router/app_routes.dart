@@ -6,4 +6,6 @@ class AppRoutes {
   static const String signUpScreen = "/sign-up";
   static const String locateScreen = '/locate';
   static const String subscribeScreen = '/subscribe';
+  static const String visitsScreen = '/visits';
+  static const String subscriptionScreen = '/subscription';
 }

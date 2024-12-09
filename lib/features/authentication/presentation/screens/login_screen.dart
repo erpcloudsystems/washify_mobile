@@ -6,8 +6,7 @@ import 'package:washify_mobile/core/resources/strings_manager.dart';
 import 'package:washify_mobile/core/router/app_routes.dart';
 import 'package:washify_mobile/core/router/route_services.dart';
 import 'package:washify_mobile/core/utils/custom_elevated_button.dart';
-import 'package:washify_mobile/core/utils/custom_text_form_field.dart';
-
+import '../widgets/login_form.dart';
 import '../widgets/or_sign_up_with_divider.dart';
 import '../widgets/sign_up_with_social_widget.dart';
 
@@ -40,40 +39,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                 ),
                 const GutterLarge(),
-                Form(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        StringsManager.emailAddress,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                      const GutterTiny(),
-                      const CustomTextFormField(),
-                      const GutterLarge(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            StringsManager.password,
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                          Text(
-                            StringsManager.forgotPassword,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                  color: ColorsManager.mainColor,
-                                ),
-                          ),
-                        ],
-                      ),
-                      const GutterTiny(),
-                      const CustomTextFormField(),
-                    ],
-                  ),
-                ),
+                const LoginForm(),
                 const Gutter(),
                 Row(
                   children: [

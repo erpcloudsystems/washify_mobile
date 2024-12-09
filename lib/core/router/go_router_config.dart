@@ -4,6 +4,9 @@ import 'package:washify_mobile/features/authentication/presentation/screens/loca
 import 'package:washify_mobile/features/authentication/presentation/screens/login_screen.dart';
 import 'package:washify_mobile/features/authentication/presentation/screens/sign_up_screen.dart';
 import 'package:washify_mobile/features/authentication/presentation/screens/subscribe_screen.dart';
+import 'package:washify_mobile/features/authentication/presentation/screens/visits_screen.dart';
+import 'package:washify_mobile/features/home/presentation/screens/home_screen.dart';
+import 'package:washify_mobile/features/subscription/presentation/screens/subscription_screen.dart';
 
 import '../utils/splash_screen.dart';
 
@@ -34,6 +37,21 @@ final router = GoRouter(
       path: AppRoutes.subscribeScreen,
       name: AppRoutes.subscribeScreen,
       builder: (context, state) => const SubscribeScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.visitsScreen,
+      name: AppRoutes.visitsScreen,
+      builder: (context, state) => const VisitsScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.homeScreen,
+      name: AppRoutes.homeScreen,
+      builder: (context, state) => const HomeScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.subscriptionScreen,
+      name: AppRoutes.subscriptionScreen,
+      builder: (context, state) => const SubscriptionScreen(),
     ),
   ],
 );

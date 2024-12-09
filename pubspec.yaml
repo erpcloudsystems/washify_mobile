@@ -22,6 +22,8 @@ dependencies:
   flutter_smart_dialog: ^4.9.8+5
   cool_alert: ^2.0.1
   dotted_line: ^3.2.3
+  syncfusion_flutter_datepicker: ^27.2.5
+
 
   # Helpers
   equatable: ^2.0.5
@@ -32,7 +34,7 @@ dependencies:
   dartz: ^0.10.1
 
   # Network
-  intl: ^0.20.0
+  intl: ^0.19.0
   internet_connection_checker_plus: ^2.5.2
   dio_cookie_manager: ^3.1.1
   cookie_jar: ^4.0.8

@@ -63,11 +63,32 @@ class StringsManager {
   static const String alreadyHaveAnAccount = 'Already have an account?';
   static const String loginHere = 'Login here';
   static const String services = 'Services';
-  static const String chooseYourMonthlySubscription = 'Choose your monthly subscription...';
+  static const String chooseYourMonthlySubscription =
+      'Choose your monthly subscription...';
   static const String orSignUpWith = 'or sign up with';
   static const String subscribe = 'Subscribe';
   static const String google = 'Google';
   static const String signUpWithGoogle = 'Sign up with Google';
   static const String facebook = 'Facebook';
   static const String signUpWithFacebook = 'Sign up with Facebook';
+  static const String carInfo = 'Car Info';
+  static const String addYourCar = 'Add your car';
+  static const String carBrand = 'Car Brand';
+  static const String carModel = 'Car Model';
+  static const String plateNo = 'Plate No.';
+  static const String fees = 'Fees';
+  static const String discount = 'Discount';
+  static const String toPay = 'To Pay';
+  static const String checkOut = 'Check out';
+  static const String addCar = 'Add car';
+  static const String payWith = 'Pay with';
+  static const String payNow = 'Pay Now';
+  static const String subscriptionConfirmed = 'Subscription Confirmed';
+  static const String thisMonthVisits = 'This month visits';
+  static const String visitDescription =
+      'According to your location and zone, Your visits has been scheduled as ( Sat, Mon & Wed)...';
+  static const String manageYourSubscription = 'Manage your subscription';
+  static const String yourSubscription = 'Your subscription';
+  static const String yourCars = 'Your cars';
+  static const String seeAll = 'See all';
 }

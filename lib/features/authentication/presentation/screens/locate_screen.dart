@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:washify_mobile/core/resources/colors_managers.dart';
-import 'package:washify_mobile/core/resources/image_paths.dart';
 import 'package:washify_mobile/core/resources/strings_manager.dart';
 import 'package:washify_mobile/core/router/app_routes.dart';
 import 'package:washify_mobile/core/router/route_services.dart';
 import 'package:washify_mobile/core/utils/custom_elevated_button.dart';
 
 import '../widgets/progress_bar_widget.dart';
+import '../widgets/territory_widget.dart';
 
 class LocateScreen extends StatelessWidget {
   const LocateScreen({super.key});
@@ -56,42 +56,7 @@ class LocateScreen extends StatelessWidget {
                     ),
                     itemCount: 8,
                     itemBuilder: (context, index) {
-                      return Stack(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: Image.asset(
-                              ImagePaths.territoryPath,
-                              fit: BoxFit.cover,
-                              width: double.infinity,
-                            ),
-                          ),
-                          Positioned.fill(
-                            child: Opacity(
-                              opacity: 0.3,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    12,
-                                  ),
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const Positioned(
-                            left: 40,
-                            top: 60,
-                            child: Text(
-                              'TAJ City',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      );
+                      return const TerritoryWidget();
                     },
                   ),
                 ),
