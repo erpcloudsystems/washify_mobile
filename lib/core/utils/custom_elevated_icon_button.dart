@@ -14,7 +14,7 @@ class CustomElevatedIconButton extends StatelessWidget {
   });
   final String title;
   final IconData? iconData;
-  final Icon? icon;
+  final Widget? icon;
   final TextStyle? textStyle;
   final Size? size;
   @override

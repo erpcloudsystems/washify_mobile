@@ -1,3 +1,4 @@
-const String apiKey = 'apiKey';
-const String apiSecretKey = 'apiSecret';
+const String sid = 'sid';
 const String isLoggedInKey = 'isLoggedIn';
+const String userName = 'userName';
+const String systemUser = 'systemUser';

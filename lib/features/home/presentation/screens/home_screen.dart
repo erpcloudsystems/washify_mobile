@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:washify_mobile/core/resources/colors_managers.dart';
 import 'package:washify_mobile/core/router/app_routes.dart';
 import 'package:washify_mobile/core/router/route_services.dart';
 import 'package:washify_mobile/core/utils/custom_elevated_button.dart';
+import '../../../../core/global/dependencies_container.dart';
 import '../../../../core/resources/strings_manager.dart';
 import '../../../authentication/presentation/widgets/calender_widget.dart';
 import '../widgets/cars_list_view.dart';
@@ -30,7 +32,12 @@ class HomeScreen extends StatelessWidget {
                         ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      await sl<SharedPreferences>().clear();
+
+                      RoutesService.go(
+                          context: context, location: AppRoutes.loginScreen);
+                    },
                     icon: const Icon(
                       Icons.logout,
                     ),

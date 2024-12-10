@@ -9,4 +9,6 @@ class ImagePaths {
   static const String instapayPath = '${assetsPath}instapay.png';
   static const String visaPath = '${assetsPath}visa.png';
   static const String splashLogoPath = '${assetsPath}splash-logo.png';
+  static const String googlePath = '${assetsPath}google.png';
+  static const String facebookPath = '${assetsPath}facebook.png';
 }

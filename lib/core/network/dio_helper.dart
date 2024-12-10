@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter/foundation.dart';
@@ -7,7 +9,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:washify_mobile/core/network/api_constant.dart';
 import '../resources/constance.dart';
 import 'exceptions.dart';
-
 
 abstract class BaseDioHelper {
   Future<dynamic> post({
@@ -97,9 +98,9 @@ class DioHelper implements BaseDioHelper {
     dio.options.headers = {
       if (!isMultiPart) 'Content-Type': 'application/json',
       if (!isMultiPart) 'Accept': 'application/json',
-      if (dioPrefs.getBool(isLoggedInKey) == true)
-        'Authorization':
-            'token ${dioPrefs.getString(apiKey)}:${dioPrefs.getString(apiSecretKey)}',
+      // if (dioPrefs.getBool(isLoggedInKey) == true)
+      //   'Authorization':
+      //       'token ${dioPrefs.getString(apiKey)}:${dioPrefs.getString(apiSecretKey)}',
     };
     return await request(
         call: () async => await dio.get(
@@ -129,9 +130,9 @@ class DioHelper implements BaseDioHelper {
     dio.options.headers = {
       if (!isMultiPart) 'Content-Type': 'application/json',
       if (!isMultiPart) 'Accept': 'application/json',
-      if (dioPrefs.getBool(isLoggedInKey) == true)
-        'Authorization':
-            'token ${dioPrefs.getString(apiKey)}:${dioPrefs.getString(apiSecretKey)}',
+      // if (dioPrefs.getBool(isLoggedInKey) == true)
+      //   'Authorization':
+      //       'token ${dioPrefs.getString(apiKey)}:${dioPrefs.getString(apiSecretKey)}',
     };
 
     return await request(
@@ -163,9 +164,9 @@ class DioHelper implements BaseDioHelper {
     dio.options.headers = {
       if (!isMultiPart) 'Content-Type': 'application/json',
       if (!isMultiPart) 'Accept': 'application/json',
-      if (dioPrefs.getBool(isLoggedInKey) == true)
-        'Authorization':
-            'token ${dioPrefs.getString(apiKey)}:${dioPrefs.getString(apiSecretKey)}',
+      // if (dioPrefs.getBool(isLoggedInKey) == true)
+      //   'Authorization':
+      //       'token ${dioPrefs.getString(apiKey)}:${dioPrefs.getString(apiSecretKey)}',
     };
 
     return await request(
@@ -197,9 +198,9 @@ class DioHelper implements BaseDioHelper {
     dio.options.headers = {
       if (!isMultiPart) 'Content-Type': 'application/json',
       if (!isMultiPart) 'Accept': 'application/json',
-      if (dioPrefs.getBool(isLoggedInKey) == true)
-        'Authorization':
-            'token ${dioPrefs.getString(apiKey)}:${dioPrefs.getString(apiSecretKey)}',
+      // if (dioPrefs.getBool(isLoggedInKey) == true)
+      //   'Authorization':
+      //       'token ${dioPrefs.getString(apiKey)}:${dioPrefs.getString(apiSecretKey)}',
     };
 
     return await request(
@@ -222,11 +223,8 @@ extension on DioHelper {
     } on DioException catch (e) {
       if (e.response!.statusCode == 401) {
         dioPrefs.setBool(isLoggedInKey, false);
-        dioPrefs.remove(apiKey);
-        dioPrefs.remove(apiSecretKey);
         dioPrefs.setBool(isLoggedInKey, false);
-        dioPrefs.remove(apiKey);
-        dioPrefs.remove(apiSecretKey);
+        dioPrefs.remove(sid);
       }
       throw PrimaryServerException(
         code: e.response?.statusCode ?? 100,
@@ -234,6 +232,7 @@ extension on DioHelper {
         message: e.response?.data['message'] ?? e.response!.toString(),
       );
     } catch (e) {
+      log(e.toString());
       PrimaryServerException exception = e as PrimaryServerException;
       throw PrimaryServerException(
         error: exception.error,

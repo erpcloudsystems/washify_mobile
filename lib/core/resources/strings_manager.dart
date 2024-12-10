@@ -91,4 +91,7 @@ class StringsManager {
   static const String yourSubscription = 'Your subscription';
   static const String yourCars = 'Your cars';
   static const String seeAll = 'See all';
+  static const String userDataUpdatedError = 'User data has been updated';
+  static const String signUpSucceeded = 'Sign up succeeded';
+  static const String loginSuccessfully = 'Login successfully';
 }
