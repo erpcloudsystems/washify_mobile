@@ -14,6 +14,7 @@ class CustomDropDownFormField extends StatefulWidget {
     this.initialValue,
     this.onChanged,
     this.prefixIcon,
+    this.isValidate = true,
   });
 
   final List<String> dropDownList;
@@ -23,6 +24,7 @@ class CustomDropDownFormField extends StatefulWidget {
   final FormFieldValidator<String>? validator;
   final ValueChanged<String?>? onChanged;
   final ValueChanged<String?>? selectedValue;
+  final bool isValidate;
 
   @override
   State<CustomDropDownFormField> createState() =>
@@ -40,62 +42,60 @@ class _CustomDropDownFormFieldState extends State<CustomDropDownFormField> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 45.h,
-      child: DropdownButtonFormField<String>(
-        hint: Text(
-          widget.hint,
-          style: TextStyle(
-            fontSize: 12.sp,
-          ),
+    return DropdownButtonFormField<String>(
+      hint: Text(
+        widget.hint,
+        style: TextStyle(
+          fontSize: 12.sp,
         ),
-        validator: widget.validator ??
-            (value) {
+      ),
+      validator: widget.isValidate
+          ? (value) {
               if (value == null || value.trim().isEmpty) {
                 return StringsManager.emptyValidator;
               }
               return null;
-            },
-        decoration: InputDecoration(
-          border: const OutlineInputBorder(
-            borderSide: BorderSide(
-              color: ColorsManager.mainColor,
-            ),
+            }
+          : null,
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: ColorsManager.mainColor,
           ),
-          prefixIcon: widget.prefixIcon != null
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FaIcon(
-                      widget.prefixIcon,
-                      size: 20.sp,
-                    ),
-                  ],
-                )
-              : null,
         ),
-        value: _selected,
-        items: widget.dropDownList.map((e) {
-          return DropdownMenuItem<String>(
-            value: e,
-            child: Text(
-              e,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          );
-        }).toList(),
-        onChanged: (String? newValue) {
-          setState(() {
-            _selected = newValue;
-            if (widget.selectedValue != null) {
-              widget.selectedValue!(newValue);
-            }
-            if (widget.onChanged != null) {
-              widget.onChanged!(newValue);
-            }
-          });
-        },
+        prefixIcon: widget.prefixIcon != null
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FaIcon(
+                    widget.prefixIcon,
+                    size: 20.sp,
+                  ),
+                ],
+              )
+            : null,
       ),
+      value: _selected,
+      items: widget.dropDownList.map((e) {
+        return DropdownMenuItem<String>(
+          value: e,
+          child: Text(
+            e,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+        );
+      }).toList(),
+      onChanged: (String? newValue) {
+        setState(() {
+          _selected = newValue;
+          if (widget.selectedValue != null) {
+            widget.selectedValue!(newValue);
+          }
+          if (widget.onChanged != null) {
+            widget.onChanged!(newValue);
+          }
+        });
+      },
     );
   }
 }

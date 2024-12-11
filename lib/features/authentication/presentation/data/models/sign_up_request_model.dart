@@ -4,6 +4,7 @@ class SignUpRequestModel {
   final String? firstName;
   final String? lastName;
   final String? phoneNumber;
+  final String? referralSource;
 
   SignUpRequestModel({
     this.email,
@@ -11,11 +12,12 @@ class SignUpRequestModel {
     this.firstName,
     this.lastName,
     this.phoneNumber,
+    this.referralSource,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      "referral_source": "Reference",
+      "referral_source": referralSource,
       'email': email,
       'password': password,
       'first_name': firstName,

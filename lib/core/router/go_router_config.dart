@@ -8,6 +8,7 @@ import 'package:washify_mobile/features/authentication/presentation/screens/visi
 import 'package:washify_mobile/features/home/presentation/screens/home_screen.dart';
 import 'package:washify_mobile/features/subscription/presentation/screens/subscription_screen.dart';
 
+import '../../features/authentication/presentation/screens/otp_screen.dart';
 import '../utils/splash_screen.dart';
 
 final router = GoRouter(
@@ -52,6 +53,14 @@ final router = GoRouter(
       path: AppRoutes.subscriptionScreen,
       name: AppRoutes.subscriptionScreen,
       builder: (context, state) => const SubscriptionScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.otpScreen,
+      name: AppRoutes.otpScreen,
+      builder: (context, state) => OtpScreen(
+        email: state.uri.queryParameters['email'].toString(),
+        password: state.uri.queryParameters['password'].toString(),
+      ),
     ),
   ],
 );

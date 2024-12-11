@@ -8,11 +8,13 @@ import '../../../../../core/network/dio_helper.dart';
 import '../models/login_request_model.dart';
 import '../models/login_response_model.dart';
 import '../models/sign_up_request_model.dart';
+import '../models/territory_model.dart';
 
 abstract class AuthRepository {
   Future<UserModel> login({required LoginRequestModel loginRequestModel});
-  Future<void> signUp({required SignUpRequestModel signUpRequestModel});
-  Future<List<String>> getGovernorate();
+  Future<String> signUp({required SignUpRequestModel signUpRequestModel});
+  Future<List<TerritoryModel>> getTerritories();
+  Future<List<String>> getReferralSource();
 }
 
 class AuthAPI implements AuthRepository {
@@ -49,18 +51,34 @@ class AuthAPI implements AuthRepository {
   }
 
   @override
-  Future<void> signUp({required SignUpRequestModel signUpRequestModel}) async {
-    await dio.post(
+  Future<String> signUp(
+      {required SignUpRequestModel signUpRequestModel}) async {
+    final response = await dio.post(
       endPoint: ApiConstance.signUpEndPoint,
       data: signUpRequestModel.toMap(),
-    );
+    ) as Response;
+    return response.data['message'].toString();
   }
 
   @override
-  Future<List<String>> getGovernorate() async {
-    final response = await dio.get(endPoint: ApiConstance.governorateEndPoint);
-    return (response.data['message'] as List)
-        .map((item) => item['name'] as String)
+  Future<List<TerritoryModel>> getTerritories() async {
+    final response = await dio.get(
+      endPoint: ApiConstance.governorateEndPoint,
+      query: {'fields': '["*"]'},
+    );
+    return (response.data['data'] as List)
+        .map((item) => TerritoryModel.fromJson(item))
+        .toList();
+  }
+
+  @override
+  Future<List<String>> getReferralSource() async {
+    final response = await dio.get(
+      endPoint: ApiConstance.referralSourceEndPoint,
+      query: {'fields': '["*"]'},
+    ) as Response;
+    return List.from(response.data['data'])
+        .map((index) => index['name'].toString())
         .toList();
   }
 }

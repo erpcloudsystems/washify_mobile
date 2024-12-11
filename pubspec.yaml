@@ -23,6 +23,9 @@ dependencies:
   cool_alert: ^2.0.1
   dotted_line: ^3.2.3
   syncfusion_flutter_datepicker: ^27.2.5
+  pinput: ^5.0.0
+  circular_countdown_timer: ^0.2.4
+  loading_indicator: ^3.1.1
 
 
   # Helpers

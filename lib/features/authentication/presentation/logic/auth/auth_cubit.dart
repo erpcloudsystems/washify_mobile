@@ -9,6 +9,7 @@ import '../../../../../core/resources/strings_manager.dart';
 import '../../data/models/login_request_model.dart';
 import '../../data/models/login_response_model.dart';
 import '../../data/models/sign_up_request_model.dart';
+import '../../data/models/territory_model.dart';
 import '../../data/services/auth_repository.dart';
 
 part 'auth_state.dart';
@@ -19,7 +20,7 @@ class AuthCubit extends Cubit<AuthState> {
   ) : super(AuthInitial());
   final AuthRepository _authRepository;
   UserModel? userModel;
-  List<String> governorate = [];
+  List<TerritoryModel> territories = [];
   String? selectedGovernorate;
 
   void caching() {
@@ -55,9 +56,9 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> getGovernorate() async {
-    emit(AuthGovernorateLoadingState());
+    emit(AuthTerritoryLoadingState());
     try {
-      governorate = await _authRepository.getGovernorate();
+      territories = await _authRepository.getTerritories();
       emit(AuthGovernorateSuccessState());
     } catch (_) {
       emit(const AuthGovernorateErrorState(
@@ -71,12 +72,11 @@ class AuthCubit extends Cubit<AuthState> {
   }) async {
     emit(AuthSignUpLoadingState());
     try {
-      await _authRepository.signUp(
+      final result = await _authRepository.signUp(
         signUpRequestModel: signUpModel,
       );
 
-      emit(const AuthSignUpSuccessState(
-          message: StringsManager.signUpSucceeded));
+      emit(AuthSignUpSuccessState(message: result));
       // await login(
       //     userName: signUpModel.email!, password: signUpModel.password!);
     } on PrimaryServerException catch (error) {
@@ -88,6 +88,18 @@ class AuthCubit extends Cubit<AuthState> {
           error: StringsManager.userDataUpdatedError,
         ),
       );
+    }
+  }
+
+  // Get Referral Source
+  List<String> referralSource = [];
+  Future<void> getReferralSource() async {
+    emit(AuthGetReferralSourceLoadingState());
+    try {
+      referralSource = await _authRepository.getReferralSource();
+      emit(AuthGetReferralSourceSuccessState(referralList: referralSource));
+    } on PrimaryServerException catch (error) {
+      emit(AuthGetReferralSourceErrorState(error: error.message));
     }
   }
 }

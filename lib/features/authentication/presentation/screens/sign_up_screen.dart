@@ -7,10 +7,11 @@ import 'package:washify_mobile/core/resources/strings_manager.dart';
 import 'package:washify_mobile/core/utils/custom_drop_down_widget.dart';
 import 'package:washify_mobile/core/utils/custom_elevated_button.dart';
 import 'package:washify_mobile/core/utils/custom_snack_bar.dart';
-import 'package:washify_mobile/features/authentication/presentation/data/models/sign_up_request_model.dart';
-import 'package:washify_mobile/features/authentication/presentation/logic/cubit/auth_cubit.dart';
+import 'package:washify_mobile/features/authentication/presentation/logic/auth/auth_cubit.dart';
+import 'package:washify_mobile/features/authentication/presentation/logic/otp/cubit/otp_cubit.dart';
 import '../../../../core/router/app_routes.dart';
 import '../../../../core/router/route_services.dart';
+import '../data/models/sign_up_request_model.dart';
 import '../widgets/or_sign_up_with_divider.dart';
 import '../widgets/progress_bar_widget.dart';
 import '../widgets/sign_up_form.dart';
@@ -31,6 +32,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final confirmPasswordController = TextEditingController();
   final phoneController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    final authCubit = context.read<AuthCubit>();
+    authCubit.getReferralSource();
+
+    super.initState();
+  }
+
+  void clearController() {
+    firstNameController.clear();
+    lastNameController.clear();
+    emailController.clear();
+    passwordController.clear();
+    confirmPasswordController.clear();
+    phoneController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,31 +90,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     confirmPasswordController: confirmPasswordController,
                     phoneController: phoneController,
                   ),
-                  Row(
-                    children: [
-                      Checkbox.adaptive(
-                        value: true,
-                        onChanged: (value) {},
-                        side: const BorderSide(
-                          width: 1,
-                        ),
-                      ),
-                      const Text(StringsManager.rememberMe)
-                    ],
-                  ),
-                  Text(
-                    StringsManager.howDidYouFindAboutUs,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                  const CustomDropDownFormField(
-                    dropDownList: ['TEST'],
-                    hint: 'Friends & Family',
-                  ),
                   const Gutter(),
                   BlocConsumer<AuthCubit, AuthState>(
+                    listenWhen: (previous, current) => previous != current,
                     listener: (context, state) {
                       if (state is AuthSignUpSuccessState) {
+                        if (mounted) {
+                          context
+                              .read<OtpCubit>()
+                              .sendOtp(email: emailController.text.trim());
+                        }
                         showSnackBar(context: context, message: state.message);
+                        clearController();
+                        RoutesService.pushNamed(
+                          AppRoutes.otpScreen,
+                          context: context,
+                          queryParameters: {
+                            'email': emailController.text.trim(),
+                            'password': passwordController.text.trim(),
+                          },
+                        );
                       } else if (state is AuthSignUpErrorState) {
                         showSnackBar(
                             context: context,
@@ -103,21 +117,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             color: ColorsManager.red);
                       }
                     },
+                    buildWhen: (previous, current) => previous != current,
                     builder: (context, state) {
-                      return CustomElevatedButton(
-                        title: StringsManager.signUp,
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            await context.read<AuthCubit>().signUp(
-                                    signUpModel: SignUpRequestModel(
-                                  firstName: firstNameController.text,
-                                  lastName: lastNameController.text,
-                                  email: emailController.text,
-                                  password: passwordController.text,
-                                  phoneNumber: phoneController.text,
-                                ));
-                          }
-                        },
+                      final referralSource =
+                          context.read<AuthCubit>().referralSource;
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            StringsManager.howDidYouFindAboutUs,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                          CustomDropDownFormField(
+                            dropDownList: referralSource,
+                            hint: 'Friends & Family',
+                            isValidate: false,
+                          ),
+                          const Gutter(),
+                          CustomElevatedButton(
+                            isLoading: state is AuthSignUpLoadingState,
+                            title: StringsManager.signUp,
+                            onPressed: _signUp,
+                          ),
+                        ],
                       );
                     },
                   ),
@@ -153,5 +175,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
     );
+  }
+
+  void _signUp() async {
+    if (_formKey.currentState!.validate()) {
+      await context.read<AuthCubit>().signUp(
+              signUpModel: SignUpRequestModel(
+            firstName: firstNameController.text,
+            lastName: lastNameController.text,
+            email: emailController.text,
+            password: passwordController.text,
+            phoneNumber: phoneController.text,
+          ));
+    }
   }
 }

@@ -94,4 +94,9 @@ class StringsManager {
   static const String userDataUpdatedError = 'User data has been updated';
   static const String signUpSucceeded = 'Sign up succeeded';
   static const String loginSuccessfully = 'Login successfully';
+  static const String verification = 'Verification';
+  static const String enterPINcode = 'Enter PIN code';
+  static const String didNotReceiveCode = 'Did not receive code';
+  static const String resend = 'Resend';
+  static const String otpHasBeenExpired = 'Otp has been expired please resend another one.';
 }
