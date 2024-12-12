@@ -65,7 +65,8 @@ class AuthAPI implements AuthRepository {
     final response = await dio.get(
       endPoint: ApiConstance.governorateEndPoint,
       query: {'fields': '["*"]'},
-    );
+    ) as Response;
+    log(response.headers.toString());
     return (response.data['data'] as List)
         .map((item) => TerritoryModel.fromJson(item))
         .toList();

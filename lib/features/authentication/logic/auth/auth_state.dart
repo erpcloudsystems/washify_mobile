@@ -24,7 +24,8 @@ final class AuthSignUpLoadingState extends AuthState {}
 final class AuthSignUpSuccessState extends AuthState {
   final String message;
 
-  const AuthSignUpSuccessState({required this.message});
+  const AuthSignUpSuccessState(
+      {this.message = StringsManager.pleaseCheckYourEmail});
 }
 
 final class AuthSignUpErrorState extends AuthState {
@@ -39,12 +40,12 @@ final class AuthEmptyLogoImageState extends AuthState {}
 
 final class AuthTerritoryLoadingState extends AuthState {}
 
-final class AuthGovernorateSuccessState extends AuthState {}
+final class AuthTerritorySuccessState extends AuthState {}
 
-final class AuthGovernorateErrorState extends AuthState {
+final class AuthTerritoryErrorState extends AuthState {
   final String error;
 
-  const AuthGovernorateErrorState({required this.error});
+  const AuthTerritoryErrorState({required this.error});
 }
 
 // Get Referral Source

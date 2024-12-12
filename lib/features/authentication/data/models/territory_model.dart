@@ -15,6 +15,6 @@ class TerritoryModel {
 
   factory TerritoryModel.fromJson(Map<String, dynamic> json) => TerritoryModel(
         id: json['name'],
-        name: json['territory_name'],
+        name: json['name'],
       );
 }

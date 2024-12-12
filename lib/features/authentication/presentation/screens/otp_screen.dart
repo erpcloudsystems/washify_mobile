@@ -8,6 +8,7 @@ import 'package:washify_mobile/core/network/exceptions.dart';
 import 'package:washify_mobile/core/resources/colors_managers.dart';
 import 'package:washify_mobile/core/router/app_routes.dart';
 import 'package:washify_mobile/core/router/route_services.dart';
+import 'package:washify_mobile/core/utils/custom_loading_widget.dart';
 import 'package:washify_mobile/core/utils/custom_snack_bar.dart';
 import 'package:washify_mobile/features/authentication/logic/auth/auth_cubit.dart';
 import 'package:washify_mobile/features/authentication/logic/otp/cubit/otp_cubit.dart';
@@ -119,16 +120,19 @@ class _OtpScreenState extends State<OtpScreen> {
                         StringsManager.didNotReceiveCode,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
-                      TextButton(
-                        onPressed: () async {
-                          print(widget.email); 
-                          await otpCubit.sendOtp(email: widget.email);
-                          countDownController.restart();
-                        },
-                        child: const Text(
-                          StringsManager.resend,
-                        ),
-                      )
+                      if (state is SendOtpLoadingState)
+                        const CustomLoadingWidget(),
+                      if (state is! SendOtpLoadingState)
+                        TextButton(
+                          onPressed: () async {
+                            print(widget.email);
+                            await otpCubit.sendOtp(email: widget.email);
+                            countDownController.restart();
+                          },
+                          child: const Text(
+                            StringsManager.resend,
+                          ),
+                        )
                     ],
                   ),
                 );

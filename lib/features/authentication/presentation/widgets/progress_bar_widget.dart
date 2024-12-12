@@ -9,10 +9,10 @@ class ProgressBarWidget extends StatelessWidget {
   const ProgressBarWidget({
     super.key,
     this.isLocateActive = false,
-    this.isSubscribeActive = false,
+    this.isCarInfoActive = false,
   });
   final bool isLocateActive;
-  final bool isSubscribeActive;
+  final bool isCarInfoActive;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -55,10 +55,13 @@ class ProgressBarWidget extends StatelessWidget {
             ),
             Flexible(
               flex: 2,
-              child: ProgressNumberWidget(
-                number: '3',
-                title: StringsManager.subscribe,
-                isActive: isSubscribeActive,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: ProgressNumberWidget(
+                  number: '3',
+                  title: StringsManager.carInfo,
+                  isActive: isCarInfoActive,
+                ),
               ),
             ),
           ],

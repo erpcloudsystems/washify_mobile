@@ -33,10 +33,12 @@ class HomeScreen extends StatelessWidget {
                   ),
                   IconButton(
                     onPressed: () async {
-                      await sl<SharedPreferences>().clear();
+                      // await sl<SharedPreferences>().clear();
 
-                      RoutesService.go(
-                          context: context, location: AppRoutes.loginScreen);
+                      // RoutesService.go(
+                      //     context: context, location: AppRoutes.loginScreen);
+                      RoutesService.pushNamed(AppRoutes.locateScreen,
+                          context: context);
                     },
                     icon: const Icon(
                       Icons.logout,

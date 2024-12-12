@@ -20,14 +20,17 @@ abstract class LoadingUtils {
               return false;
             },
             child: const Padding(
-              padding: EdgeInsets.all(8),
-              child: LoadingIndicator(
-                indicatorType: Indicator.ballPulseRise,
-                colors: [
-                  ColorsManager.mainColor,
-                  ColorsManager.secondaryColor,
-                ],
-                strokeWidth: 2,
+              padding: EdgeInsets.all(16),
+              child: SizedBox(
+                height: 150,
+                child: LoadingIndicator(
+                  indicatorType: Indicator.ballPulseRise,
+                  colors: [
+                    ColorsManager.mainColor,
+                    ColorsManager.secondaryColor,
+                  ],
+                  strokeWidth: 2,
+                ),
               ),
             ),
           ),

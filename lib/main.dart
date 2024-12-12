@@ -12,7 +12,6 @@ import 'core/router/go_router_config.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await init();
-
   Bloc.observer = AppBlocObserver();
   runApp(const MyApp());
 }

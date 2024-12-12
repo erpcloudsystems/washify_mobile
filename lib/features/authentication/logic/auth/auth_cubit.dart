@@ -55,14 +55,14 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> getGovernorate() async {
+  Future<void> getTerritory() async {
     emit(AuthTerritoryLoadingState());
     try {
       territories = await _authRepository.getTerritories();
-      emit(AuthGovernorateSuccessState());
-    } catch (_) {
-      emit(const AuthGovernorateErrorState(
-        error: StringsManager.userDataUpdatedError,
+      emit(AuthTerritorySuccessState());
+    } on PrimaryServerException catch (error) {
+      emit(AuthTerritoryErrorState(
+        error: error.message,
       ));
     }
   }
@@ -72,11 +72,11 @@ class AuthCubit extends Cubit<AuthState> {
   }) async {
     emit(AuthSignUpLoadingState());
     try {
-      final result = await _authRepository.signUp(
+      await _authRepository.signUp(
         signUpRequestModel: signUpModel,
       );
 
-      emit(AuthSignUpSuccessState(message: result));
+      emit(const AuthSignUpSuccessState());
       // await login(
       //     userName: signUpModel.email!, password: signUpModel.password!);
     } on PrimaryServerException catch (error) {

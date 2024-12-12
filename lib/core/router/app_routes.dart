@@ -9,4 +9,5 @@ class AppRoutes {
   static const String visitsScreen = '/visits';
   static const String subscriptionScreen = '/subscription';
   static const String otpScreen = '/otp-screen';
+  static const String carInfoScreen = '/car-info-screen';
 }

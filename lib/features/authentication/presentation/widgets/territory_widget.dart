@@ -32,26 +32,20 @@ class TerritoryWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(
                     12,
                   ),
-                  border: Border.all(
-                    color: territoryModel.isSelected!
-                        ? ColorsManager.green
-                        : Colors.transparent,
-                    width: 3,
-                  ),
-                  color: Colors.black,
+                  color: territoryModel.isSelected!
+                      ? ColorsManager.green
+                      : Colors.black,
                 ),
               ),
             ),
           ),
-          Positioned(
-            left: 40,
-            top: 60,
+          Center(
             child: Text(
               territoryModel.name,
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    color: ColorsManager.white,
+                  ),
             ),
           ),
         ],

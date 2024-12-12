@@ -101,7 +101,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               .sendOtp(email: emailController.text.trim());
                         }
                         showSnackBar(context: context, message: state.message);
-                        clearController();
                         RoutesService.pushNamed(
                           AppRoutes.otpScreen,
                           context: context,
@@ -110,6 +109,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             'password': passwordController.text.trim(),
                           },
                         );
+                        clearController();
                       } else if (state is AuthSignUpErrorState) {
                         showSnackBar(
                             context: context,

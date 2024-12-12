@@ -8,6 +8,8 @@ import 'package:washify_mobile/core/router/app_routes.dart';
 import 'package:washify_mobile/core/router/route_services.dart';
 import 'package:washify_mobile/core/utils/custom_elevated_button.dart';
 import 'package:washify_mobile/core/utils/custom_loading_widget.dart';
+import 'package:washify_mobile/core/utils/custom_snack_bar.dart';
+import 'package:washify_mobile/features/authentication/data/models/territory_model.dart';
 import 'package:washify_mobile/features/authentication/logic/auth/auth_cubit.dart';
 import '../widgets/progress_bar_widget.dart';
 import '../widgets/territory_widget.dart';
@@ -21,11 +23,24 @@ class LocateScreen extends StatefulWidget {
 
 class _LocateScreenState extends State<LocateScreen> {
   late final AuthCubit authCubit;
+  String? territory;
   @override
   void initState() {
     super.initState();
     authCubit = BlocProvider.of<AuthCubit>(context);
-    authCubit.getGovernorate();
+    authCubit.getTerritory();
+  }
+
+  void onCardSelected(List<TerritoryModel> territories, int index) {
+    for (var item in territories) {
+      if (item.isSelected!) {
+        item.toggleSelection();
+      }
+    }
+    territories[index].toggleSelection();
+    setState(() {
+      territory = territories[index].name;
+    });
   }
 
   @override
@@ -77,11 +92,8 @@ class _LocateScreenState extends State<LocateScreen> {
                               itemCount: territories.length,
                               itemBuilder: (context, index) {
                                 return TerritoryWidget(
-                                  onPressed: () {
-                                    setState(() {
-                                      territories[index].toggleSelection();
-                                    });
-                                  },
+                                  onPressed: () =>
+                                      onCardSelected(territories, index),
                                   territoryModel: territories[index],
                                 );
                               },
@@ -99,10 +111,21 @@ class _LocateScreenState extends State<LocateScreen> {
                         child: CustomElevatedButton(
                           title: StringsManager.next,
                           onPressed: () {
-                            RoutesService.pushNamed(
-                              AppRoutes.subscribeScreen,
-                              context: context,
-                            );
+                            if (territory != null) {
+                              RoutesService.pushNamed(
+                                AppRoutes.carInfoScreen,
+                                context: context,
+                                queryParameters: {
+                                  'territory': territory,
+                                },
+                              );
+                            } else {
+                              showSnackBar(
+                                  context: context,
+                                  message: StringsManager
+                                      .pleaseSelectYourLocationFirst,
+                                  color: ColorsManager.red);
+                            }
                           },
                         ),
                       ),

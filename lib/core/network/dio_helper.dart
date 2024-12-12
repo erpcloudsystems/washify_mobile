@@ -1,8 +1,10 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter/foundation.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -62,18 +64,34 @@ abstract class BaseDioHelper {
 
 class DioHelper implements BaseDioHelper {
   final SharedPreferences dioPrefs;
-  final Dio dio = Dio(
-    BaseOptions(
-      baseUrl: ApiConstance.baseUrl,
-      receiveDataWhenStatusError: true,
-      connectTimeout: const Duration(seconds: 30),
-    ),
-  );
+  late final PersistCookieJar cookieJar;
+  final Dio dio;
 
-  final cookieJar = CookieJar(ignoreExpires: true);
+  DioHelper({required this.dioPrefs})
+      : dio = Dio(
+          BaseOptions(
+            baseUrl: ApiConstance.baseUrl,
+            receiveDataWhenStatusError: true,
+            connectTimeout: const Duration(seconds: 30),
+          ),
+        ) {
+    _addInterceptors();
+  }
 
-  DioHelper({required this.dioPrefs}) {
+  Future<void> initializeCookieJar() async {
+    final Directory appDocDir = await getApplicationDocumentsDirectory();
+    final String appDocPath = appDocDir.path;
+    log(dio.options.headers.toString());
+    cookieJar = PersistCookieJar(
+      ignoreExpires: true,
+      storage: FileStorage("$appDocPath/.cookies/"),
+    );
+    log('Your CookieJar is now ${cookieJar.domainCookies}');
     dio.interceptors.add(CookieManager(cookieJar));
+  }
+
+  void _addInterceptors() async {
+    await initializeCookieJar();
     if (kDebugMode) {
       dio.interceptors.add(PrettyDioLogger(requestBody: true));
     }

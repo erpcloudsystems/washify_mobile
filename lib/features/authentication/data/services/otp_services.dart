@@ -26,7 +26,7 @@ class OtpServices implements BaseOtpServices {
       endPoint: ApiConstance.verifyOtpEndPoint,
       data: {
         "email": email,
-        "otp_code": otp,
+        "otp_code": otp.toString(),
       },
     ) as Response;
     return response.data['message'];
