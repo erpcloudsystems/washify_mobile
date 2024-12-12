@@ -24,7 +24,7 @@ final class AuthSignUpLoadingState extends AuthState {}
 final class AuthSignUpSuccessState extends AuthState {
   final String message;
 
-  const AuthSignUpSuccessState({required this.message});
+  const AuthSignUpSuccessState({this.message = StringsManager.pleaseCheckYourEmail});
 }
 
 final class AuthSignUpErrorState extends AuthState {

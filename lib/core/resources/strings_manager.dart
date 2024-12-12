@@ -99,4 +99,5 @@ class StringsManager {
   static const String didNotReceiveCode = 'Did not receive code';
   static const String resend = 'Resend';
   static const String otpHasBeenExpired = 'Otp has been expired please resend another one.';
+  static const String pleaseCheckYourEmail = 'Please check your email for verification';
 }
