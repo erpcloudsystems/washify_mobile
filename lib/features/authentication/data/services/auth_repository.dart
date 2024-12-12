@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 
-import '../../../../../core/global/dependencies_container.dart';
-import '../../../../../core/network/api_constant.dart';
-import '../../../../../core/network/dio_helper.dart';
+import '../../../../core/global/dependencies_container.dart';
+import '../../../../core/network/api_constant.dart';
+import '../../../../core/network/dio_helper.dart';
 import '../models/login_request_model.dart';
 import '../models/login_response_model.dart';
 import '../models/sign_up_request_model.dart';

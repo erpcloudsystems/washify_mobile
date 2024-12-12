@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:washify_mobile/core/network/api_constant.dart';
 import 'package:washify_mobile/core/network/dio_helper.dart';
 
-import '../../../../../core/global/dependencies_container.dart';
+import '../../../../core/global/dependencies_container.dart';
 
 abstract interface class BaseOtpServices {
   Future<void> sendOtp(String email);

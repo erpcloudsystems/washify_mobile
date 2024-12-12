@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:washify_mobile/core/resources/colors_managers.dart';
-import 'package:washify_mobile/features/authentication/presentation/data/models/territory_model.dart';
+import 'package:washify_mobile/features/authentication/data/models/territory_model.dart';
 
 import '../../../../core/resources/image_paths.dart';
 

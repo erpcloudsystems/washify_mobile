@@ -9,8 +9,8 @@ import 'package:washify_mobile/core/resources/colors_managers.dart';
 import 'package:washify_mobile/core/router/app_routes.dart';
 import 'package:washify_mobile/core/router/route_services.dart';
 import 'package:washify_mobile/core/utils/custom_snack_bar.dart';
-import 'package:washify_mobile/features/authentication/presentation/logic/auth/auth_cubit.dart';
-import 'package:washify_mobile/features/authentication/presentation/logic/otp/cubit/otp_cubit.dart';
+import 'package:washify_mobile/features/authentication/logic/auth/auth_cubit.dart';
+import 'package:washify_mobile/features/authentication/logic/otp/cubit/otp_cubit.dart';
 import '../../../../core/resources/strings_manager.dart';
 import '../../../../core/utils/loading_dialogs.dart';
 
@@ -121,7 +121,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       ),
                       TextButton(
                         onPressed: () async {
-                          print(widget.email);
+                          print(widget.email); 
                           await otpCubit.sendOtp(email: widget.email);
                           countDownController.restart();
                         },

@@ -8,7 +8,7 @@ import 'package:washify_mobile/core/router/app_routes.dart';
 import 'package:washify_mobile/core/router/route_services.dart';
 import 'package:washify_mobile/core/utils/custom_elevated_button.dart';
 import 'package:washify_mobile/core/utils/custom_loading_widget.dart';
-import 'package:washify_mobile/features/authentication/presentation/logic/auth/auth_cubit.dart';
+import 'package:washify_mobile/features/authentication/logic/auth/auth_cubit.dart';
 import '../widgets/progress_bar_widget.dart';
 import '../widgets/territory_widget.dart';
 

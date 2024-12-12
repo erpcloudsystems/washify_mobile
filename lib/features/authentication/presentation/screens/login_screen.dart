@@ -7,7 +7,7 @@ import 'package:washify_mobile/core/resources/strings_manager.dart';
 import 'package:washify_mobile/core/router/app_routes.dart';
 import 'package:washify_mobile/core/router/route_services.dart';
 import 'package:washify_mobile/core/utils/custom_elevated_button.dart';
-import 'package:washify_mobile/features/authentication/presentation/logic/auth/auth_cubit.dart';
+import 'package:washify_mobile/features/authentication/logic/auth/auth_cubit.dart';
 import '../../../../core/utils/custom_snack_bar.dart';
 import '../widgets/login_form.dart';
 import '../widgets/or_sign_up_with_divider.dart';

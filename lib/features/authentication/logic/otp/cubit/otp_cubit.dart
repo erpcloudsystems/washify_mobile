@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:washify_mobile/core/network/exceptions.dart';
-import 'package:washify_mobile/features/authentication/presentation/data/services/otp_services.dart';
+import 'package:washify_mobile/features/authentication/data/services/otp_services.dart';
 
 part 'otp_state.dart';
 
