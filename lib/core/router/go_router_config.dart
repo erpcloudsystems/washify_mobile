@@ -7,6 +7,7 @@ import 'package:washify_mobile/features/authentication/presentation/screens/subs
 import 'package:washify_mobile/features/authentication/presentation/screens/visits_screen.dart';
 import 'package:washify_mobile/features/car/presentation/screens/car_info_screen.dart';
 import 'package:washify_mobile/features/home/presentation/screens/home_screen.dart';
+import 'package:washify_mobile/features/subscription/presentation/screens/payment_widget.dart';
 import 'package:washify_mobile/features/subscription/presentation/screens/subscription_screen.dart';
 
 import '../../features/authentication/presentation/screens/otp_screen.dart';
@@ -69,6 +70,11 @@ final router = GoRouter(
       builder: (context, state) => CarInfoScreen(
         territory: state.uri.queryParameters['territory'] as String,
       ),
+    ),
+    GoRoute(
+      path: AppRoutes.paymentDetailsScreen,
+      name: AppRoutes.paymentDetailsScreen,
+      builder: (context, state) => const PaymentDetailsScreen(),
     ),
   ],
 );

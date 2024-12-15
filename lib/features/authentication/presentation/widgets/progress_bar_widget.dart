@@ -10,9 +10,11 @@ class ProgressBarWidget extends StatelessWidget {
     super.key,
     this.isLocateActive = false,
     this.isCarInfoActive = false,
+    this.isPayNow= false,
   });
   final bool isLocateActive;
   final bool isCarInfoActive;
+  final bool isPayNow;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -61,6 +63,25 @@ class ProgressBarWidget extends StatelessWidget {
                   number: '3',
                   title: StringsManager.carInfo,
                   isActive: isCarInfoActive,
+                ),
+              ),
+            ),
+            const Flexible(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 4),
+                child: DottedLine(
+                  dashLength: 2,
+                ),
+              ),
+            ),
+            Flexible(
+              flex: 2,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: ProgressNumberWidget(
+                  number: '4',
+                  title: StringsManager.payNow,
+                  isActive: isPayNow,
                 ),
               ),
             ),

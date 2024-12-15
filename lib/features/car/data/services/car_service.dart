@@ -1,11 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:washify_mobile/core/network/api_constant.dart';
 import 'package:washify_mobile/core/network/dio_helper.dart';
+import 'package:washify_mobile/features/car/data/models/request_service_model.dart';
 
 import '../../../../core/global/dependencies_container.dart';
 
 abstract interface class BaseCarServices {
   Future<List<String>> getBrands();
+  Future<void> createRequestService(RequestServiceModel model);
 }
 
 class CarServices extends BaseCarServices {
@@ -17,5 +19,13 @@ class CarServices extends BaseCarServices {
     return List.from(response.data['data'])
         .map((index) => index['name'].toString())
         .toList();
+  }
+
+  @override
+  Future<void> createRequestService(RequestServiceModel model) async {
+    await dio.post(
+      endPoint: ApiConstance.requestServiceEndPoint,
+      data: model.toMap(),
+    ) as Response;
   }
 }

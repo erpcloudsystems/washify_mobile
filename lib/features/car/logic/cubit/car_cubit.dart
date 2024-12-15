@@ -23,12 +23,23 @@ class CarCubit extends Cubit<CarState> {
   }
 
   List<RequestServiceModel> requestServiceModels = [];
-    double totalPay = 0;
+  double totalPay = 0;
   void addNewService({required RequestServiceModel requestServiceModel}) {
     totalPay += requestServiceModel.price;
     requestServiceModels.add(requestServiceModel);
   }
 
+// Create Request Service
+  Future<void> createRequestService(String carId) async {
+    emit(CreateRequestServiceLoadingState());
+    try {
+      for (var model in requestServiceModels) {
+        await _baseCarServices.createRequestService(model);
+      }
 
-
+      emit(CreateRequestServiceSuccessState());
+    } on PrimaryServerException catch (e) {
+      emit(CreateRequestServiceErrorState(e.message));
+    }
+  }
 }

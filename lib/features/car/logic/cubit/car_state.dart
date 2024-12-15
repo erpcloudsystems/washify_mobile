@@ -18,3 +18,13 @@ class GetBrandsErrorState extends CarState {
 }
 
 class GetBrandsSuccessState extends CarState {}
+
+// Create Request service state
+class CreateRequestServiceLoadingState extends CarState {}
+
+class CreateRequestServiceErrorState extends CarState {
+  final String errorMessage;
+  const CreateRequestServiceErrorState(this.errorMessage);
+}
+
+class CreateRequestServiceSuccessState extends CarState {}

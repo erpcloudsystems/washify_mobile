@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
-import '../widgets/payment_widget.dart';
+import '../../../subscription/presentation/screens/payment_widget.dart';
 import '../widgets/progress_bar_widget.dart';
 import '../widgets/services_widget.dart';
 
@@ -29,7 +29,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
       // const CarInfoScreen(
       //     // onPressed: updateContent,
       //     ),
-      const PaymentWidget(),
+      const PaymentDetailsScreen(),
     ];
     return Scaffold(
       body: SafeArea(

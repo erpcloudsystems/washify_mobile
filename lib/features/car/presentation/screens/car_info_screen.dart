@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
+import 'package:washify_mobile/core/router/app_routes.dart';
+import 'package:washify_mobile/core/router/route_services.dart';
 import 'package:washify_mobile/core/utils/custom_elevated_button.dart';
 import 'package:washify_mobile/core/utils/custom_snack_bar.dart';
 import 'package:washify_mobile/features/car/data/models/request_service_model.dart';
@@ -13,7 +15,6 @@ import '../widgets/added_cars.dart';
 import '../widgets/car_info_form.dart';
 import '../../../authentication/presentation/widgets/progress_bar_widget.dart';
 import '../widgets/select_subscription_list.dart';
-import '../widgets/total_pay_widget.dart';
 
 class CarInfoScreen extends StatefulWidget {
   const CarInfoScreen({super.key, required this.territory});
@@ -146,9 +147,9 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
                       ),
                 ),
                 const SelectSubscriptionList(),
-                TotalPayWidget(
-                  totalPay: carCubit.totalPay,
-                ),
+                // TotalPayWidget(
+                //   totalPay: carCubit.totalPay,
+                // ),
                 const GutterLarge(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 80),
@@ -160,7 +161,10 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
                 const GutterLarge(),
                 CustomElevatedButton(
                   title: StringsManager.checkOut,
-                  onPressed: () {},
+                  onPressed: () {
+                    RoutesService.pushNamed(AppRoutes.paymentDetailsScreen,
+                        context: context);
+                  },
                 ),
               ],
             ),
