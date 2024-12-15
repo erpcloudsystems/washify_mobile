@@ -5,7 +5,7 @@ import 'package:washify_mobile/features/authentication/presentation/screens/logi
 import 'package:washify_mobile/features/authentication/presentation/screens/sign_up_screen.dart';
 import 'package:washify_mobile/features/authentication/presentation/screens/subscribe_screen.dart';
 import 'package:washify_mobile/features/authentication/presentation/screens/visits_screen.dart';
-import 'package:washify_mobile/features/authentication/presentation/screens/car_info_screen.dart';
+import 'package:washify_mobile/features/car/presentation/screens/car_info_screen.dart';
 import 'package:washify_mobile/features/home/presentation/screens/home_screen.dart';
 import 'package:washify_mobile/features/subscription/presentation/screens/subscription_screen.dart';
 
@@ -66,7 +66,9 @@ final router = GoRouter(
     GoRoute(
       path: AppRoutes.carInfoScreen,
       name: AppRoutes.carInfoScreen,
-      builder: (context, state) => const CarInfoScreen(),
+      builder: (context, state) => CarInfoScreen(
+        territory: state.uri.queryParameters['territory'] as String,
+      ),
     ),
   ],
 );

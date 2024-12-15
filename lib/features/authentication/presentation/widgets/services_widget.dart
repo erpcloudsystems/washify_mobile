@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/resources/colors_managers.dart';
-import '../../../../core/resources/strings_manager.dart';
-import '../../../../core/utils/custom_elevated_button.dart';
+import '../../../../../core/resources/colors_managers.dart';
+import '../../../../../core/resources/strings_manager.dart';
+import '../../../../../core/utils/custom_elevated_button.dart';
 import 'subscription_container.dart';
 
 class ServicesWidget extends StatelessWidget {

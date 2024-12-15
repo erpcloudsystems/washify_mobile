@@ -6,7 +6,7 @@ import 'package:washify_mobile/core/router/route_services.dart';
 import 'package:washify_mobile/core/utils/custom_elevated_button.dart';
 import '../../../../core/resources/strings_manager.dart';
 import '../../../authentication/presentation/widgets/calender_widget.dart';
-import '../widgets/cars_list_view.dart';
+import '../../../car/presentation/widgets/cars_list_view.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

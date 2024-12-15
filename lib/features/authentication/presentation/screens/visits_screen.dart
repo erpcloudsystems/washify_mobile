@@ -6,7 +6,8 @@ import 'package:washify_mobile/core/resources/strings_manager.dart';
 import 'package:washify_mobile/core/router/app_routes.dart';
 import 'package:washify_mobile/core/router/route_services.dart';
 import 'package:washify_mobile/core/utils/custom_elevated_button.dart';
-import 'package:washify_mobile/features/authentication/presentation/widgets/calender_widget.dart';
+
+import '../widgets/calender_widget.dart';
 
 class VisitsScreen extends StatelessWidget {
   const VisitsScreen({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:washify_mobile/features/home/presentation/widgets/car_list_item.dart';
+import 'package:washify_mobile/features/car/presentation/widgets/car_list_item.dart';
 
 class CarsListView extends StatelessWidget {
   const CarsListView({super.key});

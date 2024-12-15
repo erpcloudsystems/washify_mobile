@@ -4,11 +4,10 @@ import 'package:washify_mobile/core/resources/image_paths.dart';
 import 'package:washify_mobile/core/router/app_routes.dart';
 import 'package:washify_mobile/core/router/route_services.dart';
 import 'package:washify_mobile/core/utils/custom_elevated_button.dart';
-import 'package:washify_mobile/features/authentication/presentation/widgets/payment_method_widget.dart';
-
-import '../../../../core/resources/colors_managers.dart';
-import '../../../../core/resources/strings_manager.dart';
-import 'car_info_record.dart';
+import '../../../../../core/resources/colors_managers.dart';
+import '../../../../../core/resources/strings_manager.dart';
+import '../../../car/presentation/widgets/car_info_record.dart';
+import 'payment_method_widget.dart';
 
 class PaymentWidget extends StatelessWidget {
   const PaymentWidget({super.key});

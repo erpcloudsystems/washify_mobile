@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/resources/colors_managers.dart';
+import '../../../../../core/resources/colors_managers.dart';
 
 class ProgressNumberWidget extends StatelessWidget {
   const ProgressNumberWidget({

@@ -67,6 +67,7 @@ class StringsManager {
       'Choose your monthly subscription...';
   static const String orSignUpWith = 'or sign up with';
   static const String subscribe = 'Subscribe';
+  static const String subscription = 'Subscription';
   static const String google = 'Google';
   static const String signUpWithGoogle = 'Sign up with Google';
   static const String facebook = 'Facebook';

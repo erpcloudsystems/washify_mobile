@@ -60,7 +60,26 @@ abstract class AppTheme {
           labelMedium: TextStyle(fontSize: 14.sp),
           labelSmall: TextStyle(fontSize: 12.sp),
         ),
-
+        inputDecorationTheme: InputDecorationTheme(
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(4.r),
+            borderSide: const BorderSide(),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(4.r),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(4.r),
+            borderSide: const BorderSide(color: ColorsManager.grey),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(4.r),
+            borderSide: const BorderSide(color: ColorsManager.red),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(4.r),
+          ),
+        ),
         // Icons
         iconTheme: IconThemeData(
           size: 22.sp,
@@ -69,6 +88,7 @@ abstract class AppTheme {
 
         // Checkbox
         checkboxTheme: CheckboxThemeData(
+          fillColor: WidgetStateProperty.all<Color>(ColorsManager.mainColor),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           side: BorderSide(
             style: BorderStyle.solid,

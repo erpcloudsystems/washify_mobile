@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter/foundation.dart';
@@ -240,7 +239,7 @@ extension on DioHelper {
         message: e.response?.data['message'] ?? e.response!.toString(),
       );
     } catch (e) {
-      log(e.toString());
+      
       PrimaryServerException exception = e as PrimaryServerException;
       throw PrimaryServerException(
         error: exception.error,

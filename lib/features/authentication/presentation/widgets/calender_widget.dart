@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-import '../../../../core/resources/colors_managers.dart';
+import '../../../../../core/resources/colors_managers.dart';
 
 class CalenderWidget extends StatefulWidget {
   const CalenderWidget({super.key});

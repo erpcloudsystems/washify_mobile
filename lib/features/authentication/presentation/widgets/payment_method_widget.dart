@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/resources/image_paths.dart';
+import '../../../../../core/resources/image_paths.dart';
 
 class PaymentMethodWidget extends StatelessWidget {
   const PaymentMethodWidget({super.key, required this.imagePath});

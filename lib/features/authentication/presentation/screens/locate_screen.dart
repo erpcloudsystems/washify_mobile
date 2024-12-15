@@ -102,35 +102,24 @@ class _LocateScreenState extends State<LocateScreen> {
                   },
                 ),
                 const Gutter(),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Row(
-                    children: [
-                      const BackButton(),
-                      Flexible(
-                        child: CustomElevatedButton(
-                          title: StringsManager.next,
-                          onPressed: () {
-                            if (territory != null) {
-                              RoutesService.pushNamed(
-                                AppRoutes.carInfoScreen,
-                                context: context,
-                                queryParameters: {
-                                  'territory': territory,
-                                },
-                              );
-                            } else {
-                              showSnackBar(
-                                  context: context,
-                                  message: StringsManager
-                                      .pleaseSelectYourLocationFirst,
-                                  color: ColorsManager.red);
-                            }
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
+                CustomElevatedButton(
+                  title: StringsManager.next,
+                  onPressed: () {
+                    if (territory != null) {
+                      RoutesService.pushNamed(
+                        AppRoutes.carInfoScreen,
+                        context: context,
+                        queryParameters: {
+                          'territory': territory,
+                        },
+                      );
+                    } else {
+                      showSnackBar(
+                          context: context,
+                          message: StringsManager.pleaseSelectYourLocationFirst,
+                          color: ColorsManager.red);
+                    }
+                  },
                 ),
               ],
             ),

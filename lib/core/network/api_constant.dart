@@ -13,4 +13,10 @@ class ApiConstance {
       'method/washify.overrides.whitelist.authentication.otp.request_otp';
   static const String verifyOtpEndPoint =
       'method/washify.overrides.whitelist.authentication.otp.confirm_otp';
+
+  // Subscription
+  static const String getSubscriptionEndPoint = 'resource/Subscription Plan';
+
+  // Car 
+  static const String brandsEndPoint = 'resource/Brand';
 }

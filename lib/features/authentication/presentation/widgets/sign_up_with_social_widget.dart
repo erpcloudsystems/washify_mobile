@@ -3,8 +3,8 @@ import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:washify_mobile/core/resources/image_paths.dart';
 import 'package:washify_mobile/core/resources/strings_manager.dart';
-import '../../../../core/global/enums.dart';
-import '../../../../core/utils/custom_elevated_icon_button.dart';
+import '../../../../../core/global/enums.dart';
+import '../../../../../core/utils/custom_elevated_icon_button.dart';
 
 class SignUpWithSocialWidget extends StatelessWidget {
   const SignUpWithSocialWidget({

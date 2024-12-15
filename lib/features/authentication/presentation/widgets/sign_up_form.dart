@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 
-import '../../../../core/resources/strings_manager.dart';
-import '../../../../core/utils/custom_text_form_field.dart';
+import '../../../../../core/resources/strings_manager.dart';
+import '../../../../../core/utils/custom_text_form_field.dart';
 
 class SignUpForm extends StatelessWidget {
   const SignUpForm(

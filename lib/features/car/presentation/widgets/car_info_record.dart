@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/resources/colors_managers.dart';
+import '../../../../../core/resources/colors_managers.dart';
 
 class CarInfoRecord extends StatelessWidget {
   const CarInfoRecord({super.key, required this.title, required this.value});

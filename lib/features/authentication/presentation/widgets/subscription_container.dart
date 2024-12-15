@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/resources/colors_managers.dart';
+import '../../../../../core/resources/colors_managers.dart';
 
 class SubscriptionContainer extends StatelessWidget {
   const SubscriptionContainer({super.key});
