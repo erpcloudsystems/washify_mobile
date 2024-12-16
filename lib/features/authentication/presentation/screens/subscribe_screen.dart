@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
-import '../../../subscription/presentation/screens/payment_widget.dart';
+import '../../../car/presentation/screens/payment_widget.dart';
 import '../widgets/progress_bar_widget.dart';
 import '../widgets/services_widget.dart';
 

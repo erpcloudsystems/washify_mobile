@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:washify_mobile/features/subscription/data/models/days_week_model.dart';
+
 class SubscriptionModel {
   final String id;
   final String name;
@@ -7,7 +9,9 @@ class SubscriptionModel {
   final double price;
   final String priceDetermination;
   final String itemCode;
+  final int timesPerWeek;
   bool isSelected;
+  List<DaysWeekModel> selectedDays;
   SubscriptionModel({
     required this.id,
     required this.itemCode,
@@ -15,7 +19,9 @@ class SubscriptionModel {
     required this.currency,
     required this.price,
     required this.priceDetermination,
+    required this.timesPerWeek,
     this.isSelected = false,
+    this.selectedDays = const [],
   });
 
   void toggleSelected() {
@@ -29,6 +35,7 @@ class SubscriptionModel {
     double? price,
     String? priceDetermination,
     String? itemCode,
+    int? timesPerWeek,
   }) {
     return SubscriptionModel(
       id: id ?? this.id,
@@ -37,6 +44,7 @@ class SubscriptionModel {
       currency: currency ?? this.currency,
       price: price ?? this.price,
       priceDetermination: priceDetermination ?? this.priceDetermination,
+      timesPerWeek: timesPerWeek ?? this.timesPerWeek,
     );
   }
 
@@ -58,6 +66,7 @@ class SubscriptionModel {
       itemCode: map['item'] as String,
       price: map['cost'] as double,
       priceDetermination: map['price_determination'] as String,
+      timesPerWeek: map['custom_how_many_times_per_week'] as int,
     );
   }
 

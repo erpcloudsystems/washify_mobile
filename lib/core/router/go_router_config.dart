@@ -4,10 +4,10 @@ import 'package:washify_mobile/features/authentication/presentation/screens/loca
 import 'package:washify_mobile/features/authentication/presentation/screens/login_screen.dart';
 import 'package:washify_mobile/features/authentication/presentation/screens/sign_up_screen.dart';
 import 'package:washify_mobile/features/authentication/presentation/screens/subscribe_screen.dart';
-import 'package:washify_mobile/features/authentication/presentation/screens/visits_screen.dart';
+import 'package:washify_mobile/features/subscription/presentation/screens/visits_screen.dart';
 import 'package:washify_mobile/features/car/presentation/screens/car_info_screen.dart';
 import 'package:washify_mobile/features/home/presentation/screens/home_screen.dart';
-import 'package:washify_mobile/features/subscription/presentation/screens/payment_widget.dart';
+import 'package:washify_mobile/features/car/presentation/screens/payment_widget.dart';
 import 'package:washify_mobile/features/subscription/presentation/screens/subscription_screen.dart';
 
 import '../../features/authentication/presentation/screens/otp_screen.dart';

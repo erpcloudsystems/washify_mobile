@@ -5,11 +5,12 @@ import 'package:washify_mobile/core/resources/image_paths.dart';
 import 'package:washify_mobile/core/router/app_routes.dart';
 import 'package:washify_mobile/core/router/route_services.dart';
 import 'package:washify_mobile/core/utils/custom_elevated_button.dart';
+import 'package:washify_mobile/core/utils/custom_snack_bar.dart';
 import 'package:washify_mobile/features/car/logic/cubit/car_cubit.dart';
 import '../../../../../core/resources/colors_managers.dart';
 import '../../../../../core/resources/strings_manager.dart';
 import '../../../authentication/presentation/widgets/progress_bar_widget.dart';
-import '../../../car/presentation/widgets/car_info_record.dart';
+import '../widgets/car_info_record.dart';
 import '../../../authentication/presentation/widgets/payment_method_widget.dart';
 
 class PaymentDetailsScreen extends StatelessWidget {
@@ -73,12 +74,36 @@ class PaymentDetailsScreen extends StatelessWidget {
                 const Gutter(),
                 const Divider(),
                 const Gutter(),
-                CustomElevatedButton(
-                  title: StringsManager.payNow,
-                  onPressed: () {
-                    RoutesService.pushReplacementNamed(
-                      context: context,
-                      location: AppRoutes.visitsScreen,
+                BlocConsumer<CarCubit, CarState>(
+                  listener: (context, state) {
+                    if (state is CreateRequestServiceSuccessState) {
+                      showSnackBar(
+                          context: context,
+                          message: 'Your service was created successfully');
+                      RoutesService.pushReplacementNamed(
+                        context: context,
+                        location: AppRoutes.visitsScreen,
+                      );
+                    } else {
+                      if (state is CreateRequestServiceErrorState) {
+                        showSnackBar(
+                            context: context,
+                            message: state.errorMessage,
+                            color: ColorsManager.red);
+                      }
+                    }
+                  },
+                  builder: (context, state) {
+                    return CustomElevatedButton(
+                      title: StringsManager.payNow,
+                      isLoading: state is CreateRequestServiceLoadingState,
+                      onPressed: () async {
+                        // await carCubit.createRequestService();
+                        RoutesService.pushReplacementNamed(
+                          context: context,
+                          location: AppRoutes.visitsScreen,
+                        );
+                      },
                     );
                   },
                 ),

@@ -15,74 +15,76 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Hi, Ayman',
-                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                          color: ColorsManager.mainColor,
-                        ),
-                  ),
-                  IconButton(
-                    onPressed: () async {
-                      // await sl<SharedPreferences>().clear();
-
-                      // RoutesService.go(
-                      //     context: context, location: AppRoutes.loginScreen);
-                      RoutesService.pushNamed(AppRoutes.locateScreen,
-                          context: context);
-                    },
-                    icon: const Icon(
-                      Icons.logout,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Hi, Ayman',
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                            color: ColorsManager.mainColor,
+                          ),
                     ),
-                  ),
-                ],
-              ),
-              const Gutter(),
-              Text(
-                StringsManager.visitDescription,
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              const GutterLarge(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    StringsManager.yourCars,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  Text(
-                    StringsManager.seeAll,
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: ColorsManager.mainColor,
-                        ),
-                  ),
-                ],
-              ),
-              const Gutter(),
-              const CarsListView(),
-              const GutterLarge(),
-              const Card(
-                elevation: 6,
-                child: CalenderWidget(),
-              ),
-              const GutterLarge(),
-              CustomElevatedButton(
-                title: StringsManager.manageYourSubscription,
-                onPressed: () {
-                  RoutesService.pushNamed(
-                    AppRoutes.subscriptionScreen,
-                    context: context,
-                  );
-                },
-              ),
-            ],
+                    IconButton(
+                      onPressed: () async {
+                        // await sl<SharedPreferences>().clear();
+
+                        // RoutesService.go(
+                        //     context: context, location: AppRoutes.loginScreen);
+                        RoutesService.pushNamed(AppRoutes.locateScreen,
+                            context: context);
+                      },
+                      icon: const Icon(
+                        Icons.logout,
+                      ),
+                    ),
+                  ],
+                ),
+                const Gutter(),
+                Text(
+                  StringsManager.visitDescription,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                const GutterLarge(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      StringsManager.yourCars,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    Text(
+                      StringsManager.seeAll,
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                            color: ColorsManager.mainColor,
+                          ),
+                    ),
+                  ],
+                ),
+                const Gutter(),
+                const CarsListView(),
+                const GutterLarge(),
+                const Card(
+                  elevation: 6,
+                  child: CalenderWidget(),
+                ),
+                const GutterLarge(),
+                CustomElevatedButton(
+                  title: StringsManager.manageYourSubscription,
+                  onPressed: () {
+                    RoutesService.pushNamed(
+                      AppRoutes.subscriptionScreen,
+                      context: context,
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

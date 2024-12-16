@@ -51,25 +51,33 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
   void addService() {
     if (_formKey.currentState!.validate()) {
       if (getSelectedSubscription() != null) {
-        carCubit.addNewService(
-          requestServiceModel: RequestServiceModel(
-            subscriptionPlan: getSelectedSubscription()!.id,
-            itemCode: getSelectedSubscription()!.itemCode,
-            territory: widget.territory,
-            plateCode: plateController.text,
-            model: modelController.text,
-            brand: brandController.text,
-            price: getSelectedSubscription()!.price,
-          ),
-        );
-        brandController.clear();
-        modelController.clear();
-        plateController.clear();
-        showSnackBar(
-          context: context,
-          message: 'Your car has been added.',
-        );
-        setState(() {});
+        if (getSelectedSubscription()!.selectedDays.isNotEmpty) {
+          carCubit.addNewService(
+            requestServiceModel: RequestServiceModel(
+              subscriptionPlan: getSelectedSubscription()!.id,
+              itemCode: getSelectedSubscription()!.itemCode,
+              timesPerWeek: getSelectedSubscription()!.timesPerWeek,
+              territory: widget.territory,
+              plateCode: plateController.text,
+              model: modelController.text,
+              brand: brandController.text,
+              price: getSelectedSubscription()!.price,
+            ),
+          );
+
+          modelController.clear();
+          plateController.clear();
+          showSnackBar(
+            context: context,
+            message: 'Your car has been added.',
+          );
+          setState(() {});
+        } else {
+          showSnackBar(
+              context: context,
+              message: 'Please select visit days',
+              color: ColorsManager.red);
+        }
       } else {
         showSnackBar(
             context: context,
@@ -162,8 +170,15 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
                 CustomElevatedButton(
                   title: StringsManager.checkOut,
                   onPressed: () {
-                    RoutesService.pushNamed(AppRoutes.paymentDetailsScreen,
-                        context: context);
+                    if (carCubit.requestServiceModels.isNotEmpty) {
+                      RoutesService.pushNamed(AppRoutes.paymentDetailsScreen,
+                          context: context);
+                    } else {
+                      showSnackBar(
+                          context: context,
+                          message: 'Please add your car',
+                          color: ColorsManager.red);
+                    }
                   },
                 ),
               ],

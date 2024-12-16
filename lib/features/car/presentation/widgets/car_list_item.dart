@@ -26,14 +26,11 @@ class CarListItem extends StatelessWidget {
               color: ColorsManager.mainColor,
               size: 80,
             ),
-            Positioned(
-              bottom: 0,
-              child: Text(
-                'Mercedes',
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: ColorsManager.mainColor,
-                    ),
-              ),
+            Text(
+              'Mercedes',
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    color: ColorsManager.mainColor,
+                  ),
             ),
           ],
         ),

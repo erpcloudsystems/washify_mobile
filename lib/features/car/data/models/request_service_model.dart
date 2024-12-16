@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import '../../../subscription/data/models/days_week_model.dart';
+
 class RequestServiceModel {
   final String subscriptionPlan;
   final String itemCode;
@@ -8,6 +10,8 @@ class RequestServiceModel {
   final String plateCode;
   final String model;
   final String brand;
+  final int timesPerWeek;
+  final List<DaysWeekModel> weekDays; 
   RequestServiceModel({
     required this.subscriptionPlan,
     required this.itemCode,
@@ -16,6 +20,8 @@ class RequestServiceModel {
     required this.model,
     required this.brand,
     required this.price,
+    required this.timesPerWeek,
+     this.weekDays =const [],
   });
 
   RequestServiceModel copyWith({
@@ -26,6 +32,7 @@ class RequestServiceModel {
     String? model,
     String? brand,
     double? price,
+    int? timesPerWeek,
   }) {
     return RequestServiceModel(
       subscriptionPlan: subscriptionPlan ?? this.subscriptionPlan,
@@ -35,6 +42,7 @@ class RequestServiceModel {
       model: model ?? this.model,
       brand: brand ?? this.brand,
       price: price ?? this.price,
+      timesPerWeek: timesPerWeek?? this.timesPerWeek,
     );
   }
 
@@ -58,6 +66,7 @@ class RequestServiceModel {
       model: map['model'] as String,
       brand: map['brand'] as String,
       price: map['cost'] as double,
+      timesPerWeek: map['times_per_week'] as int,
     );
   }
 

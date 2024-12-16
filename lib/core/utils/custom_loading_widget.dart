@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:washify_mobile/core/resources/colors_managers.dart';
 
@@ -7,10 +8,10 @@ class CustomLoadingWidget extends StatelessWidget {
   final Color color;
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: SizedBox(
-        height: 70,
-        child: LoadingIndicator(
+        height: 44.h,
+        child: const LoadingIndicator(
           indicatorType: Indicator.ballRotateChase,
           colors: [ColorsManager.mainColor, ColorsManager.secondaryColor],
           strokeWidth: 1,

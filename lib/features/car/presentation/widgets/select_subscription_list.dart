@@ -4,6 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:washify_mobile/core/resources/colors_managers.dart';
 import 'package:washify_mobile/features/subscription/controller/cubit/subscription_cubit.dart';
 
+import '../../../../core/utils/custom_snack_bar.dart';
+import '../../../subscription/data/models/days_week_model.dart';
+import '../../../subscription/presentation/widgets/select_days_widget.dart';
+
 class SelectSubscriptionList extends StatefulWidget {
   const SelectSubscriptionList({super.key});
 
@@ -16,6 +20,16 @@ class _SelectSubscriptionListState extends State<SelectSubscriptionList> {
   void initState() {
     context.read<SubscriptionCubit>().getSubscriptions();
     super.initState();
+  }
+
+  int validateTimesPerWeek() {
+    int count = 0;
+    for (var item in listOfWeekDays) {
+      if (item.isSelected) {
+        count++;
+      }
+    }
+    return count;
   }
 
   @override
@@ -33,16 +47,38 @@ class _SelectSubscriptionListState extends State<SelectSubscriptionList> {
               color: ColorsManager.mainColor,
             ),
           ),
-          child: CheckboxListTile.adaptive(
-            title: Text(subscriptionCubit.subscriptions[index].name),
-            subtitle: Text(
-                '${subscriptionCubit.subscriptions[index].currency}  ${subscriptionCubit.subscriptions[index].price}'),
-            value: subscriptionCubit.subscriptions[index].isSelected,
-            onChanged: (value) {
-              setState(() {
-                subscriptionCubit.subscriptions[index].toggleSelected();
-              });
-            },
+          child: Column(
+            children: [
+              CheckboxListTile.adaptive(
+                title: Text(subscriptionCubit.subscriptions[index].name),
+                subtitle: Text(
+                    '${subscriptionCubit.subscriptions[index].currency}  ${subscriptionCubit.subscriptions[index].price}'),
+                value: subscriptionCubit.subscriptions[index].isSelected,
+                onChanged: (value) {
+                  setState(() {
+                    subscriptionCubit.subscriptions[index].toggleSelected();
+                  });
+                },
+              ),
+              if (subscriptionCubit.subscriptions[index].isSelected)
+                SelectDaysWidget(
+                  onChanged: (value, idx) {
+                    if (validateTimesPerWeek() <
+                        subscriptionCubit.subscriptions[index].timesPerWeek) {
+                      setState(() {
+                        subscriptionCubit.subscriptions[index].selectedDays
+                            .add(listOfWeekDays[idx],);
+                        listOfWeekDays[idx].toggleSelected(); 
+                      });
+                    } else {
+                      showSnackBar(
+                          context: context,
+                          message:
+                              'Please select ${subscriptionCubit.subscriptions[index].selectedDays} days only');
+                    }
+                  },
+                )
+            ],
           ),
         ),
       ),

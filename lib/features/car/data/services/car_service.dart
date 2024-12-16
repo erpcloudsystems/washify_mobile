@@ -1,3 +1,4 @@
+
 import 'package:dio/dio.dart';
 import 'package:washify_mobile/core/network/api_constant.dart';
 import 'package:washify_mobile/core/network/dio_helper.dart';
@@ -16,6 +17,7 @@ class CarServices extends BaseCarServices {
   Future<List<String>> getBrands() async {
     final response =
         await dio.get(endPoint: ApiConstance.brandsEndPoint) as Response;
+
     return List.from(response.data['data'])
         .map((index) => index['name'].toString())
         .toList();
