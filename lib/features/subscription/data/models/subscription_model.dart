@@ -21,8 +21,7 @@ class SubscriptionModel {
     required this.priceDetermination,
     required this.timesPerWeek,
     this.isSelected = false,
-    this.selectedDays = const [],
-  });
+  }) : selectedDays = [];
 
   void toggleSelected() {
     isSelected = !isSelected;
