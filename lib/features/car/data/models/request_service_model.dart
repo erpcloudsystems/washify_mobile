@@ -11,7 +11,7 @@ class RequestServiceModel {
   final String model;
   final String brand;
   final int timesPerWeek;
-  final List<DaysWeekModel> weekDays; 
+  final List<DaysWeekModel> weekDays;
   RequestServiceModel({
     required this.subscriptionPlan,
     required this.itemCode,
@@ -21,7 +21,7 @@ class RequestServiceModel {
     required this.brand,
     required this.price,
     required this.timesPerWeek,
-     this.weekDays =const [],
+    this.weekDays = const [],
   });
 
   RequestServiceModel copyWith({
@@ -42,11 +42,17 @@ class RequestServiceModel {
       model: model ?? this.model,
       brand: brand ?? this.brand,
       price: price ?? this.price,
-      timesPerWeek: timesPerWeek?? this.timesPerWeek,
+      timesPerWeek: timesPerWeek ?? this.timesPerWeek,
     );
   }
 
   Map<String, dynamic> toMap() {
+    var selectedDays = [];
+    for (var index in weekDays) {
+      if (index.isSelected) {
+        selectedDays.add(index.toMap());
+      }
+    }
     return <String, dynamic>{
       'subscription_plan': subscriptionPlan,
       'item_code': itemCode,
@@ -54,6 +60,7 @@ class RequestServiceModel {
       'plate_code': plateCode,
       'model': model,
       'brand': brand,
+      'blocked_days': selectedDays.toList(),
     };
   }
 

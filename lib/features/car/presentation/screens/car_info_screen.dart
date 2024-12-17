@@ -57,6 +57,7 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
               subscriptionPlan: getSelectedSubscription()!.id,
               itemCode: getSelectedSubscription()!.itemCode,
               timesPerWeek: getSelectedSubscription()!.timesPerWeek,
+              weekDays: getSelectedSubscription()!.selectedDays,
               territory: widget.territory,
               plateCode: plateController.text,
               model: modelController.text,
@@ -67,11 +68,13 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
 
           modelController.clear();
           plateController.clear();
+
           showSnackBar(
             context: context,
             message: 'Your car has been added.',
           );
-          setState(() {});
+
+          _reset();
         } else {
           showSnackBar(
               context: context,
@@ -85,6 +88,11 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
             color: ColorsManager.red);
       }
     }
+  }
+
+  void _reset() async {
+    context.read<SubscriptionCubit>().resetSubscriptions();
+    setState(() {});
   }
 
   @override
@@ -121,14 +129,14 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
                         );
                       },
                       child: Text(
-                        'Show / Edit your cars',
+                        'Show / Edit ${carCubit.requestServiceModels.length} of cars',
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             fontSize: 14, color: ColorsManager.mainColor),
                       ),
                     ),
                   ],
                 ),
-                const GutterTiny(),
+
                 Text(
                   StringsManager.addYourCar,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -168,7 +176,7 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
                 ),
                 const GutterLarge(),
                 CustomElevatedButton(
-                  title: StringsManager.checkOut,
+                  title: '${StringsManager.checkOut} (${carCubit.totalPay}EGP)',
                   onPressed: () {
                     if (carCubit.requestServiceModels.isNotEmpty) {
                       RoutesService.pushNamed(AppRoutes.paymentDetailsScreen,

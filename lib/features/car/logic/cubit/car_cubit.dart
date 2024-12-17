@@ -42,4 +42,10 @@ class CarCubit extends Cubit<CarState> {
       emit(CreateRequestServiceErrorState(e.message));
     }
   }
+
+  void reset() {
+    requestServiceModels = [];
+    totalPay = 0;
+    emit(CarInitial());
+  }
 }

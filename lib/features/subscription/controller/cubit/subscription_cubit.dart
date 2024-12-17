@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:washify_mobile/core/network/exceptions.dart';
+import 'package:washify_mobile/features/subscription/data/models/days_week_model.dart';
 import 'package:washify_mobile/features/subscription/data/models/subscription_model.dart';
 import 'package:washify_mobile/features/subscription/data/services/subscription_services.dart';
 
@@ -21,5 +22,14 @@ class SubscriptionCubit extends Cubit<SubscriptionState> {
     } on PrimaryServerException catch (error) {
       emit(GetSubscriptionsErrorState(error.message));
     }
+  }
+
+  void resetSubscriptions() {
+    for (int i = 0; i < listOfWeekDays.length; i++) {
+      if (listOfWeekDays[i].isSelected) {
+        listOfWeekDays[i].toggleSelected();
+      }
+    }
+    getSubscriptions();
   }
 }

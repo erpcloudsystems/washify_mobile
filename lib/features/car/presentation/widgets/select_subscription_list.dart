@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:washify_mobile/core/resources/colors_managers.dart';
 import 'package:washify_mobile/features/subscription/controller/cubit/subscription_cubit.dart';
-
 import '../../../../core/utils/custom_snack_bar.dart';
 import '../../../subscription/data/models/days_week_model.dart';
 import '../../../subscription/presentation/widgets/select_days_widget.dart';
@@ -63,18 +62,30 @@ class _SelectSubscriptionListState extends State<SelectSubscriptionList> {
               if (subscriptionCubit.subscriptions[index].isSelected)
                 SelectDaysWidget(
                   onChanged: (value, idx) {
-                    if (validateTimesPerWeek() <
-                        subscriptionCubit.subscriptions[index].timesPerWeek) {
-                      setState(() {
-                        subscriptionCubit.subscriptions[index].selectedDays
-                            .add(listOfWeekDays[idx],);
-                        listOfWeekDays[idx].toggleSelected(); 
-                      });
-                    } else {
-                      showSnackBar(
+                    if (!listOfWeekDays[idx].isSelected) {
+                      if (validateTimesPerWeek() <
+                          subscriptionCubit.subscriptions[index].timesPerWeek) {
+                        setState(() {
+                          subscriptionCubit.subscriptions[index].selectedDays
+                              .add(
+                            listOfWeekDays[idx],
+                          );
+                          listOfWeekDays[idx].toggleSelected();
+                        });
+                      } else {
+                        showSnackBar(
                           context: context,
                           message:
-                              'Please select ${subscriptionCubit.subscriptions[index].selectedDays} days only');
+                              'Please select ${subscriptionCubit.subscriptions[index].timesPerWeek} days only',
+                          color: ColorsManager.red,
+                        );
+                      }
+                    } else {
+                      setState(() {
+                        listOfWeekDays[idx].toggleSelected();
+                        subscriptionCubit.subscriptions[index].selectedDays
+                            .removeAt(index);
+                      });
                     }
                   },
                 )

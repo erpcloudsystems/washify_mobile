@@ -80,10 +80,11 @@ class PaymentDetailsScreen extends StatelessWidget {
                       showSnackBar(
                           context: context,
                           message: 'Your service was created successfully');
-                      RoutesService.pushReplacementNamed(
+                      RoutesService.go(
                         context: context,
                         location: AppRoutes.visitsScreen,
                       );
+                      carCubit.reset();
                     } else {
                       if (state is CreateRequestServiceErrorState) {
                         showSnackBar(
@@ -98,11 +99,11 @@ class PaymentDetailsScreen extends StatelessWidget {
                       title: StringsManager.payNow,
                       isLoading: state is CreateRequestServiceLoadingState,
                       onPressed: () async {
-                        // await carCubit.createRequestService();
-                        RoutesService.pushReplacementNamed(
-                          context: context,
-                          location: AppRoutes.visitsScreen,
-                        );
+                        await carCubit.createRequestService();
+                        // RoutesService.pushReplacementNamed(
+                        //   context: context,
+                        //   location: AppRoutes.visitsScreen,
+                        // );
                       },
                     );
                   },
