@@ -80,7 +80,7 @@ class StringsManager {
   static const String fees = 'Fees';
   static const String discount = 'Discount';
   static const String toPay = 'To Pay';
-  static const String checkOut = 'Check out';
+  static const String checkOut = 'Checkout';
   static const String addCar = 'Add car';
   static const String payWith = 'Pay with';
   static const String payNow = 'Pay Now';
@@ -107,4 +107,7 @@ class StringsManager {
       'Please select your location first!';
   static const String pleaseSelectYourDaysOfVisits =
       'Please select your days of visits';
+  static const String yourVisits = 'Your visits';
+  static const String price = 'Price';
+  static const String youHaveNoVisits = 'You have no visits!';
 }

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:washify_mobile/core/resources/strings_manager.dart';
+import 'package:washify_mobile/core/utils/custom_loading_widget.dart';
+import 'package:washify_mobile/core/utils/error_widget.dart';
+import 'package:washify_mobile/features/subscription/controller/cubit/subscription_cubit.dart';
 
 import '../../../../../core/resources/colors_managers.dart';
 
@@ -11,22 +16,15 @@ class CalenderWidget extends StatefulWidget {
 }
 
 class CalenderWidgetState extends State<CalenderWidget> {
-  List<DateTime> _activeDates = [];
   @override
   void initState() {
     super.initState();
-    _activeDates = [
-      DateTime(2024, 12, 08),
-      DateTime(2024, 12, 12),
-      DateTime(2024, 12, 18),
-      DateTime(2024, 12, 22),
-      DateTime(2024, 12, 26),
-    ];
+    context.read<SubscriptionCubit>().getVisits();
   }
 
-  bool _predicateCallback(DateTime date) {
-    for (int i = 0; i < _activeDates.length; i++) {
-      if (_activeDates[i] == date) {
+  bool _predicateCallback(List<DateTime> visits, DateTime date) {
+    for (int i = 0; i < visits.length; i++) {
+      if (visits[i] == date) {
         return true;
       }
     }
@@ -35,19 +33,42 @@ class CalenderWidgetState extends State<CalenderWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SfDateRangePicker(
-      selectionMode: DateRangePickerSelectionMode.multiple,
-      headerStyle: const DateRangePickerHeaderStyle(
-        backgroundColor: ColorsManager.mainColor,
-        textStyle: TextStyle(
-          color: Colors.white,
-        ),
-      ),
-      todayHighlightColor: ColorsManager.white,
-      backgroundColor: Colors.white,
-      initialSelectedDates: _activeDates,
-      selectionShape: DateRangePickerSelectionShape.rectangle,
-      selectableDayPredicate: _predicateCallback,
+    final visits = context.watch<SubscriptionCubit>().visits;
+    return BlocBuilder<SubscriptionCubit, SubscriptionState>(
+      builder: (context, state) {
+        if (state is GetVisitsLoadingState) {
+          return const CustomLoadingWidget();
+        }
+        if (state is GetVisitsErrorState) {
+          return CustomErrorWidget(
+            errorMessage: state.errorMessage,
+          );
+        }
+        if (visits.isEmpty) {
+          return const SizedBox(
+            width: double.infinity,
+            height: 100,
+            child: Center(
+              child: Text(StringsManager.youHaveNoVisits),
+            ),
+          );
+        }
+        return SfDateRangePicker(
+          selectionMode: DateRangePickerSelectionMode.multiple,
+          headerStyle: const DateRangePickerHeaderStyle(
+            backgroundColor: ColorsManager.mainColor,
+            textStyle: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          todayHighlightColor: ColorsManager.white,
+          backgroundColor: Colors.white,
+          initialSelectedDates: visits,
+          selectionShape: DateRangePickerSelectionShape.rectangle,
+          selectableDayPredicate: (DateTime date) =>
+              _predicateCallback(visits, date),
+        );
+      },
     );
   }
 }

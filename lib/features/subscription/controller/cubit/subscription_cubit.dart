@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:washify_mobile/core/network/exceptions.dart';
 import 'package:washify_mobile/features/subscription/data/models/subscription_model.dart';
@@ -18,6 +18,24 @@ class SubscriptionCubit extends Cubit<SubscriptionState> {
     try {
       subscriptions = await _baseSubscriptionServices.getSubscriptions();
       emit(GetSubscriptionsSuccessState());
+    } on PrimaryServerException catch (error) {
+      emit(GetSubscriptionsErrorState(error.message));
+    }
+  }
+
+  // Get Visits
+  List<DateTime> visits = [];
+  Future<void> getVisits() async {
+    emit(GetVisitsLoadingState());
+    try {
+      final response = await _baseSubscriptionServices.getVisits();
+      for (final visit in response) {
+        final date = DateTime.tryParse(visit);
+        if (date != null) {
+          visits.add(date);
+        }
+      }
+      emit(GetVisitsSuccessState());
     } on PrimaryServerException catch (error) {
       emit(GetSubscriptionsErrorState(error.message));
     }

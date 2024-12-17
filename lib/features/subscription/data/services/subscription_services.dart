@@ -7,6 +7,7 @@ import '../../../../core/global/dependencies_container.dart';
 
 abstract interface class BaseSubscriptionServices {
   Future<List<SubscriptionModel>> getSubscriptions();
+  Future<List<String>> getVisits();
 }
 
 class SubscriptionServices implements BaseSubscriptionServices {
@@ -20,6 +21,17 @@ class SubscriptionServices implements BaseSubscriptionServices {
 
     return List.from(response.data['data'])
         .map((item) => SubscriptionModel.fromMap(item))
+        .toList();
+  }
+
+  @override
+  Future<List<String>> getVisits() async {
+    final response = await dio.get(
+      endPoint: ApiConstance.getVisitsEndPoint,
+      query: {'fields': '["*"]'},
+    ) as Response;
+    return List.from(response.data['data'])
+        .map((item) => item['day_of_maintenance'] as String)
         .toList();
   }
 }

@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:washify_mobile/core/network/api_constant.dart';
 import 'package:washify_mobile/core/network/dio_helper.dart';
@@ -9,6 +8,7 @@ import '../../../../core/global/dependencies_container.dart';
 abstract interface class BaseCarServices {
   Future<List<String>> getBrands();
   Future<void> createRequestService(RequestServiceModel model);
+  Future<List<RequestServiceModel>> getCars();
 }
 
 class CarServices extends BaseCarServices {
@@ -29,5 +29,16 @@ class CarServices extends BaseCarServices {
       endPoint: ApiConstance.requestServiceEndPoint,
       data: model.toMap(),
     ) as Response;
+  }
+
+  @override
+  Future<List<RequestServiceModel>> getCars() async {
+    final response = await dio.get(
+      endPoint: ApiConstance.requestServiceEndPoint,
+      query: {'fields' : '["*"]'}
+    ) as Response;
+    return List.from(response.data['data'])
+        .map((item) => RequestServiceModel.fromMap(item))
+        .toList();
   }
 }
