@@ -39,7 +39,7 @@ class CarServices extends BaseCarServices {
     final response =
         await dio.get(endPoint: ApiConstance.requestServiceEndPoint, query: {
       'fields': '["*"]',
-      'filters': '[["user_id", "=", "$user"]]',
+      'filters': '[["owner", "=", "$user"]]',
     }) as Response;
     return List.from(response.data['data'])
         .map((item) => RequestServiceModel.fromMap(item))

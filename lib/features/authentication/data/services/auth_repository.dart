@@ -21,8 +21,9 @@ class AuthAPI implements AuthRepository {
   final dio = sl<BaseDioHelper>();
 
   @override
-  Future<UserModel> login(
-      {required LoginRequestModel loginRequestModel}) async {
+  Future<UserModel> login({
+    required LoginRequestModel loginRequestModel,
+  }) async {
     final response = await dio.post(
       endPoint: ApiConstance.loginEndPoint,
       data: loginRequestModel.toMap(),
@@ -37,16 +38,19 @@ class AuthAPI implements AuthRepository {
           final keyValue = part.split('=');
           if (keyValue.length == 2) {
             final key = keyValue[0].trim();
-            final value = keyValue[1].trim();
+            final value = keyValue[1];
             cookieMap[key] = value;
           }
         }
       }
     }
+    cookieMap = cookieMap
+        .map((key, value) => MapEntry(key, Uri.decodeComponent(value)));
 
     cookieMap.forEach((key, value) {
       log('$key: $value');
     });
+
     return UserModel.fromMap(cookieMap);
   }
 

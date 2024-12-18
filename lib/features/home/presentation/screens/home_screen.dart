@@ -50,9 +50,7 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
                 const Gutter(),
-                const ImageSlider(
-                  
-                ),
+                const ImageSlider(),
                 const Gutter(),
                 Text(
                   StringsManager.yourCars,

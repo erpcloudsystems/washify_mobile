@@ -3,9 +3,10 @@ import 'package:carousel_slider/carousel_slider.dart' as slider;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:skeletonizer/skeletonizer.dart';
+import 'package:washify_mobile/core/resources/image_paths.dart';
 import 'package:washify_mobile/core/router/app_routes.dart';
 import 'package:washify_mobile/core/router/route_services.dart';
-import 'package:washify_mobile/core/utils/custom_loading_widget.dart';
 import 'package:washify_mobile/core/utils/error_widget.dart';
 import 'package:washify_mobile/features/shop/logic/cubit/shop_cubit.dart';
 
@@ -35,7 +36,14 @@ class _ImageSliderState extends State<ImageSlider> {
     return BlocBuilder<ShopCubit, ShopState>(
       builder: (context, state) {
         if (state is ShopLoadingState) {
-          return const CustomLoadingWidget();
+          return Skeletonizer(
+            enabled: true,
+            child: Image.asset(
+              ImagePaths.errorImagePath,
+              width: double.infinity,
+              height: 200,
+            ),
+          );
         } else if (state is ShopErrorState) {
           return CustomErrorWidget(errorMessage: state.errorMessage);
         }
