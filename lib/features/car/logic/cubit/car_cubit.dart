@@ -43,6 +43,19 @@ class CarCubit extends Cubit<CarState> {
     }
   }
 
+  List<RequestServiceModel> carsList = [];
+  Future<void> getCars() async {
+    emit(GetCarsLoadingState());
+    try {
+      carsList = await _baseCarServices.getCars();
+      emit(GetCarsSuccessState());
+    } on PrimaryServerException catch (e) {
+      emit(GetCarsErrorState(e.message));
+    } catch (e) {
+      emit(GetCarsErrorState(e.toString()));
+    }
+  }
+
   void reset() {
     requestServiceModels = [];
     totalPay = 0;

@@ -11,4 +11,10 @@ class ImagePaths {
   static const String splashLogoPath = '${assetsPath}splash-logo.png';
   static const String googlePath = '${assetsPath}google.png';
   static const String facebookPath = '${assetsPath}facebook.png';
+  static const List<String> offersPath = [
+    '${assetsPath}designer-1.jpeg',
+    '${assetsPath}designer-2.jpeg',
+    '${assetsPath}designer-3.jpeg',
+    '${assetsPath}designer-4.jpeg',
+  ];
 }

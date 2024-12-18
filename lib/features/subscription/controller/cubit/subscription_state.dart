@@ -20,3 +20,15 @@ class GetSubscriptionsErrorState extends SubscriptionState {
 }
 
 class GetSubscriptionsSuccessState extends SubscriptionState {}
+
+// Get Visits
+class GetVisitsLoadingState extends SubscriptionState {}
+
+class GetVisitsErrorState extends SubscriptionState {
+  final String errorMessage;
+  const GetVisitsErrorState(this.errorMessage);
+  @override
+  List<Object> get props => [errorMessage];
+}
+
+class GetVisitsSuccessState extends SubscriptionState {}

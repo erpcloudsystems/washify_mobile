@@ -20,7 +20,7 @@ class CustomErrorWidget extends StatelessWidget {
         ),
         const Gutter(),
         Text(
-          StringsManager.notData,
+           StringsManager.notData,
           style: Theme.of(context).textTheme.titleMedium,
         )
       ],

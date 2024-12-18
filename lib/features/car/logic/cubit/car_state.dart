@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'car_cubit.dart';
 
 sealed class CarState extends Equatable {
@@ -28,3 +29,12 @@ class CreateRequestServiceErrorState extends CarState {
 }
 
 class CreateRequestServiceSuccessState extends CarState {}
+
+class GetCarsLoadingState extends CarState {}
+
+class GetCarsSuccessState extends CarState {}
+
+class GetCarsErrorState extends CarState {
+  final String errorMessage;
+  const GetCarsErrorState(this.errorMessage);
+}

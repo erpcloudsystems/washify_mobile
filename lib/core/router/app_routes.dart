@@ -11,4 +11,5 @@ class AppRoutes {
   static const String otpScreen = '/otp-screen';
   static const String carInfoScreen = '/car-info-screen';
   static const String paymentDetailsScreen = '/payment-details-screen';
+  static const String shopScreen = '/shop';
 }

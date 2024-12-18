@@ -66,14 +66,14 @@ class RequestServiceModel {
 
   factory RequestServiceModel.fromMap(Map<String, dynamic> map) {
     return RequestServiceModel(
-      subscriptionPlan: map['subscription_plan'] as String,
-      itemCode: map['item'] as String,
-      territory: map['territory'] as String,
-      plateCode: map['plate_code'] as String,
-      model: map['model'] as String,
-      brand: map['brand'] as String,
-      price: map['cost'] as double,
-      timesPerWeek: map['times_per_week'] as int,
+      subscriptionPlan: map['subscription_plan']  ?? '',
+      itemCode: map['item'] ?? '',
+      territory: map['territory'] ?? '',
+      plateCode: map['plate_code'] ?? '',
+      model: map['model'] ??'',
+      brand: map['brand'] ?? '',
+      price: map['cost'] ?? 0.0,
+      timesPerWeek: map['times_per_week'] ?? 0,
     );
   }
 

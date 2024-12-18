@@ -4,6 +4,8 @@ import 'package:washify_mobile/features/authentication/presentation/screens/loca
 import 'package:washify_mobile/features/authentication/presentation/screens/login_screen.dart';
 import 'package:washify_mobile/features/authentication/presentation/screens/sign_up_screen.dart';
 import 'package:washify_mobile/features/authentication/presentation/screens/subscribe_screen.dart';
+import 'package:washify_mobile/features/shop/data/models/shop_item_model.dart';
+import 'package:washify_mobile/features/shop/presentation/screens/shop_screen.dart';
 import 'package:washify_mobile/features/subscription/presentation/screens/visits_screen.dart';
 import 'package:washify_mobile/features/car/presentation/screens/car_info_screen.dart';
 import 'package:washify_mobile/features/home/presentation/screens/home_screen.dart';
@@ -75,6 +77,13 @@ final router = GoRouter(
       path: AppRoutes.paymentDetailsScreen,
       name: AppRoutes.paymentDetailsScreen,
       builder: (context, state) => const PaymentDetailsScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.shopScreen,
+      name: AppRoutes.shopScreen,
+      builder: (context, state) => ShopScreen(
+        shopItem: state.extra! as ShopItemModel ,
+      ),
     ),
   ],
 );

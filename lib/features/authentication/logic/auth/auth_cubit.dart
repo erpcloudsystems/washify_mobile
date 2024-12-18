@@ -27,8 +27,9 @@ class AuthCubit extends Cubit<AuthState> {
     sl<SharedPreferences>().setBool(isLoggedInKey, true);
     if (userModel != null) {
       sl<SharedPreferences>().setString(sid, userModel!.sid!);
-      sl<SharedPreferences>().setString(userName, userModel!.userImage!);
+      sl<SharedPreferences>().setString(userName, userModel!.username!);
       sl<SharedPreferences>().setString(systemUser, userModel!.systemUser!);
+      sl<SharedPreferences>().setString(userId, userModel!.userId!);
     }
   }
 
