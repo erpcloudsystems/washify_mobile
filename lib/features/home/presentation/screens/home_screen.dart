@@ -3,14 +3,13 @@ import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:washify_mobile/core/global/dependencies_container.dart';
 import 'package:washify_mobile/core/resources/colors_managers.dart';
-import 'package:washify_mobile/core/resources/image_paths.dart';
 import 'package:washify_mobile/core/router/app_routes.dart';
 import 'package:washify_mobile/core/router/route_services.dart';
 import '../../../../core/resources/constance.dart';
 import '../../../../core/resources/strings_manager.dart';
 import '../../../authentication/presentation/widgets/calender_widget.dart';
 import '../../../car/presentation/widgets/cars_list_view.dart';
-import '../widgets/image_slider.dart';
+import '../../../shop/presentation/widgets/image_slider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -52,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const Gutter(),
                 const ImageSlider(
-                  images: ImagePaths.offersPath,
+                  
                 ),
                 const Gutter(),
                 Text(

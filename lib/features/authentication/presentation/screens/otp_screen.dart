@@ -1,6 +1,7 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pinput/pinput.dart';
@@ -117,8 +118,19 @@ class _OtpScreenState extends State<OtpScreen> {
                         height: 30.h,
                       ),
                       Text(
-                        StringsManager.didNotReceiveCode,
+                        '${StringsManager.didNotReceiveCode}?',
                         style: Theme.of(context).textTheme.titleSmall,
+                      ),
+                      Text(
+                        StringsManager.useOTPtoContinue,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: ColorsManager.mainColor,
+                            ),
+                      ),
+                      const GutterSmall(),
+                      Text(
+                        StringsManager.or,
+                        style: Theme.of(context).textTheme.titleSmall!,
                       ),
                       if (state is SendOtpLoadingState)
                         const CustomLoadingWidget(),

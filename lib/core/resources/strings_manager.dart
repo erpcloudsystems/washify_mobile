@@ -110,4 +110,6 @@ class StringsManager {
   static const String yourVisits = 'Your visits';
   static const String price = 'Price';
   static const String youHaveNoVisits = 'You have no visits!';
+  static const String useOTPtoContinue = 'Use 111111 to continue';
+  static const String or = 'OR';
 }

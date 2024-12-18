@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:washify_mobile/core/network/api_constant.dart';
 import 'package:washify_mobile/core/network/dio_helper.dart';
+import 'package:washify_mobile/core/resources/constance.dart';
 import 'package:washify_mobile/features/car/data/models/request_service_model.dart';
 
 import '../../../../core/global/dependencies_container.dart';
@@ -13,6 +15,7 @@ abstract interface class BaseCarServices {
 
 class CarServices extends BaseCarServices {
   final dio = sl<BaseDioHelper>();
+  final String? user = sl<SharedPreferences>().getString(userId);
   @override
   Future<List<String>> getBrands() async {
     final response =
@@ -33,10 +36,11 @@ class CarServices extends BaseCarServices {
 
   @override
   Future<List<RequestServiceModel>> getCars() async {
-    final response = await dio.get(
-      endPoint: ApiConstance.requestServiceEndPoint,
-      query: {'fields' : '["*"]'}
-    ) as Response;
+    final response =
+        await dio.get(endPoint: ApiConstance.requestServiceEndPoint, query: {
+      'fields': '["*"]',
+      'filters': '[["user_id", "=", "$user"]]',
+    }) as Response;
     return List.from(response.data['data'])
         .map((item) => RequestServiceModel.fromMap(item))
         .toList();

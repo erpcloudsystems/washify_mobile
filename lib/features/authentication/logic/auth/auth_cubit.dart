@@ -29,6 +29,7 @@ class AuthCubit extends Cubit<AuthState> {
       sl<SharedPreferences>().setString(sid, userModel!.sid!);
       sl<SharedPreferences>().setString(userName, userModel!.username!);
       sl<SharedPreferences>().setString(systemUser, userModel!.systemUser!);
+      sl<SharedPreferences>().setString(userId, userModel!.userId!);
     }
   }
 
