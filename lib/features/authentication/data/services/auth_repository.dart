@@ -68,7 +68,11 @@ class AuthAPI implements AuthRepository {
   Future<List<TerritoryModel>> getTerritories() async {
     final response = await dio.get(
       endPoint: ApiConstance.governorateEndPoint,
-      query: {'fields': '["*"]'},
+      query: {
+        'fields': '["*"]',
+        'filters':
+            '[["parent_territory", "like", "%egy%"],["is_group", "=", "0"]]',
+      },
     ) as Response;
     return (response.data['data'] as List)
         .map((item) => TerritoryModel.fromJson(item))

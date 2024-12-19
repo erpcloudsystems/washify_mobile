@@ -1,6 +1,6 @@
 class ApiConstance {
-  static const String siteUrl = 'https://washify.mobi/';
-  static const String baseUrl = '${siteUrl}api/';
+  static const String siteUrl = 'https://washify.mobi';
+  static const String baseUrl = '$siteUrl/api/';
 
   /// Authentication
   static const String loginEndPoint = 'method/login';

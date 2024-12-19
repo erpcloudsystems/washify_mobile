@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:washify_mobile/core/resources/colors_managers.dart';
+import 'package:washify_mobile/core/utils/cached_image.dart';
 import 'package:washify_mobile/features/authentication/data/models/territory_model.dart';
-
-import '../../../../../core/resources/image_paths.dart';
 
 class TerritoryWidget extends StatelessWidget {
   const TerritoryWidget(
@@ -18,10 +17,10 @@ class TerritoryWidget extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              ImagePaths.territoryPath,
-              fit: BoxFit.cover,
+            child: CachedImage(
+              imageUrl: territoryModel.imageUrl,
               width: double.infinity,
+              height: double.infinity,
             ),
           ),
           Positioned.fill(
