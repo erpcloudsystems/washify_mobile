@@ -42,7 +42,7 @@ class _AddedCarsWidgetState extends State<AddedCarsWidget> {
                         Text(
                             "${services[index].subscriptionPlan} ${services[index].price}"),
                         const Gutter.small(),
-                        Wrap(
+                        /*  Wrap(
                           spacing: 1,
                           children: List.generate(
                               services[index].weekDays.length,
@@ -54,7 +54,7 @@ class _AddedCarsWidgetState extends State<AddedCarsWidget> {
                                           Theme.of(context).textTheme.bodySmall,
                                     ),
                                   )),
-                        ),
+                        ),*/
                       ],
                     ),
                     onLongPress: () {

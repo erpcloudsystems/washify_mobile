@@ -16,7 +16,7 @@ class ApiConstance {
 
   // Subscription
   static const String getSubscriptionEndPoint = 'resource/Subscription Plan';
-  static const String getVisitsEndPoint = 'resource/Scheduled Maintenance';
+  static const String getVisitsEndPoint = 'resource/Maintenance Schedule';
 
   // Car
   static const String brandsEndPoint = 'resource/Brand';

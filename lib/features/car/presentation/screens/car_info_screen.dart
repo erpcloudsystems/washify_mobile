@@ -51,36 +51,29 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
   void addService() {
     if (_formKey.currentState!.validate()) {
       if (getSelectedSubscription() != null) {
-        if (getSelectedSubscription()!.selectedDays.isNotEmpty) {
-          carCubit.addNewService(
-            requestServiceModel: RequestServiceModel(
-              subscriptionPlan: getSelectedSubscription()!.id,
-              itemCode: getSelectedSubscription()!.itemCode,
-              timesPerWeek: getSelectedSubscription()!.timesPerWeek,
-              weekDays: getSelectedSubscription()!.selectedDays,
-              territory: widget.territory,
-              plateCode: plateController.text,
-              model: modelController.text,
-              brand: brandController.text,
-              price: getSelectedSubscription()!.price,
-            ),
-          );
+        carCubit.addNewService(
+          requestServiceModel: RequestServiceModel(
+            subscriptionPlan: getSelectedSubscription()!.id,
+            itemCode: getSelectedSubscription()!.itemCode,
+            timesPerWeek: getSelectedSubscription()!.timesPerWeek,
+            // weekDays: getSelectedSubscription()!.selectedDays,
+            territory: widget.territory,
+            plateCode: plateController.text,
+            model: modelController.text,
+            brand: brandController.text,
+            price: getSelectedSubscription()!.price,
+          ),
+        );
 
-          modelController.clear();
-          plateController.clear();
+        modelController.clear();
+        plateController.clear();
 
-          showSnackBar(
-            context: context,
-            message: 'Your car has been added.',
-          );
+        showSnackBar(
+          context: context,
+          message: 'Your car has been added.',
+        );
 
-          _reset();
-        } else {
-          showSnackBar(
-              context: context,
-              message: 'Please select visit days',
-              color: ColorsManager.red);
-        }
+        _reset();
       } else {
         showSnackBar(
             context: context,

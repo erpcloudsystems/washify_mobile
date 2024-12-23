@@ -33,11 +33,11 @@ class SubscriptionServices implements BaseSubscriptionServices {
       endPoint: ApiConstance.getVisitsEndPoint,
       query: {
         'fields': '["*"]',
-        'filters': '[["user", "=", "$user"]]',
+        'filters': '[["owner", "=", "$user"]]',
       },
     ) as Response;
     return List.from(response.data['data'])
-        .map((item) => item['day_of_maintenance'] as String)
+        .map((item) => item['transaction_date'] as String? ?? '')
         .toList();
   }
 }

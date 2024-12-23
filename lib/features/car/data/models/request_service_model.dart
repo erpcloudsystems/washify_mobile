@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import '../../../subscription/data/models/days_week_model.dart';
-
 class RequestServiceModel {
   final String subscriptionPlan;
   final String itemCode;
@@ -11,7 +9,7 @@ class RequestServiceModel {
   final String model;
   final String brand;
   final int timesPerWeek;
-  final List<DaysWeekModel> weekDays;
+  //final List<DaysWeekModel> weekDays;
   RequestServiceModel({
     required this.subscriptionPlan,
     required this.itemCode,
@@ -21,7 +19,7 @@ class RequestServiceModel {
     required this.brand,
     required this.price,
     required this.timesPerWeek,
-    this.weekDays = const [],
+    //this.weekDays = const [],
   });
 
   RequestServiceModel copyWith({
@@ -47,12 +45,12 @@ class RequestServiceModel {
   }
 
   Map<String, dynamic> toMap() {
-    var selectedDays = [];
-    for (var index in weekDays) {
+    // var selectedDays = [];
+    /* for (var index in weekDays) {
       if (index.isSelected) {
         selectedDays.add(index.toMap());
       }
-    }
+    }*/
     return <String, dynamic>{
       'subscription_plan': subscriptionPlan,
       'item_code': itemCode,
@@ -60,17 +58,17 @@ class RequestServiceModel {
       'plate_code': plateCode,
       'model': model,
       'brand': brand,
-      'blocked_days': selectedDays.toList(),
+      //'blocked_days': selectedDays.toList(),
     };
   }
 
   factory RequestServiceModel.fromMap(Map<String, dynamic> map) {
     return RequestServiceModel(
-      subscriptionPlan: map['subscription_plan']  ?? '',
+      subscriptionPlan: map['subscription_plan'] ?? '',
       itemCode: map['item'] ?? '',
       territory: map['territory'] ?? '',
       plateCode: map['plate_code'] ?? '',
-      model: map['model'] ??'',
+      model: map['model'] ?? '',
       brand: map['brand'] ?? '',
       price: map['cost'] ?? 0.0,
       timesPerWeek: map['times_per_week'] ?? 0,

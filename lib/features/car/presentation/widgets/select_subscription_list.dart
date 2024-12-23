@@ -3,9 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:washify_mobile/core/resources/colors_managers.dart';
 import 'package:washify_mobile/features/subscription/controller/cubit/subscription_cubit.dart';
-import '../../../../core/utils/custom_snack_bar.dart';
 import '../../../subscription/data/models/days_week_model.dart';
-import '../../../subscription/presentation/widgets/select_days_widget.dart';
 
 class SelectSubscriptionList extends StatefulWidget {
   const SelectSubscriptionList({super.key});
@@ -59,7 +57,7 @@ class _SelectSubscriptionListState extends State<SelectSubscriptionList> {
                   });
                 },
               ),
-              if (subscriptionCubit.subscriptions[index].isSelected)
+              /*if (subscriptionCubit.subscriptions[index].isSelected)
                 SelectDaysWidget(
                   onChanged: (value, idx) {
                     if (!listOfWeekDays[idx].isSelected) {
@@ -88,7 +86,7 @@ class _SelectSubscriptionListState extends State<SelectSubscriptionList> {
                       });
                     }
                   },
-                )
+                )*/
             ],
           ),
         ),
