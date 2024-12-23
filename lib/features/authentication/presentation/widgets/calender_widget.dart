@@ -5,6 +5,7 @@ import 'package:washify_mobile/core/resources/strings_manager.dart';
 import 'package:washify_mobile/core/utils/custom_loading_widget.dart';
 import 'package:washify_mobile/core/utils/error_widget.dart';
 import 'package:washify_mobile/features/subscription/controller/cubit/subscription_cubit.dart';
+import 'package:washify_mobile/features/subscription/data/models/visit_model.dart';
 
 import '../../../../../core/resources/colors_managers.dart';
 
@@ -31,9 +32,22 @@ class CalenderWidgetState extends State<CalenderWidget> {
     return false;
   }
 
+  Color _getColor(List<VisitModel> visits) {
+    for (var index in visits) {
+      if (index.status != 'Pending') {
+        return ColorsManager.green;
+      } else {
+        return Colors.orange;
+      }
+    }
+    return Colors.orange;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final visits = context.watch<SubscriptionCubit>().visits;
+    final cubit = context.watch<SubscriptionCubit>();
+    final visits = cubit.visits;
+
     return BlocBuilder<SubscriptionCubit, SubscriptionState>(
       builder: (context, state) {
         if (state is GetVisitsLoadingState) {
@@ -54,6 +68,8 @@ class CalenderWidgetState extends State<CalenderWidget> {
           );
         }
         return SfDateRangePicker(
+          minDate: DateTime(visits.first.year, visits.first.month),
+          initialSelectedDate: visits.first,
           selectionMode: DateRangePickerSelectionMode.multiple,
           headerStyle: const DateRangePickerHeaderStyle(
             backgroundColor: ColorsManager.mainColor,
@@ -64,6 +80,7 @@ class CalenderWidgetState extends State<CalenderWidget> {
           todayHighlightColor: ColorsManager.white,
           backgroundColor: Colors.white,
           initialSelectedDates: visits,
+          selectionColor: _getColor(cubit.visitsList),
           selectionShape: DateRangePickerSelectionShape.rectangle,
           selectableDayPredicate: (DateTime date) =>
               _predicateCallback(visits, date),

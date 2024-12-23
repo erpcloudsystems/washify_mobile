@@ -6,10 +6,11 @@ import 'package:washify_mobile/features/subscription/data/models/subscription_mo
 
 import '../../../../core/global/dependencies_container.dart';
 import '../../../../core/resources/constance.dart';
+import '../models/visit_model.dart';
 
 abstract interface class BaseSubscriptionServices {
   Future<List<SubscriptionModel>> getSubscriptions();
-  Future<List<String>> getVisits();
+  Future<List<VisitModel>> getVisits();
 }
 
 class SubscriptionServices implements BaseSubscriptionServices {
@@ -28,16 +29,16 @@ class SubscriptionServices implements BaseSubscriptionServices {
   }
 
   @override
-  Future<List<String>> getVisits() async {
+  Future<List<VisitModel>> getVisits() async {
     final response = await dio.get(
       endPoint: ApiConstance.getVisitsEndPoint,
-      query: {
-        'fields': '["*"]',
-        'filters': '[["owner", "=", "$user"]]',
-      },
+      // query: {
+      //   'fields': '["*"]',
+      //   'filters': '[["owner", "=", "$user"]]',
+      // },
     ) as Response;
-    return List.from(response.data['data'])
-        .map((item) => item['transaction_date'] as String? ?? '')
+    return List.from(response.data['message'])
+        .map((item) => VisitModel.fromJson(item))
         .toList();
   }
 }

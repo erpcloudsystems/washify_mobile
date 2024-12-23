@@ -5,6 +5,8 @@ import 'package:washify_mobile/features/subscription/data/models/days_week_model
 import 'package:washify_mobile/features/subscription/data/models/subscription_model.dart';
 import 'package:washify_mobile/features/subscription/data/services/subscription_services.dart';
 
+import '../../data/models/visit_model.dart';
+
 part 'subscription_state.dart';
 
 class SubscriptionCubit extends Cubit<SubscriptionState> {
@@ -35,12 +37,13 @@ class SubscriptionCubit extends Cubit<SubscriptionState> {
 
   // Get Visits
   List<DateTime> visits = [];
+  List<VisitModel> visitsList = [];
   Future<void> getVisits() async {
     emit(GetVisitsLoadingState());
     try {
-      final response = await _baseSubscriptionServices.getVisits();
-      for (final visit in response) {
-        final date = DateTime.tryParse(visit);
+      visitsList = await _baseSubscriptionServices.getVisits();
+      for (final visit in visitsList) {
+        final date = DateTime.tryParse(visit.date);
         if (date != null) {
           visits.add(date);
         }

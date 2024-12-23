@@ -56,6 +56,16 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.14.2
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/logo.png"
+  min_sdk_android: 21
+  remove_alpha_ios: true
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/images/logo.png"
 
 
 flutter:
@@ -64,6 +74,7 @@ flutter:
   assets:
      - assets/fonts/
      - assets/images/
+     - assets/images/logo.png
      - assets/lottie/
 
   fonts:

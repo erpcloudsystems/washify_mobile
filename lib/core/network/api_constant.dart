@@ -16,7 +16,8 @@ class ApiConstance {
 
   // Subscription
   static const String getSubscriptionEndPoint = 'resource/Subscription Plan';
-  static const String getVisitsEndPoint = 'resource/Maintenance Schedule';
+  static const String getVisitsEndPoint =
+      'method/washify.api.maintenance_schedule.get_maintenace_schedule';
 
   // Car
   static const String brandsEndPoint = 'resource/Brand';
