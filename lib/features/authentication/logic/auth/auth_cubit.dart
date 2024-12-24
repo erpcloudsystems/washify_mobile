@@ -46,11 +46,10 @@ class AuthCubit extends Cubit<AuthState> {
       emit(
         AuthLoginErrorState(errorMessage: error.message),
       );
-    } catch (_) {
-      log(_.toString());
+    } catch (error) {
       emit(
-        const AuthLoginErrorState(
-          errorMessage: StringsManager.userDataUpdatedError,
+        AuthLoginErrorState(
+          errorMessage: error.toString(),
         ),
       );
     }
@@ -85,8 +84,8 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthSignUpErrorState(error: error.message));
     } catch (error) {
       emit(
-        const AuthSignUpErrorState(
-          error: StringsManager.userDataUpdatedError,
+        AuthSignUpErrorState(
+          error: error.toString(),
         ),
       );
     }
