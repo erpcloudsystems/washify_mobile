@@ -10,14 +10,17 @@ import 'package:washify_mobile/features/car/logic/cubit/car_cubit.dart';
 import '../../../../../core/resources/colors_managers.dart';
 import '../../../../../core/resources/strings_manager.dart';
 import '../../../authentication/presentation/widgets/progress_bar_widget.dart';
+import '../../../subscription/controller/cubit/subscription_cubit.dart';
 import '../widgets/car_info_record.dart';
 import '../../../authentication/presentation/widgets/payment_method_widget.dart';
+import '../widgets/subscription_record.dart';
 
 class PaymentDetailsScreen extends StatelessWidget {
   const PaymentDetailsScreen({super.key});
   @override
   Widget build(BuildContext context) {
     final carCubit = context.read<CarCubit>();
+    final subscriptions = context.watch<SubscriptionCubit>().subscriptions;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -32,6 +35,72 @@ class PaymentDetailsScreen extends StatelessWidget {
                   isCarInfoActive: true,
                   isPayNow: true,
                 ),
+                const GutterLarge(),
+                ListView.builder(
+                  itemCount: subscriptions.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    final item = subscriptions[index];
+                    return Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(2),
+                            border: const Border(
+                              top: BorderSide(width: 0.5),
+                              left: BorderSide(width: 0.5),
+                              right: BorderSide(width: 0.5),
+                            ),
+                          ),
+                          child: Text(
+                            '#${index + 1} Subscription details',
+                            style:
+                                Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                      color: ColorsManager.mainColor,
+                                    ),
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              width: 0.5,
+                            ),
+                          ),
+                          child: Column(
+                            children: [
+                              SubscriptionRecord(
+                                title: 'Subscription name: ',
+                                value: item.name,
+                              ),
+                              const GutterSmall(),
+                              SubscriptionRecord(
+                                title: 'Times per week: ',
+                                value: item.timesPerWeek.toString(),
+                              ),
+                              const GutterSmall(),
+                              SubscriptionRecord(
+                                title: 'Price determination: ',
+                                value: item.priceDetermination,
+                              ),
+                              const GutterSmall(),
+                              SubscriptionRecord(
+                                title: 'Price: ',
+                                value:
+                                    '${item.price.toString()} ${item.currency}',
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
                 const Gutter(),
                 Text(
                   StringsManager.payWith,
@@ -44,27 +113,21 @@ class PaymentDetailsScreen extends StatelessWidget {
                 const Gutter(),
                 CarInfoRecord(
                   title: StringsManager.fees,
-                  value: '${carCubit.totalPay}\$',
+                  value: '${carCubit.totalPay} EGP',
                 ),
                 const Gutter(),
                 const CarInfoRecord(
                   title: StringsManager.discount,
-                  value: '-0\$',
+                  value: '-0 EGP',
                 ),
                 const GutterSmall(),
                 const Divider(),
                 const GutterSmall(),
                 CarInfoRecord(
                   title: StringsManager.toPay,
-                  value: '${carCubit.totalPay}\$',
+                  value: '${carCubit.totalPay} EGP',
                 ),
                 const GutterLarge(),
-                const PaymentMethodWidget(
-                  imagePath: ImagePaths.instapayPath,
-                ),
-                const PaymentMethodWidget(
-                  imagePath: ImagePaths.fawryPath,
-                ),
                 const PaymentMethodWidget(
                   imagePath: ImagePaths.visaPath,
                 ),

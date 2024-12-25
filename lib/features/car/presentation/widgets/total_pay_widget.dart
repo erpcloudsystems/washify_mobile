@@ -18,19 +18,19 @@ class TotalPayWidget extends StatelessWidget {
         ),
         CarInfoRecord(
           title: StringsManager.fees,
-          value: '$totalPay \$',
+          value: '$totalPay EGP',
         ),
         const Gutter(),
         const CarInfoRecord(
           title: StringsManager.discount,
-          value: '-0\$',
+          value: '-0 EGP',
         ),
         const GutterSmall(),
         const Divider(),
         const GutterSmall(),
         CarInfoRecord(
           title: StringsManager.toPay,
-          value: '$totalPay \$',
+          value: '$totalPay EGP',
         ),
       ],
     );

@@ -58,10 +58,9 @@ class CarInfoForm extends StatelessWidget {
         ),
         const GutterTiny(),
         Pinput(
+            keyboardType: TextInputType.text,
             controller: plateController,
             length: 8,
-            autofillHints: const [AutofillHints.oneTimeCode],
-            toolbarEnabled: false,
             errorTextStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   color: ColorsManager.red,
                 ),
