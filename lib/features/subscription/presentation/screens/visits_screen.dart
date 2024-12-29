@@ -46,7 +46,7 @@ class VisitsScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 4),
                   color: ColorsManager.grey.withOpacity(0.2),
                   alignment: Alignment.center,
-                  child: const Text(StringsManager.thisMonthVisits),
+                  child: Text(StringsManager.thisMonthVisits),
                 ),
                 const GutterExtraLarge(),
                 Text(

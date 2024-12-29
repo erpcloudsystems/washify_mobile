@@ -21,7 +21,7 @@ class TotalPayWidget extends StatelessWidget {
           value: '$totalPay EGP',
         ),
         const Gutter(),
-        const CarInfoRecord(
+        CarInfoRecord(
           title: StringsManager.discount,
           value: '-0 EGP',
         ),

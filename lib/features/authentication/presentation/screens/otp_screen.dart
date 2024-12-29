@@ -141,7 +141,7 @@ class _OtpScreenState extends State<OtpScreen> {
                             await otpCubit.sendOtp(email: widget.email);
                             countDownController.restart();
                           },
-                          child: const Text(
+                          child: Text(
                             StringsManager.resend,
                           ),
                         )

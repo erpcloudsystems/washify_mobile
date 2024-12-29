@@ -17,8 +17,10 @@ import '../../../authentication/presentation/widgets/progress_bar_widget.dart';
 import '../widgets/select_subscription_list.dart';
 
 class CarInfoScreen extends StatefulWidget {
-  const CarInfoScreen({super.key, required this.territory});
+  const CarInfoScreen(
+      {super.key, required this.territory, this.isEdit = 'false'});
   final String territory;
+  final String isEdit;
 
   @override
   State<CarInfoScreen> createState() => _CarInfoScreenState();
@@ -33,9 +35,25 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
 
   @override
   void initState() {
+    super.initState();
     carCubit = context.read<CarCubit>();
     carCubit.getBrands();
-    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(Duration.zero, () async {
+        if (mounted && widget.isEdit == 'true') {
+          final RequestServiceModel? car = await showModalBottomSheet(
+            context: context,
+            showDragHandle: true,
+            builder: (context) => const AddedCarsWidget(),
+          );
+          if (car != null) {
+            brandController.text = car.brand;
+            modelController.text = car.model;
+            plateController.text = car.plateCode;
+          }
+        }
+      });
+    });
   }
 
   SubscriptionModel? getSelectedSubscription() {
@@ -155,7 +173,9 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
                         color: ColorsManager.mainColor,
                       ),
                 ),
-                const SelectSubscriptionList(),
+                SelectSubscriptionList(
+                  isEdit: widget.isEdit == 'true',
+                ),
                 // TotalPayWidget(
                 //   totalPay: carCubit.totalPay,
                 // ),

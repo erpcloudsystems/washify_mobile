@@ -70,6 +70,7 @@ class SignUpForm extends StatelessWidget {
             const GutterTiny(),
             CustomTextFormField(
               controller: emailController,
+              isEmail: true,
             ),
           ],
         ),
@@ -98,6 +99,7 @@ class SignUpForm extends StatelessWidget {
             const GutterTiny(),
             CustomTextFormField(
               controller: passwordController,
+              isPassword: true,
             ),
           ],
         ),
@@ -112,6 +114,9 @@ class SignUpForm extends StatelessWidget {
             const GutterTiny(),
             CustomTextFormField(
               controller: confirmPasswordController,
+              isPassword: true,
+              isConfirmPassword: true,
+              newPassword: passwordController.text,
             ),
           ],
         ),

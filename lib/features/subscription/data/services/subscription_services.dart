@@ -11,6 +11,7 @@ import '../models/visit_model.dart';
 abstract interface class BaseSubscriptionServices {
   Future<List<SubscriptionModel>> getSubscriptions();
   Future<List<VisitModel>> getVisits();
+  Future<SubscriptionModel> getSubscription(String id);
 }
 
 class SubscriptionServices implements BaseSubscriptionServices {
@@ -40,5 +41,13 @@ class SubscriptionServices implements BaseSubscriptionServices {
     return List.from(response.data['message'])
         .map((item) => VisitModel.fromJson(item))
         .toList();
+  }
+  
+  @override
+  Future<SubscriptionModel> getSubscription(String id)async {
+     final response = await dio.get(
+      endPoint: '${ApiConstance.getSubscriptionEndPoint}/$id',
+    ) as Response;
+    return SubscriptionModel.fromMap(response.data['data']);
   }
 }

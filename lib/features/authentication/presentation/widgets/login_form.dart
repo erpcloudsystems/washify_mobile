@@ -45,6 +45,7 @@ class LoginForm extends StatelessWidget {
         const GutterTiny(),
         CustomTextFormField(
           controller: passwordController,
+          isPassword: true,
         ),
       ],
     );

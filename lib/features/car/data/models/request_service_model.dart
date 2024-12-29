@@ -9,6 +9,8 @@ class RequestServiceModel {
   final String model;
   final String brand;
   final int timesPerWeek;
+  final String? startDate;
+  final String? endDate;
   //final List<DaysWeekModel> weekDays;
   RequestServiceModel({
     required this.subscriptionPlan,
@@ -19,6 +21,8 @@ class RequestServiceModel {
     required this.brand,
     required this.price,
     required this.timesPerWeek,
+    this.startDate,
+    this.endDate,
     //this.weekDays = const [],
   });
 
@@ -31,17 +35,20 @@ class RequestServiceModel {
     String? brand,
     double? price,
     int? timesPerWeek,
+    String? startDate,
+    String? endDate,
   }) {
     return RequestServiceModel(
-      subscriptionPlan: subscriptionPlan ?? this.subscriptionPlan,
-      itemCode: itemCode ?? this.itemCode,
-      territory: territory ?? this.territory,
-      plateCode: plateCode ?? this.plateCode,
-      model: model ?? this.model,
-      brand: brand ?? this.brand,
-      price: price ?? this.price,
-      timesPerWeek: timesPerWeek ?? this.timesPerWeek,
-    );
+        subscriptionPlan: subscriptionPlan ?? this.subscriptionPlan,
+        itemCode: itemCode ?? this.itemCode,
+        territory: territory ?? this.territory,
+        plateCode: plateCode ?? this.plateCode,
+        model: model ?? this.model,
+        brand: brand ?? this.brand,
+        price: price ?? this.price,
+        timesPerWeek: timesPerWeek ?? this.timesPerWeek,
+        startDate: startDate ?? this.startDate,
+        endDate: endDate ?? this.endDate);
   }
 
   Map<String, dynamic> toMap() {
@@ -72,6 +79,8 @@ class RequestServiceModel {
       brand: map['brand'] ?? '',
       price: map['cost'] ?? 0.0,
       timesPerWeek: map['times_per_week'] ?? 0,
+      startDate: map['custom_start_date'] ?? '',
+      endDate: map['custom_end_date'] ?? '',
     );
   }
 

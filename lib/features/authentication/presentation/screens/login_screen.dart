@@ -10,8 +10,6 @@ import 'package:washify_mobile/core/utils/custom_elevated_button.dart';
 import 'package:washify_mobile/features/authentication/logic/auth/auth_cubit.dart';
 import '../../../../core/utils/custom_snack_bar.dart';
 import '../widgets/login_form.dart';
-import '../widgets/or_sign_up_with_divider.dart';
-import '../widgets/sign_up_with_social_widget.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -36,8 +34,13 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset(
-                    ImagePaths.logoPngPath,
+                  Center(
+                    child: Image.asset(
+                      ImagePaths.splashLogoPath,
+                      width: 200,
+                      height: 100,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                   const GutterLarge(),
                   Text(
@@ -66,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           width: 1,
                         ),
                       ),
-                      const Text(StringsManager.keepMeSignedIn),
+                      Text(StringsManager.keepMeSignedIn),
                     ],
                   ),
                   const GutterSmall(),
@@ -81,13 +84,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                   const GutterLarge(),
-                  const OrSignUpWithDivider(),
+                  /* const OrSignUpWithDivider(),
                   const GutterSmall(),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 12),
                     child: SignUpWithSocialWidget(),
-                  ),
-                  const GutterLarge(),
+                  ),*/
+                  //const GutterLarge(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

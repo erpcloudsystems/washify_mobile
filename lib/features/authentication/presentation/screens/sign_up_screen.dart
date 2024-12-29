@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
-import 'package:washify_mobile/core/global/enums.dart';
 import 'package:washify_mobile/core/resources/colors_managers.dart';
 import 'package:washify_mobile/core/resources/strings_manager.dart';
 import 'package:washify_mobile/core/utils/custom_drop_down_widget.dart';
@@ -12,10 +11,8 @@ import 'package:washify_mobile/features/authentication/logic/otp/cubit/otp_cubit
 import '../../../../core/router/app_routes.dart';
 import '../../../../core/router/route_services.dart';
 import '../../data/models/sign_up_request_model.dart';
-import '../widgets/or_sign_up_with_divider.dart';
 import '../widgets/progress_bar_widget.dart';
 import '../widgets/sign_up_form.dart';
-import '../widgets/sign_up_with_social_widget.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -76,11 +73,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                   ),
                   const GutterSmall(),
-                  const SignUpWithSocialWidget(
+                  /*const SignUpWithSocialWidget(
                     style: SignUpWithSocialWidgetStyle.signUp,
                   ),
                   const GutterSmall(),
-                  const OrSignUpWithDivider(),
+                  const OrSignUpWithDivider(),*/
                   const GutterSmall(),
                   SignUpForm(
                     firstNameController: firstNameController,

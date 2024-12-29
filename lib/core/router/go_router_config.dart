@@ -4,6 +4,7 @@ import 'package:washify_mobile/features/authentication/presentation/screens/loca
 import 'package:washify_mobile/features/authentication/presentation/screens/login_screen.dart';
 import 'package:washify_mobile/features/authentication/presentation/screens/sign_up_screen.dart';
 import 'package:washify_mobile/features/authentication/presentation/screens/subscribe_screen.dart';
+import 'package:washify_mobile/features/car/data/models/request_service_model.dart';
 import 'package:washify_mobile/features/shop/data/models/shop_item_model.dart';
 import 'package:washify_mobile/features/shop/presentation/screens/shop_screen.dart';
 import 'package:washify_mobile/features/subscription/presentation/screens/visits_screen.dart';
@@ -56,7 +57,9 @@ final router = GoRouter(
     GoRoute(
       path: AppRoutes.subscriptionScreen,
       name: AppRoutes.subscriptionScreen,
-      builder: (context, state) => const SubscriptionScreen(),
+      builder: (context, state) => SubscriptionScreen(
+        car: state.extra! as RequestServiceModel,
+      ),
     ),
     GoRoute(
       path: AppRoutes.otpScreen,
@@ -71,6 +74,7 @@ final router = GoRouter(
       name: AppRoutes.carInfoScreen,
       builder: (context, state) => CarInfoScreen(
         territory: state.uri.queryParameters['territory'] as String,
+        isEdit: state.uri.queryParameters['isEdit'] as String,
       ),
     ),
     GoRoute(
@@ -82,7 +86,7 @@ final router = GoRouter(
       path: AppRoutes.shopScreen,
       name: AppRoutes.shopScreen,
       builder: (context, state) => ShopScreen(
-        shopItem: state.extra! as ShopItemModel ,
+        shopItem: state.extra! as ShopItemModel,
       ),
     ),
   ],

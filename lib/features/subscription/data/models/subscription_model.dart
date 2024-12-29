@@ -9,6 +9,7 @@ class SubscriptionModel {
   final String itemCode;
   final int timesPerWeek;
   bool isSelected;
+  final String description;
   //List<DaysWeekModel> selectedDays;
   SubscriptionModel({
     required this.id,
@@ -19,6 +20,7 @@ class SubscriptionModel {
     required this.priceDetermination,
     required this.timesPerWeek,
     this.isSelected = false,
+    required this.description
   }) ; // : selectedDays = [];
 
   void toggleSelected() {
@@ -33,6 +35,7 @@ class SubscriptionModel {
     String? priceDetermination,
     String? itemCode,
     int? timesPerWeek,
+    String? description
   }) {
     return SubscriptionModel(
       id: id ?? this.id,
@@ -42,6 +45,7 @@ class SubscriptionModel {
       price: price ?? this.price,
       priceDetermination: priceDetermination ?? this.priceDetermination,
       timesPerWeek: timesPerWeek ?? this.timesPerWeek,
+      description: description ?? this.description
     );
   }
 
@@ -64,6 +68,7 @@ class SubscriptionModel {
       price: map['cost'] as double,
       priceDetermination: map['price_determination'] as String,
       timesPerWeek: map['custom_how_many_times_per_week'] as int,
+      description: map['custom_description'] as String
     );
   }
 

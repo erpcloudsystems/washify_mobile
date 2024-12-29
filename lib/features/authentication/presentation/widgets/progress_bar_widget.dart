@@ -10,7 +10,7 @@ class ProgressBarWidget extends StatelessWidget {
     super.key,
     this.isLocateActive = false,
     this.isCarInfoActive = false,
-    this.isPayNow= false,
+    this.isPayNow = false,
   });
   final bool isLocateActive;
   final bool isCarInfoActive;
@@ -23,7 +23,7 @@ class ProgressBarWidget extends StatelessWidget {
         width: 375.w,
         child: Row(
           children: [
-            const Flexible(
+            Flexible(
               flex: 2,
               child: ProgressNumberWidget(
                 number: '1',

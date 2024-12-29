@@ -16,6 +16,8 @@ class CustomTextFormField extends StatefulWidget {
     this.controller,
     this.isValidate = true,
     this.isEmail = false,
+    this.isConfirmPassword = false,
+    this.newPassword,
   });
   final String? hintText;
   final Icon? prefixIcon;
@@ -26,17 +28,23 @@ class CustomTextFormField extends StatefulWidget {
   final TextEditingController? controller;
   final bool isValidate;
   final bool isEmail;
+  final bool isConfirmPassword;
+  final String? newPassword;
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
 }
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
-  bool isObscureText = false;
+  bool? isObscureText;
+  bool get getIsObscureText {
+    isObscureText ??= widget.isPassword;
+    return isObscureText!;
+  }
+
   IconData passwordIcon = Icons.visibility_off;
   @override
   Widget build(BuildContext context) {
-    isObscureText = widget.isPassword ? true : false;
     return TextFormField(
       controller: widget.controller,
       maxLines: widget.maxLines,
@@ -46,13 +54,15 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                 return StringsManager.emptyValidator;
               } else if (widget.isEmail && !isEmail(value)) {
                 return StringsManager.emailValidator;
+              } else if (widget.isConfirmPassword &&
+                  value != widget.newPassword) {
+                return StringsManager.newPasswordDoesNotMatch;
               }
               return null;
             }
           : null,
       decoration: InputDecoration(
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(4.r)),
-        
         prefixIconColor: Colors.grey.shade600,
         suffixIconColor: ColorsManager.mainColor,
         contentPadding:
@@ -63,8 +73,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                 icon: Icon(passwordIcon),
                 onPressed: () {
                   setState(() {
-                    isObscureText = !isObscureText;
-                    if (isObscureText) {
+                    isObscureText = !getIsObscureText;
+                    if (!getIsObscureText) {
                       passwordIcon = Icons.visibility;
                     } else {
                       passwordIcon = Icons.visibility_off;
@@ -77,12 +87,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         labelText: widget.labelText,
         hintStyle: Theme.of(context).textTheme.bodyMedium,
         labelStyle: Theme.of(context).textTheme.bodyMedium,
-        errorStyle: TextStyle(
-          color: ColorsManager.red,
-          fontSize: 14.sp,
-        ),
       ),
-      obscureText: isObscureText,
+      obscureText: getIsObscureText,
       style: Theme.of(context).textTheme.bodyMedium,
       initialValue: widget.initialValue,
     );

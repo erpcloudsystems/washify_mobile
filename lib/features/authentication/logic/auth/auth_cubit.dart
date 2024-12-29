@@ -76,7 +76,8 @@ class AuthCubit extends Cubit<AuthState> {
         signUpRequestModel: signUpModel,
       );
 
-      emit(const AuthSignUpSuccessState());
+      emit(
+          AuthSignUpSuccessState(message: StringsManager.pleaseCheckYourEmail));
       // await login(
       //     userName: signUpModel.email!, password: signUpModel.password!);
     } on PrimaryServerException catch (error) {

@@ -53,4 +53,16 @@ class SubscriptionCubit extends Cubit<SubscriptionState> {
       emit(GetSubscriptionsErrorState(error.message));
     }
   }
+
+  // Get subscription
+  SubscriptionModel? subscriptionModel;
+  Future<void> getSubscription(String id) async{
+     emit(GetSubscriptionsLoadingState());
+    try {
+      subscriptionModel = await _baseSubscriptionServices.getSubscription(id);
+      emit(GetSubscriptionsSuccessState());
+    } on PrimaryServerException catch (error) {
+      emit(GetSubscriptionsErrorState(error.message));
+    }
+  }
 }

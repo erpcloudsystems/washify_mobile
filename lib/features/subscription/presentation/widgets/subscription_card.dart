@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
+import 'package:washify_mobile/core/resources/strings_manager.dart';
+import 'package:washify_mobile/features/car/data/models/request_service_model.dart';
+import 'package:washify_mobile/features/subscription/data/models/subscription_model.dart';
 
 import '../../../../core/resources/colors_managers.dart';
 
 class SubscriptionCard extends StatelessWidget {
-  const SubscriptionCard({super.key});
+  const SubscriptionCard(
+      {super.key, required this.subscription, required this.car});
+  final SubscriptionModel subscription;
+  final RequestServiceModel car;
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +28,10 @@ class SubscriptionCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Text('Subscription status:'),
+              Text('${StringsManager.subscriptionStatus}: '),
               const GutterTiny(),
               Text(
-                'Active',
+                StringsManager.active,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: ColorsManager.mainColor,
                     ),
@@ -35,10 +41,34 @@ class SubscriptionCard extends StatelessWidget {
           const GutterSmall(),
           Row(
             children: [
-              const Text('Subscription plan:'),
+              Text('${StringsManager.startingDate}: '),
               const GutterTiny(),
               Text(
-                'Daily',
+                car.startDate!,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: ColorsManager.mainColor,
+                    ),
+              ),
+            ],
+          ),
+          const GutterSmall(),
+          Row(children: [
+            Text('${StringsManager.endingDate}: '),
+            const GutterTiny(),
+            Text(
+              car.endDate!,
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    color: ColorsManager.mainColor,
+                  ),
+            ),
+          ]),
+          const GutterSmall(),
+          Row(
+            children: [
+              Text('${StringsManager.subscriptionPlan}: '),
+              const GutterTiny(),
+              Text(
+                subscription.name,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: ColorsManager.mainColor,
                     ),
@@ -48,10 +78,25 @@ class SubscriptionCard extends StatelessWidget {
           const GutterSmall(),
           Row(
             children: [
-              const Text('Starting date:'),
+              Text('${StringsManager.planDetails}: '),
+              const GutterTiny(),
+              Flexible(
+                child: Text(
+                  subscription.description,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: ColorsManager.mainColor,
+                      ),
+                ),
+              ),
+            ],
+          ),
+          const GutterSmall(),
+          Row(
+            children: [
+              Text('${StringsManager.price}: '),
               const GutterTiny(),
               Text(
-                '2024-12-09',
+                '${subscription.price.toString()} ${subscription.currency}',
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: ColorsManager.mainColor,
                     ),
@@ -61,10 +106,10 @@ class SubscriptionCard extends StatelessWidget {
           const GutterSmall(),
           Row(
             children: [
-              const Text('Ending date:'),
+              Text('${StringsManager.determination}: '),
               const GutterTiny(),
               Text(
-                '2025-01-09',
+                subscription.priceDetermination,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: ColorsManager.mainColor,
                     ),
@@ -74,23 +119,10 @@ class SubscriptionCard extends StatelessWidget {
           const GutterSmall(),
           Row(
             children: [
-              const Text('Payment method:'),
+              Text('${StringsManager.timesPerWeek}: '),
               const GutterTiny(),
               Text(
-                'Visa',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: ColorsManager.mainColor,
-                    ),
-              ),
-            ],
-          ),
-          const GutterSmall(),
-          Row(
-            children: [
-              const Text('Number of cars:'),
-              const GutterTiny(),
-              Text(
-                '4',
+                subscription.timesPerWeek.toString(),
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: ColorsManager.mainColor,
                     ),

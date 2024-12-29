@@ -6,8 +6,8 @@ import 'package:washify_mobile/features/subscription/controller/cubit/subscripti
 import '../../../subscription/data/models/days_week_model.dart';
 
 class SelectSubscriptionList extends StatefulWidget {
-  const SelectSubscriptionList({super.key});
-
+  const SelectSubscriptionList({super.key, this.isEdit = false});
+  final bool isEdit;
   @override
   State<SelectSubscriptionList> createState() => _SelectSubscriptionListState();
 }
@@ -15,8 +15,22 @@ class SelectSubscriptionList extends StatefulWidget {
 class _SelectSubscriptionListState extends State<SelectSubscriptionList> {
   @override
   void initState() {
-    context.read<SubscriptionCubit>().getSubscriptions();
     super.initState();
+    Future.delayed(Duration.zero, () async {
+      if (mounted) {
+        await context.read<SubscriptionCubit>().getSubscriptions();
+        if (widget.isEdit && mounted) {
+          final selected =
+              context.read<SubscriptionCubit>().subscriptions.firstWhere(
+            (element) {
+              return element.id ==
+                  context.read<SubscriptionCubit>().subscriptionModel!.id;
+            },
+          );
+          selected.toggleSelected();
+        }
+      }
+    });
   }
 
   int validateTimesPerWeek() {
@@ -36,28 +50,29 @@ class _SelectSubscriptionListState extends State<SelectSubscriptionList> {
       spacing: 5.w,
       children: List.generate(
         subscriptionCubit.subscriptions.length,
-        (index) => Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(
-              color: ColorsManager.mainColor,
-            ),
-          ),
-          child: Column(
-            children: [
-              CheckboxListTile.adaptive(
-                title: Text(subscriptionCubit.subscriptions[index].name),
-                subtitle: Text(
-                    '${subscriptionCubit.subscriptions[index].currency}  ${subscriptionCubit.subscriptions[index].price}'),
-                value: subscriptionCubit.subscriptions[index].isSelected,
-                onChanged: (value) {
-                  setState(() {
-                    subscriptionCubit.subscriptions[index].toggleSelected();
-                  });
-                },
+        (index) {
+          return Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(
+                color: ColorsManager.mainColor,
               ),
-              /*if (subscriptionCubit.subscriptions[index].isSelected)
+            ),
+            child: Column(
+              children: [
+                CheckboxListTile.adaptive(
+                  title: Text(subscriptionCubit.subscriptions[index].name),
+                  subtitle: Text(
+                      '${subscriptionCubit.subscriptions[index].currency}  ${subscriptionCubit.subscriptions[index].price}'),
+                  value: subscriptionCubit.subscriptions[index].isSelected,
+                  onChanged: (value) {
+                    setState(() {
+                      subscriptionCubit.subscriptions[index].toggleSelected();
+                    });
+                  },
+                ),
+                /*if (subscriptionCubit.subscriptions[index].isSelected)
                 SelectDaysWidget(
                   onChanged: (value, idx) {
                     if (!listOfWeekDays[idx].isSelected) {
@@ -87,9 +102,10 @@ class _SelectSubscriptionListState extends State<SelectSubscriptionList> {
                     }
                   },
                 )*/
-            ],
-          ),
-        ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
