@@ -27,6 +27,51 @@ class SubscriptionCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Row(
+                children: [
+                  Text('${StringsManager.carBrand}: '),
+                  const GutterTiny(),
+                  Text(
+                    car.brand,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: ColorsManager.mainColor,
+                        ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Text('${StringsManager.carModel}: '),
+                  const GutterTiny(),
+                  Text(
+                    car.model,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: ColorsManager.mainColor,
+                        ),
+                    maxLines: 1,
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const GutterSmall(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('${StringsManager.plateNo}: '),
+              const GutterTiny(),
+              Text(
+                car.plateCode,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: ColorsManager.mainColor,
+                    ),
+              ),
+            ],
+          ),
+          const Divider(),
+          Row(
             children: [
               Text('${StringsManager.subscriptionStatus}: '),
               const GutterTiny(),

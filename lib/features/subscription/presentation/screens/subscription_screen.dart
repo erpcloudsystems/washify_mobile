@@ -11,7 +11,6 @@ import 'package:washify_mobile/core/utils/error_widget.dart';
 import 'package:washify_mobile/features/subscription/controller/cubit/subscription_cubit.dart';
 
 import '../../../car/data/models/request_service_model.dart';
-import '../../../car/logic/cubit/car_cubit.dart';
 import '../widgets/subscription_card.dart';
 
 class SubscriptionScreen extends StatefulWidget {
@@ -31,6 +30,16 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         .getSubscription(widget.car.subscriptionPlan);
   }
 
+  void updateSubscription() {
+    // go to the car info screen with the isEdit flag true
+    RoutesService.pushNamed(
+      AppRoutes.carInfoScreen,
+      context: context,
+      queryParameters: {'territory': widget.car.territory, 'isEdit': 'true'},
+      extra: widget.car,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,41 +47,6 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         title: Text(
           StringsManager.yourSubscription,
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              context.read<CarCubit>().addNewService(
-                    requestServiceModel: RequestServiceModel(
-                      subscriptionPlan: widget.car.subscriptionPlan,
-                      itemCode: context
-                          .read<SubscriptionCubit>()
-                          .subscriptionModel!
-                          .itemCode,
-                      timesPerWeek: context
-                          .read<SubscriptionCubit>()
-                          .subscriptionModel!
-                          .timesPerWeek,
-                      // weekDays: getSelectedSubscription()!.selectedDays,
-                      territory: widget.car.territory,
-                      plateCode: widget.car.plateCode,
-                      model: widget.car.model,
-                      brand: widget.car.brand,
-                      price: context
-                          .read<SubscriptionCubit>()
-                          .subscriptionModel!
-                          .price,
-                    ),
-                  );
-              RoutesService.pushNamed(AppRoutes.carInfoScreen,
-                  context: context,
-                  queryParameters: {
-                    'territory': widget.car.territory,
-                    'isEdit': 'true'
-                  });
-            },
-            icon: const Icon(Icons.edit),
-          )
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -95,10 +69,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 const Gutter(),
                 Flexible(
                   child: CustomElevatedIconButton(
-                    title: 'Cancel subscription',
+                    onPressed: updateSubscription,
+                    title: StringsManager.editSubscription,
                     icon: const Icon(
-                      FontAwesomeIcons.ban,
-                      color: Colors.red,
+                      FontAwesomeIcons.penToSquare,
                     ),
                     size: const Size(double.infinity, 40),
                     textStyle: Theme.of(context).textTheme.bodyMedium,

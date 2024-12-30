@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 class RequestServiceModel {
+  final String? id;
   final String subscriptionPlan;
   final String itemCode;
   final double price;
@@ -13,6 +14,7 @@ class RequestServiceModel {
   final String? endDate;
   //final List<DaysWeekModel> weekDays;
   RequestServiceModel({
+    this.id,
     required this.subscriptionPlan,
     required this.itemCode,
     required this.territory,
@@ -27,6 +29,7 @@ class RequestServiceModel {
   });
 
   RequestServiceModel copyWith({
+    String? id,
     String? subscriptionPlan,
     String? itemCode,
     String? territory,
@@ -39,6 +42,7 @@ class RequestServiceModel {
     String? endDate,
   }) {
     return RequestServiceModel(
+        id: id ?? this.id,
         subscriptionPlan: subscriptionPlan ?? this.subscriptionPlan,
         itemCode: itemCode ?? this.itemCode,
         territory: territory ?? this.territory,
@@ -71,6 +75,7 @@ class RequestServiceModel {
 
   factory RequestServiceModel.fromMap(Map<String, dynamic> map) {
     return RequestServiceModel(
+      id: map['name'] ?? '',
       subscriptionPlan: map['subscription_plan'] ?? '',
       itemCode: map['item'] ?? '',
       territory: map['territory'] ?? '',
@@ -91,14 +96,15 @@ class RequestServiceModel {
 
   @override
   String toString() {
-    return 'RequestServiceModel(subscriptionPlan: $subscriptionPlan, itemCode: $itemCode, territory: $territory, plateCode: $plateCode, model: $model, brand: $brand)';
+    return 'RequestServiceModel(id: $id, subscriptionPlan: $subscriptionPlan, itemCode: $itemCode, territory: $territory, plateCode: $plateCode, model: $model, brand: $brand)';
   }
 
   @override
   bool operator ==(covariant RequestServiceModel other) {
     if (identical(this, other)) return true;
 
-    return other.subscriptionPlan == subscriptionPlan &&
+    return other.id == other.id &&
+        other.subscriptionPlan == subscriptionPlan &&
         other.itemCode == itemCode &&
         other.territory == territory &&
         other.plateCode == plateCode &&
@@ -108,7 +114,8 @@ class RequestServiceModel {
 
   @override
   int get hashCode {
-    return subscriptionPlan.hashCode ^
+    return id.hashCode ^
+        subscriptionPlan.hashCode ^
         itemCode.hashCode ^
         territory.hashCode ^
         plateCode.hashCode ^

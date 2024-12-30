@@ -56,8 +56,8 @@ class SubscriptionCubit extends Cubit<SubscriptionState> {
 
   // Get subscription
   SubscriptionModel? subscriptionModel;
-  Future<void> getSubscription(String id) async{
-     emit(GetSubscriptionsLoadingState());
+  Future<void> getSubscription(String id) async {
+    emit(GetSubscriptionsLoadingState());
     try {
       subscriptionModel = await _baseSubscriptionServices.getSubscription(id);
       emit(GetSubscriptionsSuccessState());
@@ -65,4 +65,6 @@ class SubscriptionCubit extends Cubit<SubscriptionState> {
       emit(GetSubscriptionsErrorState(error.message));
     }
   }
+
+  List<SubscriptionModel> selectedSubscriptions = [];
 }

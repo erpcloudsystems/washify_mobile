@@ -4,23 +4,24 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../resources/colors_managers.dart';
 
 class CustomElevatedIconButton extends StatelessWidget {
-  const CustomElevatedIconButton({
-    super.key,
-    required this.title,
-    this.iconData,
-    this.icon,
-    this.textStyle,
-    this.size,
-  });
+  const CustomElevatedIconButton(
+      {super.key,
+      required this.title,
+      this.iconData,
+      this.icon,
+      this.textStyle,
+      this.size,
+      this.onPressed});
   final String title;
   final IconData? iconData;
   final Widget? icon;
   final TextStyle? textStyle;
   final Size? size;
+  final VoidCallback? onPressed;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-      onPressed: () {},
+      onPressed: onPressed,
       label: Text(
         title,
         style: textStyle ??

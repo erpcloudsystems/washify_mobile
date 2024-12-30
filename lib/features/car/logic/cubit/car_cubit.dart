@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:washify_mobile/core/network/exceptions.dart';
@@ -60,5 +62,17 @@ class CarCubit extends Cubit<CarState> {
     requestServiceModels = [];
     totalPay = 0;
     emit(CarInitial());
+  }
+
+  // Create Request Service
+  Future<void> updateRequestService() async {
+    emit(UpdateRequestServiceLoadingState());
+    try {
+      log(requestServiceModels.first.toJson());
+      await _baseCarServices.updateRequestService(requestServiceModels.first);
+      emit(UpdateRequestServiceSuccessState());
+    } on PrimaryServerException catch (e) {
+      emit(UpdateRequestServiceErrorState(e.message));
+    }
   }
 }

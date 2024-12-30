@@ -75,12 +75,17 @@ final router = GoRouter(
       builder: (context, state) => CarInfoScreen(
         territory: state.uri.queryParameters['territory'] as String,
         isEdit: state.uri.queryParameters['isEdit'] as String,
+        car: state.extra! as RequestServiceModel?,
       ),
     ),
     GoRoute(
       path: AppRoutes.paymentDetailsScreen,
       name: AppRoutes.paymentDetailsScreen,
-      builder: (context, state) => const PaymentDetailsScreen(),
+      builder: (context, state) {
+        return PaymentDetailsScreen(
+          isEdit: state.uri.queryParameters['isEdit'] as String,
+        );
+      },
     ),
     GoRoute(
       path: AppRoutes.shopScreen,

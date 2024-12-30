@@ -18,9 +18,10 @@ import '../widgets/select_subscription_list.dart';
 
 class CarInfoScreen extends StatefulWidget {
   const CarInfoScreen(
-      {super.key, required this.territory, this.isEdit = 'false'});
+      {super.key, required this.territory, this.isEdit = 'false', this.car});
   final String territory;
   final String isEdit;
+  final RequestServiceModel? car;
 
   @override
   State<CarInfoScreen> createState() => _CarInfoScreenState();
@@ -38,22 +39,11 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
     super.initState();
     carCubit = context.read<CarCubit>();
     carCubit.getBrands();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(Duration.zero, () async {
-        if (mounted && widget.isEdit == 'true') {
-          final RequestServiceModel? car = await showModalBottomSheet(
-            context: context,
-            showDragHandle: true,
-            builder: (context) => const AddedCarsWidget(),
-          );
-          if (car != null) {
-            brandController.text = car.brand;
-            modelController.text = car.model;
-            plateController.text = car.plateCode;
-          }
-        }
-      });
-    });
+    if (widget.isEdit == 'true' && widget.car != null) {
+      brandController.text = widget.car!.brand;
+      modelController.text = widget.car!.model;
+      plateController.text = widget.car!.plateCode;
+    }
   }
 
   SubscriptionModel? getSelectedSubscription() {
@@ -71,6 +61,7 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
       if (getSelectedSubscription() != null) {
         carCubit.addNewService(
           requestServiceModel: RequestServiceModel(
+            id: widget.isEdit == 'true' ? widget.car!.id : null,
             subscriptionPlan: getSelectedSubscription()!.id,
             itemCode: getSelectedSubscription()!.itemCode,
             timesPerWeek: getSelectedSubscription()!.timesPerWeek,
@@ -180,6 +171,7 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
                 //   totalPay: carCubit.totalPay,
                 // ),
                 const GutterLarge(),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 80),
                   child: CustomElevatedButton(
@@ -193,7 +185,10 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
                   onPressed: () {
                     if (carCubit.requestServiceModels.isNotEmpty) {
                       RoutesService.pushNamed(AppRoutes.paymentDetailsScreen,
-                          context: context);
+                          context: context,
+                          queryParameters: {
+                            'isEdit': widget.isEdit,
+                          });
                     } else {
                       showSnackBar(
                           context: context,

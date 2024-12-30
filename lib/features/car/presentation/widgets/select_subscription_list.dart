@@ -69,6 +69,13 @@ class _SelectSubscriptionListState extends State<SelectSubscriptionList> {
                   onChanged: (value) {
                     setState(() {
                       subscriptionCubit.subscriptions[index].toggleSelected();
+                      if (subscriptionCubit.subscriptions[index].isSelected) {
+                        subscriptionCubit.selectedSubscriptions
+                            .add(subscriptionCubit.subscriptions[index]);
+                      } else {
+                        subscriptionCubit.selectedSubscriptions
+                            .remove(subscriptionCubit.subscriptions[index]);
+                      }
                     });
                   },
                 ),

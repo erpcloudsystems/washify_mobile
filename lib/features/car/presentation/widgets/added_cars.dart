@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:go_router/go_router.dart';
 import 'package:washify_mobile/core/resources/colors_managers.dart';
 import 'package:washify_mobile/core/utils/custom_model_bottom_sheet.dart';
 import 'package:washify_mobile/features/car/logic/cubit/car_cubit.dart';
@@ -58,11 +57,6 @@ class _AddedCarsWidgetState extends State<AddedCarsWidget> {
                         ),*/
                       ],
                     ),
-                    onTap: () {
-                      context.pop(services[index]);
-                      cubit.totalPay = cubit.totalPay - services[index].price;
-                      cubit.requestServiceModels.removeAt(index);
-                    },
                     onLongPress: () {
                       cubit.totalPay = cubit.totalPay - services[index].price;
                       cubit.requestServiceModels.removeAt(index);

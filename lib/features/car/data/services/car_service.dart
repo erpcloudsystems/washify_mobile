@@ -11,6 +11,7 @@ abstract interface class BaseCarServices {
   Future<List<String>> getBrands();
   Future<void> createRequestService(RequestServiceModel model);
   Future<List<RequestServiceModel>> getCars();
+  Future<void> updateRequestService(RequestServiceModel model);
 }
 
 class CarServices extends BaseCarServices {
@@ -44,5 +45,13 @@ class CarServices extends BaseCarServices {
     return List.from(response.data['data'])
         .map((item) => RequestServiceModel.fromMap(item))
         .toList();
+  }
+  
+  @override
+  Future<void> updateRequestService(RequestServiceModel model)async {
+     await dio.post(
+      endPoint: '${ApiConstance.requestServiceEndPoint}/${model.id}',
+      data: model.toMap(),
+    ) as Response;
   }
 }

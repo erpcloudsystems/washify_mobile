@@ -125,4 +125,5 @@ abstract class StringsManager {
   static String active = 'Active'.tr();
   static String startingDate = 'Starting date'.tr();
   static String endingDate = 'Ending date'.tr();
+  static String editSubscription = 'Edit subscription'.tr();
 }

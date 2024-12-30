@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
@@ -16,11 +18,13 @@ import '../../../authentication/presentation/widgets/payment_method_widget.dart'
 import '../widgets/subscription_record.dart';
 
 class PaymentDetailsScreen extends StatelessWidget {
-  const PaymentDetailsScreen({super.key});
+  const PaymentDetailsScreen({super.key, this.isEdit = 'false'});
+  final String isEdit;
   @override
   Widget build(BuildContext context) {
     final carCubit = context.read<CarCubit>();
-    final subscriptions = context.watch<SubscriptionCubit>().subscriptions;
+    final subscriptions =
+        context.watch<SubscriptionCubit>().selectedSubscriptions;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -39,6 +43,7 @@ class PaymentDetailsScreen extends StatelessWidget {
                 ListView.builder(
                   itemCount: subscriptions.length,
                   shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
                     final item = subscriptions[index];
                     return Column(
@@ -162,6 +167,10 @@ class PaymentDetailsScreen extends StatelessWidget {
                       title: StringsManager.payNow,
                       isLoading: state is CreateRequestServiceLoadingState,
                       onPressed: () async {
+                        if (isEdit == 'true') {
+                          log('isEdit from payment');
+                          await carCubit.updateRequestService();
+                        }
                         await carCubit.createRequestService();
                         // RoutesService.pushReplacementNamed(
                         //   context: context,

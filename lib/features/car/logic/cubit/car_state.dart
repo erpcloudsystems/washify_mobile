@@ -30,6 +30,15 @@ class CreateRequestServiceErrorState extends CarState {
 
 class CreateRequestServiceSuccessState extends CarState {}
 
+class UpdateRequestServiceLoadingState extends CarState {}
+
+class UpdateRequestServiceErrorState extends CarState {
+  final String errorMessage;
+  const UpdateRequestServiceErrorState(this.errorMessage);
+}
+
+class UpdateRequestServiceSuccessState extends CarState {}
+
 class GetCarsLoadingState extends CarState {}
 
 class GetCarsSuccessState extends CarState {}
