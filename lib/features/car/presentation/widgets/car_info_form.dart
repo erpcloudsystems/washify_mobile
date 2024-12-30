@@ -33,14 +33,13 @@ class CarInfoForm extends StatelessWidget {
         const GutterTiny(),
         BlocBuilder<CarCubit, CarState>(
           builder: (context, state) {
-           
             return CustomDropDownFormField(
-              initialValue: state is GetBrandsLoadingState ? null : brandController.text,
               selectedValue: (value) {
                 brandController.text = value!;
               },
               dropDownList: carCubit.brands,
-              hint: '',
+              hint:
+                  state is GetBrandsLoadingState ? null : brandController.text,
             );
           },
         ),

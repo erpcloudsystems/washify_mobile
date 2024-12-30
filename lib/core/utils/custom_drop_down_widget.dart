@@ -9,7 +9,7 @@ class CustomDropDownFormField extends StatefulWidget {
     super.key,
     this.selectedValue,
     required this.dropDownList,
-    required this.hint,
+    this.hint,
     this.validator,
     this.initialValue,
     this.onChanged,
@@ -18,7 +18,7 @@ class CustomDropDownFormField extends StatefulWidget {
   });
 
   final List<String> dropDownList;
-  final String hint;
+  final String? hint;
   final IconData? prefixIcon;
   final String? initialValue;
   final FormFieldValidator<String>? validator;
@@ -43,12 +43,14 @@ class _CustomDropDownFormFieldState extends State<CustomDropDownFormField> {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
-      hint: Text(
-        widget.hint,
-        style: TextStyle(
-          fontSize: 12.sp,
-        ),
-      ),
+      hint: widget.hint != null
+          ? Text(
+              widget.hint!,
+              style: TextStyle(
+                fontSize: 12.sp,
+              ),
+            )
+          : null,
       validator: widget.isValidate
           ? (value) {
               if (value == null || value.trim().isEmpty) {

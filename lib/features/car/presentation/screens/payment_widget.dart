@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
@@ -168,7 +166,6 @@ class PaymentDetailsScreen extends StatelessWidget {
                       isLoading: state is CreateRequestServiceLoadingState,
                       onPressed: () async {
                         if (isEdit == 'true') {
-                          log('isEdit from payment');
                           await carCubit.updateRequestService();
                         }
                         await carCubit.createRequestService();
