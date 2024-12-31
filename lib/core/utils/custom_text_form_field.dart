@@ -17,7 +17,7 @@ class CustomTextFormField extends StatefulWidget {
     this.isValidate = true,
     this.isEmail = false,
     this.isConfirmPassword = false,
-    this.newPassword,
+    this.newPasswordController,
   });
   final String? hintText;
   final Icon? prefixIcon;
@@ -29,7 +29,7 @@ class CustomTextFormField extends StatefulWidget {
   final bool isValidate;
   final bool isEmail;
   final bool isConfirmPassword;
-  final String? newPassword;
+  final TextEditingController? newPasswordController;
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -55,9 +55,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               } else if (widget.isEmail && !isEmail(value)) {
                 return StringsManager.emailValidator;
               } else if (widget.isConfirmPassword &&
-                  value != widget.newPassword) {
+                  value != widget.newPasswordController!.text) {
                 return StringsManager.newPasswordDoesNotMatch;
               }
+              setState(() {});
               return null;
             }
           : null,

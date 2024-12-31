@@ -116,7 +116,7 @@ class SignUpForm extends StatelessWidget {
               controller: confirmPasswordController,
               isPassword: true,
               isConfirmPassword: true,
-              newPassword: passwordController.text,
+              newPasswordController: passwordController,
             ),
           ],
         ),
