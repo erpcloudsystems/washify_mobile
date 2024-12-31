@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
@@ -6,6 +7,7 @@ import 'package:washify_mobile/core/resources/image_paths.dart';
 import 'package:washify_mobile/core/resources/strings_manager.dart';
 import 'package:washify_mobile/core/router/app_routes.dart';
 import 'package:washify_mobile/core/router/route_services.dart';
+import 'package:washify_mobile/core/utils/custom_drop_down_widget.dart';
 import 'package:washify_mobile/core/utils/custom_elevated_button.dart';
 import 'package:washify_mobile/features/authentication/logic/auth/auth_cubit.dart';
 import '../../../../core/utils/custom_snack_bar.dart';
@@ -34,6 +36,27 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Flexible(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 260,
+                          ),
+                          child: CustomDropDownFormField(
+                            selectedValue: (value) {
+                              context.setLocale(Locale(value!));
+                              setState(() {});
+                            },
+                            dropDownList: const ['en', 'ar'],
+                            hint: context.locale.languageCode,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const GutterExtraLarge(),
                   Center(
                     child: Image.asset(
                       ImagePaths.splashLogoPath,
