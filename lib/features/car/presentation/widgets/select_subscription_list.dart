@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:washify_mobile/core/resources/colors_managers.dart';
 import 'package:washify_mobile/features/subscription/controller/cubit/subscription_cubit.dart';
@@ -53,6 +54,7 @@ class _SelectSubscriptionListState extends State<SelectSubscriptionList> {
         (index) {
           return Container(
             padding: const EdgeInsets.symmetric(horizontal: 12),
+            margin: const EdgeInsets.symmetric(vertical: 8),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
               border: Border.all(
@@ -62,9 +64,16 @@ class _SelectSubscriptionListState extends State<SelectSubscriptionList> {
             child: Column(
               children: [
                 CheckboxListTile.adaptive(
-                  title: Text(subscriptionCubit.subscriptions[index].name),
-                  subtitle: Text(
-                      '${subscriptionCubit.subscriptions[index].currency}  ${subscriptionCubit.subscriptions[index].price}'),
+                  title: Row(
+                    children: [
+                      Text(subscriptionCubit.subscriptions[index].name),
+                      const Gutter(),
+                      Text(
+                          '${subscriptionCubit.subscriptions[index].currency}  ${subscriptionCubit.subscriptions[index].price}')
+                    ],
+                  ),
+                  subtitle:
+                      Text(subscriptionCubit.subscriptions[index].description),
                   value: subscriptionCubit.subscriptions[index].isSelected,
                   onChanged: (value) {
                     setState(() {
