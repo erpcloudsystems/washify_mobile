@@ -111,6 +111,7 @@ class _LocateScreenState extends State<LocateScreen> {
                         context: context,
                         queryParameters: {
                           'territory': territory,
+                          'isEdit': 'false',
                         },
                       );
                     } else {

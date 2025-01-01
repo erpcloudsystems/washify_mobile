@@ -9,14 +9,17 @@ import '../../../../../core/utils/custom_text_form_field.dart';
 import '../../logic/cubit/car_cubit.dart';
 
 class CarInfoForm extends StatelessWidget {
-  const CarInfoForm(
-      {super.key,
-      required this.brandController,
-      required this.modelController,
-      required this.plateController});
+  const CarInfoForm({
+    super.key,
+    required this.brandController,
+    required this.modelController,
+    required this.plateController,
+    required this.addressController,
+  });
   final TextEditingController brandController;
   final TextEditingController modelController;
   final TextEditingController plateController;
+  final TextEditingController addressController;
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +56,18 @@ class CarInfoForm extends StatelessWidget {
         const GutterTiny(),
         CustomTextFormField(
           controller: modelController,
+        ),
+        const Gutter(),
+        Text(
+          StringsManager.address,
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: ColorsManager.mainColor,
+              ),
+        ),
+        const GutterTiny(),
+        CustomTextFormField(
+          controller: addressController,
+          isValidate: false,
         ),
         const Gutter(),
         Text(

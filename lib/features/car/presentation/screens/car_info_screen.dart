@@ -31,6 +31,7 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
   final brandController = TextEditingController();
   final modelController = TextEditingController();
   final plateController = TextEditingController();
+  final addressController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   late final CarCubit carCubit;
 
@@ -107,11 +108,14 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Gutter.large(),
-                const ProgressBarWidget(
-                  isLocateActive: true,
-                  isCarInfoActive: true,
-                ),
+                if (widget.isEdit != true.toString()) ...[
+                  const Gutter.large(),
+                  const ProgressBarWidget(
+                    isLocateActive: true,
+                    isCarInfoActive: true,
+                  ),
+                ],
+
                 const Gutter(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -155,6 +159,7 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
                     brandController: brandController,
                     modelController: modelController,
                     plateController: plateController,
+                    addressController: addressController,
                   ),
                 ),
                 const Gutter(),

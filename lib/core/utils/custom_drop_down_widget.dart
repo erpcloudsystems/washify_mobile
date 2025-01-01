@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -82,7 +83,7 @@ class _CustomDropDownFormFieldState extends State<CustomDropDownFormField> {
         return DropdownMenuItem<String>(
           value: e,
           child: Text(
-            e,
+            e.tr(),
             style: Theme.of(context).textTheme.bodyMedium,
           ),
         );

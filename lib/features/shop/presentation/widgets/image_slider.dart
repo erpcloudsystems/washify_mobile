@@ -10,6 +10,8 @@ import 'package:washify_mobile/core/router/route_services.dart';
 import 'package:washify_mobile/core/utils/error_widget.dart';
 import 'package:washify_mobile/features/shop/logic/cubit/shop_cubit.dart';
 
+import '../../../../core/utils/cached_image.dart';
+
 class ImageSlider extends StatefulWidget {
   const ImageSlider({
     super.key,
@@ -77,9 +79,8 @@ class _ImageSliderState extends State<ImageSlider> {
                     },
                   ),
                   itemCount: shopItems.length,
-                  itemBuilder: (ctx, index, _) => Image.network(
-                    shopItems[index].image,
-                    fit: BoxFit.cover,
+                  itemBuilder: (ctx, index, _) => CachedImage(
+                    imageUrl: shopItems[index].image,
                     width: double.infinity,
                   ),
                   carouselController: sliderController,

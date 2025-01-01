@@ -40,17 +40,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Flexible(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 260,
-                          ),
+                        child: SizedBox(
+                          width: 120,
                           child: CustomDropDownFormField(
                             selectedValue: (value) {
                               context.setLocale(Locale(value!));
                               setState(() {});
                             },
                             dropDownList: const ['en', 'ar'],
-                            hint: context.locale.languageCode,
+                            isValidate: false,
+                            hint: context.locale.languageCode.tr(),
                           ),
                         ),
                       ),
