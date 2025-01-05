@@ -9,6 +9,7 @@ import '../../../../core/global/dependencies_container.dart';
 
 abstract interface class BaseCarServices {
   Future<List<String>> getBrands();
+  Future<List<String>> getModelsByBrandName(String name);
   Future<void> createRequestService(RequestServiceModel model);
   Future<List<RequestServiceModel>> getCars();
   Future<void> updateRequestService(RequestServiceModel model);
@@ -19,8 +20,28 @@ class CarServices extends BaseCarServices {
   final String? user = sl<SharedPreferences>().getString(userId);
   @override
   Future<List<String>> getBrands() async {
-    final response =
-        await dio.get(endPoint: ApiConstance.brandsEndPoint) as Response;
+    final response = await dio.get(
+      endPoint: ApiConstance.brandsEndPoint,
+      query: {
+        'filters': '[["custom_is_parent", "=", "1"]]',
+        "limit": 150,
+      },
+    ) as Response;
+
+    return List.from(response.data['data'])
+        .map((index) => index['name'].toString())
+        .toList();
+  }
+
+  @override
+  Future<List<String>> getModelsByBrandName(String name) async {
+    final response = await dio.get(
+      endPoint: ApiConstance.brandsEndPoint,
+      query: {
+        'filters': '[["custom_parent_brand", "=", "$name"]]',
+        "limit": 150,
+      },
+    ) as Response;
 
     return List.from(response.data['data'])
         .map((index) => index['name'].toString())
@@ -46,10 +67,10 @@ class CarServices extends BaseCarServices {
         .map((item) => RequestServiceModel.fromMap(item))
         .toList();
   }
-  
+
   @override
-  Future<void> updateRequestService(RequestServiceModel model)async {
-     await dio.post(
+  Future<void> updateRequestService(RequestServiceModel model) async {
+    await dio.post(
       endPoint: '${ApiConstance.requestServiceEndPoint}/${model.id}',
       data: model.toMap(),
     ) as Response;

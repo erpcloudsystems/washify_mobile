@@ -32,7 +32,8 @@ class _SplashScreenState extends State<SplashScreen> {
         useImmersiveMode: false,
         duration: const Duration(seconds: 7),
         onEnd: () => _isLoggedIn
-            ? RoutesService.go(context: context, location: AppRoutes.homeScreen)
+            ? RoutesService.go(
+                context: context, location: AppRoutes.layoutScreen)
             : RoutesService.pushReplacementNamed(
                 context: context,
                 location: AppRoutes.loginScreen,

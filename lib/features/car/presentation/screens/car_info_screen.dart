@@ -75,8 +75,8 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
           ),
         );
 
-        modelController.clear();
         plateController.clear();
+        addressController.clear();
 
         showSnackBar(
           context: context,

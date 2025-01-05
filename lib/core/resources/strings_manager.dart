@@ -128,4 +128,7 @@ abstract class StringsManager {
   static String get startingDate => 'Starting date'.tr();
   static String get endingDate => 'Ending date'.tr();
   static String get editSubscription => 'Edit subscription'.tr();
+  static String get home => 'Home';
+  static String get more => 'More';
+  static String get shop => 'Shop';
 }

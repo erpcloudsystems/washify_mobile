@@ -113,6 +113,7 @@ class _LocateScreenState extends State<LocateScreen> {
                           'territory': territory,
                           'isEdit': 'false',
                         },
+                        extra: null,
                       );
                     } else {
                       showSnackBar(

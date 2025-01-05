@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:washify_mobile/core/network/api_constant.dart';
 
 class CachedImage extends StatelessWidget {
   final String imageUrl;
@@ -18,7 +19,7 @@ class CachedImage extends StatelessWidget {
     // final globalVariables = GlobalVariables();
     return CachedNetworkImage(
       fit: BoxFit.cover,
-      imageUrl: imageUrl,
+      imageUrl: ApiConstance.siteUrl + imageUrl,
       width: width,
       height: height,
       placeholder: (context, url) {

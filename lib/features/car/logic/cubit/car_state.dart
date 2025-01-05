@@ -47,3 +47,13 @@ class GetCarsErrorState extends CarState {
   final String errorMessage;
   const GetCarsErrorState(this.errorMessage);
 }
+
+// get models by brand
+class GetCarsModelByBrandLoadingState extends CarState {}
+
+class GetCarsModelByBrandSuccessState extends CarState {}
+
+class GetCarsModelByBrandErrorState extends CarState {
+  final String errorMessage;
+  const GetCarsModelByBrandErrorState(this.errorMessage);
+}

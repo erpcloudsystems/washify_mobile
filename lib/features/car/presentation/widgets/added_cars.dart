@@ -31,7 +31,6 @@ class _AddedCarsWidgetState extends State<AddedCarsWidget> {
                     border: Border.all(color: ColorsManager.mainColor),
                   ),
                   child: ListTile(
-                    isThreeLine: true,
                     leading: const Icon(FontAwesomeIcons.car),
                     tileColor: Colors.transparent,
                     title: Text(services[index].brand),

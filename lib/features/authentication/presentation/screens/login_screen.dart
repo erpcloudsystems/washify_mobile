@@ -162,7 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
         message: StringsManager.loginSuccessfully,
       );
 
-      RoutesService.go(context: context, location: AppRoutes.homeScreen);
+      RoutesService.go(context: context, location: AppRoutes.layoutScreen);
     } else if (state is AuthLoginErrorState) {
       showSnackBar(
         context: context,

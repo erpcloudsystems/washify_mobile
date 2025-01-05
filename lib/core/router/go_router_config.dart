@@ -5,6 +5,7 @@ import 'package:washify_mobile/features/authentication/presentation/screens/logi
 import 'package:washify_mobile/features/authentication/presentation/screens/sign_up_screen.dart';
 import 'package:washify_mobile/features/authentication/presentation/screens/subscribe_screen.dart';
 import 'package:washify_mobile/features/car/data/models/request_service_model.dart';
+import 'package:washify_mobile/features/home/presentation/screens/layout_screen.dart';
 import 'package:washify_mobile/features/shop/data/models/shop_item_model.dart';
 import 'package:washify_mobile/features/shop/presentation/screens/shop_screen.dart';
 import 'package:washify_mobile/features/subscription/presentation/screens/visits_screen.dart';
@@ -75,7 +76,7 @@ final router = GoRouter(
       builder: (context, state) => CarInfoScreen(
         territory: state.uri.queryParameters['territory'] as String,
         isEdit: state.uri.queryParameters['isEdit'] as String,
-        car: state.extra! as RequestServiceModel?,
+        car: state.extra as RequestServiceModel?,
       ),
     ),
     GoRoute(
@@ -93,6 +94,11 @@ final router = GoRouter(
       builder: (context, state) => ShopScreen(
         shopItem: state.extra! as ShopItemModel,
       ),
+    ),
+    GoRoute(
+      path: AppRoutes.layoutScreen,
+      name: AppRoutes.layoutScreen,
+      builder: (context, state) => const LayoutScreen(),
     ),
   ],
 );

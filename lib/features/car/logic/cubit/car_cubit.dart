@@ -29,6 +29,18 @@ class CarCubit extends Cubit<CarState> {
     requestServiceModels.add(requestServiceModel);
   }
 
+  // get models by brand
+  List<String> models = [];
+  Future<void> getModelByBrand(String brand) async {
+    emit(GetCarsModelByBrandLoadingState());
+    try {
+      models = await _baseCarServices.getModelsByBrandName(brand);
+      emit(GetCarsModelByBrandSuccessState());
+    } on PrimaryServerException catch (e) {
+      emit(GetCarsModelByBrandErrorState(e.message));
+    }
+  }
+
 // Create Request Service
   Future<void> createRequestService() async {
     emit(CreateRequestServiceLoadingState());

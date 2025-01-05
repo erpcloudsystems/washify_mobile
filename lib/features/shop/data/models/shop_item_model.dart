@@ -1,4 +1,3 @@
-import 'package:washify_mobile/core/network/api_constant.dart';
 
 class ShopItemModel {
   ShopItemModel({
@@ -15,15 +14,13 @@ class ShopItemModel {
   final String image;
   final num price;
 
-
   factory ShopItemModel.fromMap(Map<String, dynamic> map) {
     return ShopItemModel(
       id: map['name'] ?? '',
       name: map['item_name'] ?? '',
       description: map['description'] ?? '',
-      image: '${ApiConstance.siteUrl}${map['image']}',
+      image: map['image'] ?? '',
       price: map['standard_rate'] ?? 0.0,
     );
   }
-
 }

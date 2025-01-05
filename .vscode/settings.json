@@ -1,9 +1,10 @@
 {
-    "cSpell.words": [
-        "Ayman",
-        "fawry",
-        "insta",
-        "instapay",
-        "washify"
-    ]
+  "cSpell.words": [
+    "Ayman",
+    "fawry",
+    "insta",
+    "instapay",
+    "washify"
+  ],
+  "dart.flutterSdkPath": ".fvm/versions/3.24.5"
 }

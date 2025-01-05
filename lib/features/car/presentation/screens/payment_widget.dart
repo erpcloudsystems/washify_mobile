@@ -10,7 +10,6 @@ import 'package:washify_mobile/features/car/logic/cubit/car_cubit.dart';
 import '../../../../../core/resources/colors_managers.dart';
 import '../../../../../core/resources/strings_manager.dart';
 import '../../../authentication/presentation/widgets/progress_bar_widget.dart';
-import '../../../subscription/controller/cubit/subscription_cubit.dart';
 import '../widgets/car_info_record.dart';
 import '../../../authentication/presentation/widgets/payment_method_widget.dart';
 import '../widgets/subscription_record.dart';
@@ -21,8 +20,7 @@ class PaymentDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final carCubit = context.read<CarCubit>();
-    final subscriptions =
-        context.watch<SubscriptionCubit>().selectedSubscriptions;
+    final subscriptions = carCubit.requestServiceModels;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -79,7 +77,7 @@ class PaymentDetailsScreen extends StatelessWidget {
                             children: [
                               SubscriptionRecord(
                                 title: 'Subscription name: ',
-                                value: item.name,
+                                value: item.subscriptionPlan,
                               ),
                               const GutterSmall(),
                               SubscriptionRecord(
@@ -89,13 +87,12 @@ class PaymentDetailsScreen extends StatelessWidget {
                               const GutterSmall(),
                               SubscriptionRecord(
                                 title: 'Price determination: ',
-                                value: item.priceDetermination,
+                                value: item.timesPerWeek.toString(),
                               ),
                               const GutterSmall(),
                               SubscriptionRecord(
                                 title: 'Price: ',
-                                value:
-                                    '${item.price.toString()} ${item.currency}',
+                                value: '${item.price.toString()} EGP',
                               ),
                             ],
                           ),
