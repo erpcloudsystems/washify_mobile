@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:washify_mobile/core/network/exceptions.dart';
-import 'package:washify_mobile/features/car/data/models/request_service_model.dart';
+import 'package:washify_mobile/features/car/data/models/address_model.dart';
 import 'package:washify_mobile/features/car/data/services/car_service.dart';
 
 part 'car_state.dart';
@@ -22,9 +22,9 @@ class CarCubit extends Cubit<CarState> {
     }
   }
 
-  List<RequestServiceModel> requestServiceModels = [];
+  List<AddressModel> requestServiceModels = [];
   double totalPay = 0;
-  void addNewService({required RequestServiceModel requestServiceModel}) {
+  void addNewService({required AddressModel requestServiceModel}) {
     totalPay += requestServiceModel.price;
     requestServiceModels.add(requestServiceModel);
   }
@@ -46,7 +46,7 @@ class CarCubit extends Cubit<CarState> {
     emit(CreateRequestServiceLoadingState());
     try {
       for (var model in requestServiceModels) {
-        await _baseCarServices.createRequestService(model);
+        await _baseCarServices.createAddress(model);
       }
 
       emit(CreateRequestServiceSuccessState());
@@ -55,7 +55,7 @@ class CarCubit extends Cubit<CarState> {
     }
   }
 
-  List<RequestServiceModel> carsList = [];
+  List<AddressModel> carsList = [];
   Future<void> getCars() async {
     emit(GetCarsLoadingState());
     try {
@@ -78,7 +78,7 @@ class CarCubit extends Cubit<CarState> {
   Future<void> updateRequestService() async {
     emit(UpdateRequestServiceLoadingState());
     try {
-      await _baseCarServices.updateRequestService(requestServiceModels.first);
+      await _baseCarServices.updateAddress(requestServiceModels.first);
       emit(UpdateRequestServiceSuccessState());
     } on PrimaryServerException catch (e) {
       emit(UpdateRequestServiceErrorState(e.message));

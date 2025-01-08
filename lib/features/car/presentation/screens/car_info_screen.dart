@@ -5,7 +5,7 @@ import 'package:washify_mobile/core/router/app_routes.dart';
 import 'package:washify_mobile/core/router/route_services.dart';
 import 'package:washify_mobile/core/utils/custom_elevated_button.dart';
 import 'package:washify_mobile/core/utils/custom_snack_bar.dart';
-import 'package:washify_mobile/features/car/data/models/request_service_model.dart';
+import 'package:washify_mobile/features/car/data/models/address_model.dart';
 import 'package:washify_mobile/features/car/logic/cubit/car_cubit.dart';
 import 'package:washify_mobile/features/subscription/controller/cubit/subscription_cubit.dart';
 import 'package:washify_mobile/features/subscription/data/models/subscription_model.dart';
@@ -21,7 +21,7 @@ class CarInfoScreen extends StatefulWidget {
       {super.key, required this.territory, this.isEdit = 'false', this.car});
   final String territory;
   final String isEdit;
-  final RequestServiceModel? car;
+  final AddressModel? car;
 
   @override
   State<CarInfoScreen> createState() => _CarInfoScreenState();
@@ -61,18 +61,18 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
     if (_formKey.currentState!.validate()) {
       if (getSelectedSubscription() != null) {
         carCubit.addNewService(
-          requestServiceModel: RequestServiceModel(
-            id: widget.isEdit == 'true' ? widget.car!.id : null,
-            subscriptionPlan: getSelectedSubscription()!.id,
-            itemCode: getSelectedSubscription()!.itemCode,
-            timesPerWeek: getSelectedSubscription()!.timesPerWeek,
-            // weekDays: getSelectedSubscription()!.selectedDays,
-            territory: widget.territory,
-            plateCode: plateController.text,
-            model: modelController.text,
-            brand: brandController.text,
-            price: getSelectedSubscription()!.price,
-          ),
+          requestServiceModel: AddressModel(
+              id: widget.isEdit == 'true' ? widget.car!.id : null,
+              subscriptionPlan: getSelectedSubscription()!.id,
+              itemCode: getSelectedSubscription()!.itemCode,
+              timesPerWeek: getSelectedSubscription()!.timesPerWeek,
+              // weekDays: getSelectedSubscription()!.selectedDays,
+              city: widget.territory,
+              plateCode: plateController.text,
+              model: modelController.text,
+              brand: brandController.text,
+              price: getSelectedSubscription()!.price,
+              addressLine: addressController.text),
         );
 
         plateController.clear();

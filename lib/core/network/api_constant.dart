@@ -21,7 +21,7 @@ class ApiConstance {
 
   // Car
   static const String brandsEndPoint = 'resource/Brand';
-  static const String requestServiceEndPoint = 'resource/Request Service';
+  static const String addressEndPoint = 'resource/Address';
 
   // Shop
   static const String getShopItemsEndPoint = 'resource/Item';

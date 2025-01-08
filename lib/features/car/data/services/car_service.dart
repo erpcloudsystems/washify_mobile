@@ -3,16 +3,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:washify_mobile/core/network/api_constant.dart';
 import 'package:washify_mobile/core/network/dio_helper.dart';
 import 'package:washify_mobile/core/resources/constance.dart';
-import 'package:washify_mobile/features/car/data/models/request_service_model.dart';
+import 'package:washify_mobile/features/car/data/models/address_model.dart';
 
 import '../../../../core/global/dependencies_container.dart';
 
 abstract interface class BaseCarServices {
   Future<List<String>> getBrands();
   Future<List<String>> getModelsByBrandName(String name);
-  Future<void> createRequestService(RequestServiceModel model);
-  Future<List<RequestServiceModel>> getCars();
-  Future<void> updateRequestService(RequestServiceModel model);
+  Future<void> createAddress(AddressModel model);
+  Future<List<AddressModel>> getCars();
+  Future<void> updateAddress(AddressModel model);
 }
 
 class CarServices extends BaseCarServices {
@@ -49,29 +49,29 @@ class CarServices extends BaseCarServices {
   }
 
   @override
-  Future<void> createRequestService(RequestServiceModel model) async {
+  Future<void> createAddress(AddressModel model) async {
     await dio.post(
-      endPoint: ApiConstance.requestServiceEndPoint,
+      endPoint: ApiConstance.addressEndPoint,
       data: model.toMap(),
     ) as Response;
   }
 
   @override
-  Future<List<RequestServiceModel>> getCars() async {
+  Future<List<AddressModel>> getCars() async {
     final response =
-        await dio.get(endPoint: ApiConstance.requestServiceEndPoint, query: {
+        await dio.get(endPoint: ApiConstance.addressEndPoint, query: {
       'fields': '["*"]',
-      'filters': '[["owner", "=", "$user"]]',
+      //'filters': '[["owner", "=", "$user"]]',
     }) as Response;
     return List.from(response.data['data'])
-        .map((item) => RequestServiceModel.fromMap(item))
+        .map((item) => AddressModel.fromMap(item))
         .toList();
   }
 
   @override
-  Future<void> updateRequestService(RequestServiceModel model) async {
+  Future<void> updateAddress(AddressModel model) async {
     await dio.post(
-      endPoint: '${ApiConstance.requestServiceEndPoint}/${model.id}',
+      endPoint: '${ApiConstance.addressEndPoint}/${model.id}',
       data: model.toMap(),
     ) as Response;
   }

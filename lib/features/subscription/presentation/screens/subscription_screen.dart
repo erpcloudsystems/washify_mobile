@@ -10,12 +10,12 @@ import 'package:washify_mobile/core/utils/custom_loading_widget.dart';
 import 'package:washify_mobile/core/utils/error_widget.dart';
 import 'package:washify_mobile/features/subscription/controller/cubit/subscription_cubit.dart';
 
-import '../../../car/data/models/request_service_model.dart';
+import '../../../car/data/models/address_model.dart';
 import '../widgets/subscription_card.dart';
 
 class SubscriptionScreen extends StatefulWidget {
   const SubscriptionScreen({super.key, required this.car});
-  final RequestServiceModel car;
+  final AddressModel car;
 
   @override
   State<SubscriptionScreen> createState() => _SubscriptionScreenState();
@@ -35,7 +35,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
     RoutesService.pushNamed(
       AppRoutes.carInfoScreen,
       context: context,
-      queryParameters: {'territory': widget.car.territory, 'isEdit': 'true'},
+      queryParameters: {'territory': widget.car.city, 'isEdit': 'true'},
       extra: widget.car,
     );
   }

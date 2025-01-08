@@ -38,6 +38,11 @@ class CarInfoForm extends StatelessWidget {
           CustomSearchDropDown(
             list: carCubit.brands,
             controller: brandController,
+            onChanged: (value) {
+              if (value != null) {
+                carCubit.getModelByBrand(value);
+              }
+            },
           ),
           // CustomDropDownFormField(
           //   selectedValue: (value) async {
@@ -80,7 +85,6 @@ class CarInfoForm extends StatelessWidget {
           const GutterTiny(),
           CustomTextFormField(
             controller: addressController,
-            isValidate: false,
           ),
           const Gutter(),
           Text(

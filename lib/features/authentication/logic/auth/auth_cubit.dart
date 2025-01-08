@@ -23,13 +23,14 @@ class AuthCubit extends Cubit<AuthState> {
   List<TerritoryModel> territories = [];
   String? selectedGovernorate;
 
-  void caching() {
-    sl<SharedPreferences>().setBool(isLoggedInKey, true);
+  Future<void> caching() async {
+    await sl<SharedPreferences>().setBool(isLoggedInKey, true);
     if (userModel != null) {
-      sl<SharedPreferences>().setString(sid, userModel!.sid!);
-      sl<SharedPreferences>().setString(userName, userModel!.username!);
-      sl<SharedPreferences>().setString(systemUser, userModel!.systemUser!);
-      sl<SharedPreferences>().setString(userId, userModel!.userId!);
+      await sl<SharedPreferences>().setString(sid, userModel!.sid!);
+      await sl<SharedPreferences>().setString(userName, userModel!.username!);
+      await sl<SharedPreferences>()
+          .setString(systemUser, userModel!.systemUser!);
+      await sl<SharedPreferences>().setString(userId, userModel!.userId!);
     }
   }
 
@@ -40,7 +41,7 @@ class AuthCubit extends Cubit<AuthState> {
       userModel = await _authRepository.login(
           loginRequestModel:
               LoginRequestModel(userName: userName, password: password));
-      caching();
+      await caching();
       emit(AuthLoginSussesState());
     } on PrimaryServerException catch (error) {
       emit(

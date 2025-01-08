@@ -3,13 +3,13 @@ import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:washify_mobile/core/router/app_routes.dart';
 import 'package:washify_mobile/core/router/route_services.dart';
-import 'package:washify_mobile/features/car/data/models/request_service_model.dart';
+import 'package:washify_mobile/features/car/data/models/address_model.dart';
 
 import '../../../../core/resources/colors_managers.dart';
 
 class CarListItem extends StatelessWidget {
   const CarListItem({super.key, required this.car});
-  final RequestServiceModel car;
+  final AddressModel car;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -60,35 +60,36 @@ class CarListItem extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: ColorsManager.mainColor,
                     ),
+                textAlign: TextAlign.center,
               ),
-              Text(
+              /* Text(
                 'PNo. ${car.plateCode}',
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: ColorsManager.mainColor,
                     ),
-              ),
+              ),*/
               const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 12,
+                ),
                 child: Divider(
                   thickness: 0.4,
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    car.subscriptionPlan,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: ColorsManager.mainColor.withOpacity(0.7)),
-                  ),
-                ],
-              ),
               Text(
+                car.subscriptionPlan,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium!
+                    .copyWith(color: ColorsManager.mainColor.withOpacity(0.7)),
+              ),
+              /*Text(
                 '${car.timesPerWeek}/week',
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: ColorsManager.mainColor.withOpacity(0.7),
                     ),
-              ),
+              ),*/
             ],
           ),
         ),

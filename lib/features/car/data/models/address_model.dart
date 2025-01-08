@@ -1,34 +1,36 @@
 import 'dart:convert';
 
-class RequestServiceModel {
+class AddressModel {
   final String? id;
   final String subscriptionPlan;
-  final String itemCode;
-  final double price;
-  final String territory;
+  final String city;
   final String plateCode;
   final String model;
   final String brand;
   final int timesPerWeek;
   final String? startDate;
   final String? endDate;
+  final String? addressLine;
+  final num price;
+  final String? itemCode;
   //final List<DaysWeekModel> weekDays;
-  RequestServiceModel({
+  AddressModel({
     this.id,
+    this.price = 0,
+    this.itemCode,
     required this.subscriptionPlan,
-    required this.itemCode,
-    required this.territory,
+    required this.city,
     required this.plateCode,
     required this.model,
     required this.brand,
-    required this.price,
     required this.timesPerWeek,
     this.startDate,
     this.endDate,
+    this.addressLine,
     //this.weekDays = const [],
   });
 
-  RequestServiceModel copyWith({
+  AddressModel copyWith({
     String? id,
     String? subscriptionPlan,
     String? itemCode,
@@ -40,19 +42,22 @@ class RequestServiceModel {
     int? timesPerWeek,
     String? startDate,
     String? endDate,
+    String? addressLine,
   }) {
-    return RequestServiceModel(
-        id: id ?? this.id,
-        subscriptionPlan: subscriptionPlan ?? this.subscriptionPlan,
-        itemCode: itemCode ?? this.itemCode,
-        territory: territory ?? this.territory,
-        plateCode: plateCode ?? this.plateCode,
-        model: model ?? this.model,
-        brand: brand ?? this.brand,
-        price: price ?? this.price,
-        timesPerWeek: timesPerWeek ?? this.timesPerWeek,
-        startDate: startDate ?? this.startDate,
-        endDate: endDate ?? this.endDate);
+    return AddressModel(
+      id: id ?? this.id,
+      price: price ?? this.price,
+      itemCode: itemCode ?? this.itemCode,
+      subscriptionPlan: subscriptionPlan ?? this.subscriptionPlan,
+      city: territory ?? city,
+      plateCode: plateCode ?? this.plateCode,
+      model: model ?? this.model,
+      brand: brand ?? this.brand,
+      timesPerWeek: timesPerWeek ?? this.timesPerWeek,
+      startDate: startDate ?? this.startDate,
+      endDate: endDate ?? this.endDate,
+      addressLine: addressLine ?? this.addressLine,
+    );
   }
 
   Map<String, dynamic> toMap() {
@@ -64,8 +69,11 @@ class RequestServiceModel {
     }*/
     return <String, dynamic>{
       'subscription_plan': subscriptionPlan,
-      'item_code': itemCode,
-      'territory': territory,
+      "address_type": "Billing",
+      'city': city,
+      "address_line1": addressLine,
+      "country": "Egypt",
+      "doctype": "Address",
       'plate_code': plateCode,
       'model': model,
       'brand': brand,
@@ -73,40 +81,38 @@ class RequestServiceModel {
     };
   }
 
-  factory RequestServiceModel.fromMap(Map<String, dynamic> map) {
-    return RequestServiceModel(
+  factory AddressModel.fromMap(Map<String, dynamic> map) {
+    return AddressModel(
       id: map['name'] ?? '',
       subscriptionPlan: map['subscription_plan'] ?? '',
-      itemCode: map['item'] ?? '',
-      territory: map['territory'] ?? '',
+      city: map['city'] ?? '',
       plateCode: map['plate_code'] ?? '',
       model: map['model'] ?? '',
       brand: map['brand'] ?? '',
-      price: map['cost'] ?? 0.0,
       timesPerWeek: map['times_per_week'] ?? 0,
       startDate: map['custom_start_date'] ?? '',
       endDate: map['custom_end_date'] ?? '',
+      addressLine: map['address_line1'] ?? '',
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory RequestServiceModel.fromJson(String source) =>
-      RequestServiceModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory AddressModel.fromJson(String source) =>
+      AddressModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'RequestServiceModel(id: $id, subscriptionPlan: $subscriptionPlan, itemCode: $itemCode, territory: $territory, plateCode: $plateCode, model: $model, brand: $brand)';
+    return 'RequestServiceModel(id: $id, subscriptionPlan: $subscriptionPlan, territory: $city, plateCode: $plateCode, model: $model, brand: $brand)';
   }
 
   @override
-  bool operator ==(covariant RequestServiceModel other) {
+  bool operator ==(covariant AddressModel other) {
     if (identical(this, other)) return true;
 
     return other.id == other.id &&
         other.subscriptionPlan == subscriptionPlan &&
-        other.itemCode == itemCode &&
-        other.territory == territory &&
+        other.city == city &&
         other.plateCode == plateCode &&
         other.model == model &&
         other.brand == brand;
@@ -116,8 +122,7 @@ class RequestServiceModel {
   int get hashCode {
     return id.hashCode ^
         subscriptionPlan.hashCode ^
-        itemCode.hashCode ^
-        territory.hashCode ^
+        city.hashCode ^
         plateCode.hashCode ^
         model.hashCode ^
         brand.hashCode;

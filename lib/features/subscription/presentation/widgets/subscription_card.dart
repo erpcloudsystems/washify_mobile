@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:washify_mobile/core/resources/strings_manager.dart';
-import 'package:washify_mobile/features/car/data/models/request_service_model.dart';
+import 'package:washify_mobile/features/car/data/models/address_model.dart';
 import 'package:washify_mobile/features/subscription/data/models/subscription_model.dart';
 
 import '../../../../core/resources/colors_managers.dart';
@@ -10,7 +10,7 @@ class SubscriptionCard extends StatelessWidget {
   const SubscriptionCard(
       {super.key, required this.subscription, required this.car});
   final SubscriptionModel subscription;
-  final RequestServiceModel car;
+  final AddressModel car;
 
   @override
   Widget build(BuildContext context) {
@@ -56,20 +56,6 @@ class SubscriptionCard extends StatelessWidget {
               ),
             ],
           ),
-          const GutterSmall(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('${StringsManager.plateNo}: '),
-              const GutterTiny(),
-              Text(
-                car.plateCode,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: ColorsManager.mainColor,
-                    ),
-              ),
-            ],
-          ),
           const Divider(),
           Row(
             children: [
@@ -83,30 +69,6 @@ class SubscriptionCard extends StatelessWidget {
               ),
             ],
           ),
-          const GutterSmall(),
-          Row(
-            children: [
-              Text('${StringsManager.startingDate}: '),
-              const GutterTiny(),
-              Text(
-                car.startDate!,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: ColorsManager.mainColor,
-                    ),
-              ),
-            ],
-          ),
-          const GutterSmall(),
-          Row(children: [
-            Text('${StringsManager.endingDate}: '),
-            const GutterTiny(),
-            Text(
-              car.endDate!,
-              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    color: ColorsManager.mainColor,
-                  ),
-            ),
-          ]),
           const GutterSmall(),
           Row(
             children: [

@@ -7,6 +7,7 @@ import 'package:washify_mobile/features/car/presentation/widgets/cars_list_view.
 import 'package:washify_mobile/features/home/presentation/screens/home_screen.dart';
 
 import '../../../../core/resources/colors_managers.dart';
+import '../widgets/more_widget.dart';
 
 class LayoutScreen extends StatefulWidget {
   const LayoutScreen({super.key});
@@ -22,7 +23,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
     const UnderDevelopmentScreen(),
     const HomeScreen(),
     const CarsListView(),
-    const UnderDevelopmentScreen(),
+    const MoreWidget(),
   ];
 
   final headers = [

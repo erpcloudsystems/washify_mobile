@@ -12,11 +12,13 @@ class CustomSearchDropDown extends StatefulWidget {
       required this.list,
       required this.controller,
       this.isValidate = true,
-      this.prefixIcon});
+      this.prefixIcon,
+      this.onChanged});
   final List<String> list;
   final TextEditingController controller;
   final bool isValidate;
   final IconData? prefixIcon;
+  final void Function(String?)? onChanged;
 
   @override
   State<CustomSearchDropDown> createState() => _CustomSearchDropDownState();
@@ -30,6 +32,7 @@ class _CustomSearchDropDownState extends State<CustomSearchDropDown> {
         setState(() {
           widget.controller.text = value!;
         });
+        widget.onChanged!(value);
       },
       // selectedItem: widget.controller.text,
       items: (filter, infiniteScrollProps) => widget.list,
