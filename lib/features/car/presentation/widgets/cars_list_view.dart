@@ -7,7 +7,8 @@ import 'package:washify_mobile/features/car/logic/cubit/car_cubit.dart';
 import 'package:washify_mobile/features/car/presentation/widgets/car_list_item.dart';
 
 class CarsListView extends StatefulWidget {
-  const CarsListView({super.key});
+  const CarsListView({super.key, this.inNavBar = false});
+  final bool inNavBar;
 
   @override
   State<CarsListView> createState() => _CarsListViewState();
@@ -34,9 +35,13 @@ class _CarsListViewState extends State<CarsListView> {
           );
         }
         return SizedBox(
-          height: 150.h,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
+          height: widget.inNavBar ? null : 150.h,
+          child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: widget.inNavBar ? 2 : 1,
+                childAspectRatio: 1,
+                mainAxisSpacing: 10),
+            scrollDirection: widget.inNavBar ? Axis.vertical : Axis.horizontal,
             itemCount: carList.length,
             itemBuilder: (context, index) {
               return CarListItem(

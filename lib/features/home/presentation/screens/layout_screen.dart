@@ -22,7 +22,9 @@ class _LayoutScreenState extends State<LayoutScreen> {
     const UnderDevelopmentScreen(),
     const UnderDevelopmentScreen(),
     const HomeScreen(),
-    const CarsListView(),
+    const CarsListView(
+      inNavBar: true,
+    ),
     const MoreWidget(),
   ];
 

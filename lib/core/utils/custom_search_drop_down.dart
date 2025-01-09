@@ -32,7 +32,9 @@ class _CustomSearchDropDownState extends State<CustomSearchDropDown> {
         setState(() {
           widget.controller.text = value!;
         });
-        widget.onChanged!(value);
+        if (widget.onChanged != null) {
+          widget.onChanged!(value);
+        }
       },
       // selectedItem: widget.controller.text,
       items: (filter, infiniteScrollProps) => widget.list,

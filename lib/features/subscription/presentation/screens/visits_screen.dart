@@ -61,7 +61,7 @@ class VisitsScreen extends StatelessWidget {
                   onPressed: () {
                     RoutesService.pushReplacementNamed(
                       context: context,
-                      location: AppRoutes.homeScreen,
+                      location: AppRoutes.layoutScreen,
                     );
                   },
                 ),
