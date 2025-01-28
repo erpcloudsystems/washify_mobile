@@ -91,7 +91,7 @@ abstract class StringsManager {
   static String get subscriptionConfirmed => 'Subscription Confirmed'.tr();
   static String get thisMonthVisits => 'This month visits'.tr();
   static String get visitDescription =>
-      'According to your location and zone, Your visits has been scheduled as ( Sat, Mon & Wed)...'
+      'According to your location and zone, Your visits has been scheduled as'
           .tr();
   static String get manageYourSubscription => 'Manage your subscription'.tr();
   static String get yourSubscription => 'Your subscription'.tr();

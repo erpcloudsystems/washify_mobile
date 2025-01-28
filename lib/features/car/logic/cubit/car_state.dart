@@ -57,3 +57,13 @@ class GetCarsModelByBrandErrorState extends CarState {
   final String errorMessage;
   const GetCarsModelByBrandErrorState(this.errorMessage);
 }
+
+// Delete Request Service
+class DeleteRequestServiceLoadingState extends CarState {}
+
+class DeleteRequestServiceSuccessState extends CarState {}
+
+class DeleteRequestServiceErrorState extends CarState {
+  final String errorMessage;
+  const DeleteRequestServiceErrorState(this.errorMessage);
+}

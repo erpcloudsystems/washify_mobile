@@ -108,18 +108,6 @@ class PaymentDetailsScreen extends StatelessWidget {
                         color: ColorsManager.mainColor,
                       ),
                 ),
-                const GutterTiny(),
-                const Divider(),
-                const Gutter(),
-                CarInfoRecord(
-                  title: StringsManager.fees,
-                  value: '${carCubit.totalPay} EGP',
-                ),
-                const Gutter(),
-                CarInfoRecord(
-                  title: StringsManager.discount,
-                  value: '-0 EGP',
-                ),
                 const GutterSmall(),
                 const Divider(),
                 const GutterSmall(),

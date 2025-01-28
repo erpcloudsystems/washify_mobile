@@ -70,8 +70,7 @@ class AuthAPI implements AuthRepository {
       endPoint: ApiConstance.governorateEndPoint,
       query: {
         'fields': '["*"]',
-        'filters':
-            '[["parent_territory", "like", "%egy%"],["is_group", "=", "0"]]',
+        'filters': '[["is_group", "=", "0"]]',
       },
     ) as Response;
     return (response.data['data'] as List)

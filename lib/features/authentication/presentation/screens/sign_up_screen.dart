@@ -104,6 +104,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           queryParameters: {
                             'email': emailController.text.trim(),
                             'password': passwordController.text.trim(),
+                            'phone': phoneController.text.trim(),
                           },
                         );
                         clearController();

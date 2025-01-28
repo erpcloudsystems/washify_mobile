@@ -84,4 +84,16 @@ class CarCubit extends Cubit<CarState> {
       emit(UpdateRequestServiceErrorState(e.message));
     }
   }
+
+  // Delete Request Service
+  Future<void> deleteRequestService(int index) async {
+    emit(DeleteRequestServiceLoadingState());
+    try {
+      totalPay = totalPay - requestServiceModels[index].price;
+      requestServiceModels.removeAt(index);
+      emit(DeleteRequestServiceSuccessState());
+    } on PrimaryServerException catch (e) {
+      emit(DeleteRequestServiceErrorState(e.message));
+    }
+  }
 }

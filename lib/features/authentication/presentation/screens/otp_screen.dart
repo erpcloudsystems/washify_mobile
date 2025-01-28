@@ -17,9 +17,14 @@ import '../../../../core/resources/strings_manager.dart';
 import '../../../../core/utils/loading_dialogs.dart';
 
 class OtpScreen extends StatefulWidget {
-  const OtpScreen({super.key, required this.email, required this.password});
+  const OtpScreen(
+      {super.key,
+      required this.email,
+      required this.password,
+      required this.phone});
   final String email;
   final String password;
+  final String phone;
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -79,7 +84,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         height: 30.h,
                       ),
                       Text(
-                        widget.email,
+                        widget.phone,
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
                       SizedBox(

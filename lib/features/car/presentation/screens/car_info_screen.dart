@@ -83,6 +83,10 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
           message: 'Your car has been added.',
         );
 
+        setState(() {
+          index = 1;
+        });
+
         _reset();
       } else {
         showSnackBar(
@@ -98,15 +102,135 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
     setState(() {});
   }
 
+  int index = 0;
   @override
   Widget build(BuildContext context) {
+    List<Widget> content = [
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                StringsManager.carInfo,
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: ColorsManager.mainColor,
+                    ),
+              ),
+              // TextButton(
+              //   onPressed: () {
+              //     showModalBottomSheet(
+              //       context: context,
+              //       showDragHandle: true,
+              //       builder: (context) => const AddedCarsWidget(),
+              //     );
+              //   },
+              //   child: Text(
+              //     'Show / Edit ${carCubit.requestServiceModels.length} of cars',
+              //     style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              //         fontSize: 14, color: ColorsManager.mainColor),
+              //   ),
+              // ),
+            ],
+          ),
+
+          Text(
+            StringsManager.addYourCar,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: ColorsManager.grey,
+                ),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 12),
+            child: Divider(),
+          ),
+          Form(
+            key: _formKey,
+            child: CarInfoForm(
+              brandController: brandController,
+              modelController: modelController,
+              plateController: plateController,
+              addressController: addressController,
+            ),
+          ),
+          const Gutter(),
+          Text(
+            StringsManager.subscription,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: ColorsManager.mainColor,
+                ),
+          ),
+          SelectSubscriptionList(
+            isEdit: widget.isEdit == 'true',
+          ),
+          // TotalPayWidget(
+          //   totalPay: carCubit.totalPay,
+          // ),
+          const GutterLarge(),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 80),
+            child: CustomElevatedButton(
+              title: StringsManager.addCar,
+              onPressed: () => addService(),
+            ),
+          ),
+          const Gutter(),
+        ],
+      ),
+      Column(
+        children: [
+          const Gutter(),
+          Text(
+            'Your Cars',
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+          const GutterLarge(),
+          AddedCarsWidget(
+            isEdit: widget.isEdit,
+          ),
+          const GutterLarge(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 80),
+            child: CustomElevatedButton(
+              title: StringsManager.addCar,
+              onPressed: () {
+                setState(() {
+                  index = 0;
+                });
+              },
+            ),
+          ),
+          const Gutter(),
+          CustomElevatedButton(
+            title:
+                '${StringsManager.checkOut} (${context.watch<CarCubit>().totalPay}EGP)',
+            onPressed: () {
+              if (carCubit.requestServiceModels.isNotEmpty) {
+                RoutesService.pushNamed(AppRoutes.paymentDetailsScreen,
+                    context: context,
+                    queryParameters: {
+                      'isEdit': widget.isEdit,
+                    });
+              } else {
+                showSnackBar(
+                  context: context,
+                  message: 'Please add your car',
+                  color: ColorsManager.red,
+                );
+              }
+            },
+          ),
+        ],
+      ),
+    ];
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(12),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 if (widget.isEdit != true.toString()) ...[
                   const Gutter.large(),
@@ -115,93 +239,8 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
                     isCarInfoActive: true,
                   ),
                 ],
-
                 const Gutter(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      StringsManager.carInfo,
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            color: ColorsManager.mainColor,
-                          ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          showDragHandle: true,
-                          builder: (context) => const AddedCarsWidget(),
-                        );
-                      },
-                      child: Text(
-                        'Show / Edit ${carCubit.requestServiceModels.length} of cars',
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                            fontSize: 14, color: ColorsManager.mainColor),
-                      ),
-                    ),
-                  ],
-                ),
-
-                Text(
-                  StringsManager.addYourCar,
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: ColorsManager.grey,
-                      ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 12),
-                  child: Divider(),
-                ),
-                Form(
-                  key: _formKey,
-                  child: CarInfoForm(
-                    brandController: brandController,
-                    modelController: modelController,
-                    plateController: plateController,
-                    addressController: addressController,
-                  ),
-                ),
-                const Gutter(),
-                Text(
-                  StringsManager.subscription,
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: ColorsManager.mainColor,
-                      ),
-                ),
-                SelectSubscriptionList(
-                  isEdit: widget.isEdit == 'true',
-                ),
-                // TotalPayWidget(
-                //   totalPay: carCubit.totalPay,
-                // ),
-                const GutterLarge(),
-
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 80),
-                  child: CustomElevatedButton(
-                    title: StringsManager.addCar,
-                    onPressed: () => addService(),
-                  ),
-                ),
-                const GutterLarge(),
-                CustomElevatedButton(
-                  title: '${StringsManager.checkOut} (${carCubit.totalPay}EGP)',
-                  onPressed: () {
-                    if (carCubit.requestServiceModels.isNotEmpty) {
-                      RoutesService.pushNamed(AppRoutes.paymentDetailsScreen,
-                          context: context,
-                          queryParameters: {
-                            'isEdit': widget.isEdit,
-                          });
-                    } else {
-                      showSnackBar(
-                          context: context,
-                          message: 'Please add your car',
-                          color: ColorsManager.red);
-                    }
-                  },
-                ),
+                content[index],
               ],
             ),
           ),
