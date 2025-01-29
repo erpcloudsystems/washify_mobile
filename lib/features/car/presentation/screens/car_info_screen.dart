@@ -170,10 +170,29 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
           const GutterLarge(),
 
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 80),
-            child: CustomElevatedButton(
-              title: StringsManager.addCar,
-              onPressed: () => addService(),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              children: [
+                if (carCubit.requestServiceModels.isNotEmpty)
+                  Flexible(
+                    child: ListTile(
+                      title: Text(
+                          'Back to ${carCubit.requestServiceModels.length} cars'),
+                      leading: const Icon(Icons.arrow_back_ios),
+                      onTap: () {
+                        setState(() {
+                          index = 1;
+                        });
+                      },
+                    ),
+                  ),
+                Flexible(
+                  child: CustomElevatedButton(
+                    title: StringsManager.addCar,
+                    onPressed: () => addService(),
+                  ),
+                ),
+              ],
             ),
           ),
           const Gutter(),
