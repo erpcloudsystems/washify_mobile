@@ -44,6 +44,7 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
       brandController.text = widget.car!.brand;
       modelController.text = widget.car!.model;
       plateController.text = widget.car!.plateCode;
+      addressController.text = widget.car!.addressLine ?? '';
     }
   }
 
@@ -118,20 +119,6 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
                       color: ColorsManager.mainColor,
                     ),
               ),
-              // TextButton(
-              //   onPressed: () {
-              //     showModalBottomSheet(
-              //       context: context,
-              //       showDragHandle: true,
-              //       builder: (context) => const AddedCarsWidget(),
-              //     );
-              //   },
-              //   child: Text(
-              //     'Show / Edit ${carCubit.requestServiceModels.length} of cars',
-              //     style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              //         fontSize: 14, color: ColorsManager.mainColor),
-              //   ),
-              // ),
             ],
           ),
 

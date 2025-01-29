@@ -28,6 +28,7 @@ class _CustomSearchDropDownState extends State<CustomSearchDropDown> {
   @override
   Widget build(BuildContext context) {
     return DropdownSearch<String>(
+      selectedItem: widget.controller.text,
       onChanged: (value) {
         setState(() {
           widget.controller.text = value!;
