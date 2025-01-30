@@ -19,12 +19,13 @@ class LoginForm extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          StringsManager.emailAddress,
+          StringsManager.phoneNumber,
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         const GutterTiny(),
         CustomTextFormField(
           controller: userController,
+          isPhoneNumber: true,
         ),
         const GutterLarge(),
         Row(

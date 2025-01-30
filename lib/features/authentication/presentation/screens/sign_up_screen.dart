@@ -24,7 +24,6 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
-  final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   final phoneController = TextEditingController();
@@ -41,7 +40,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void clearController() {
     firstNameController.clear();
     lastNameController.clear();
-    emailController.clear();
     passwordController.clear();
     confirmPasswordController.clear();
     phoneController.clear();
@@ -82,7 +80,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SignUpForm(
                     firstNameController: firstNameController,
                     lastNameController: lastNameController,
-                    emailController: emailController,
                     passwordController: passwordController,
                     confirmPasswordController: confirmPasswordController,
                     phoneController: phoneController,
@@ -95,14 +92,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         if (mounted) {
                           context
                               .read<OtpCubit>()
-                              .sendOtp(email: emailController.text.trim());
+                              .sendOtp(email: phoneController.text.trim());
                         }
                         showSnackBar(context: context, message: state.message);
                         RoutesService.pushNamed(
                           AppRoutes.otpScreen,
                           context: context,
                           queryParameters: {
-                            'email': emailController.text.trim(),
                             'password': passwordController.text.trim(),
                             'phone': phoneController.text.trim(),
                           },
@@ -181,7 +177,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               signUpModel: SignUpRequestModel(
             firstName: firstNameController.text,
             lastName: lastNameController.text,
-            email: emailController.text,
             password: passwordController.text,
             phoneNumber: phoneController.text,
           ));

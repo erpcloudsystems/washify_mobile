@@ -16,7 +16,7 @@ class OtpServices implements BaseOtpServices {
   Future<void> sendOtp(String email) async {
     await dio.post(
       endPoint: ApiConstance.sendOtpEndPoint,
-      data: {"email": email, "otp_email_template": "OTP Verify"},
+      data: {"email": '2$email@washify.mobi', "otp_email_template": "OTP Verify"},
     ) as Response;
   }
 
@@ -25,7 +25,7 @@ class OtpServices implements BaseOtpServices {
     final response = await dio.post(
       endPoint: ApiConstance.verifyOtpEndPoint,
       data: {
-        "email": email,
+        "email": '2$email@washify.mobi',
         "otp_code": otp.toString(),
       },
     ) as Response;

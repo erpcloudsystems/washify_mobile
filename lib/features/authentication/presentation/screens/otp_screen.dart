@@ -19,10 +19,8 @@ import '../../../../core/utils/loading_dialogs.dart';
 class OtpScreen extends StatefulWidget {
   const OtpScreen(
       {super.key,
-      required this.email,
       required this.password,
       required this.phone});
-  final String email;
   final String password;
   final String phone;
 
@@ -49,7 +47,7 @@ class _OtpScreenState extends State<OtpScreen> {
 
   Future<void> verifyOtp(int otpCode) async {
     await otpCubit.verifyOtp(
-      email: widget.email,
+      email: widget.phone,
       otp: otpCode,
     );
   }
@@ -142,8 +140,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       if (state is! SendOtpLoadingState)
                         TextButton(
                           onPressed: () async {
-                            print(widget.email);
-                            await otpCubit.sendOtp(email: widget.email);
+                            await otpCubit.sendOtp(email: widget.phone);
                             countDownController.restart();
                           },
                           child: Text(
@@ -167,7 +164,7 @@ class _OtpScreenState extends State<OtpScreen> {
     } else if (state is VerifyOtpSuccessState) {
       try {
         await context.read<AuthCubit>().login(
-              userName: widget.email,
+              userName: widget.phone,
               password: widget.password,
             );
         context.pop();

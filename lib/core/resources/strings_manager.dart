@@ -131,4 +131,5 @@ abstract class StringsManager {
   static String get home => 'Home';
   static String get more => 'More';
   static String get shop => 'Shop';
+  static String get enterValidPhoneNumber => 'Enter valid phone number';
 }

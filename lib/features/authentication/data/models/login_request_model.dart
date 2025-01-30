@@ -8,7 +8,7 @@ class LoginRequestModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'usr': userName,
+      'usr': '2$userName',
       'pwd': password,
     };
   }

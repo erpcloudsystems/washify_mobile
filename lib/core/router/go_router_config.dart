@@ -66,7 +66,6 @@ final router = GoRouter(
       path: AppRoutes.otpScreen,
       name: AppRoutes.otpScreen,
       builder: (context, state) => OtpScreen(
-        email: state.uri.queryParameters['email'].toString(),
         password: state.uri.queryParameters['password'].toString(),
         phone: state.uri.queryParameters['phone'].toString(),
       ),

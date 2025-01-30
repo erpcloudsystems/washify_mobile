@@ -18,6 +18,7 @@ class CustomTextFormField extends StatefulWidget {
     this.isEmail = false,
     this.isConfirmPassword = false,
     this.newPasswordController,
+    this.isPhoneNumber = false,
   });
   final String? hintText;
   final Icon? prefixIcon;
@@ -30,6 +31,7 @@ class CustomTextFormField extends StatefulWidget {
   final bool isEmail;
   final bool isConfirmPassword;
   final TextEditingController? newPasswordController;
+  final bool isPhoneNumber;
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -46,6 +48,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType:
+          widget.isPhoneNumber ? const TextInputType.numberWithOptions() : null,
+      maxLength: widget.isPhoneNumber ? 11 : null,
       controller: widget.controller,
       maxLines: widget.maxLines,
       validator: widget.isValidate
@@ -57,6 +62,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               } else if (widget.isConfirmPassword &&
                   value != widget.newPasswordController!.text) {
                 return StringsManager.newPasswordDoesNotMatch;
+              } else if (widget.isPhoneNumber && value.trim().length < 11) {
+                return StringsManager.enterValidPhoneNumber;
               }
               setState(() {});
               return null;

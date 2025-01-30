@@ -9,13 +9,11 @@ class SignUpForm extends StatelessWidget {
       {super.key,
       required this.firstNameController,
       required this.lastNameController,
-      required this.emailController,
       required this.passwordController,
       required this.confirmPasswordController,
       required this.phoneController});
   final TextEditingController firstNameController;
   final TextEditingController lastNameController;
-  final TextEditingController emailController;
   final TextEditingController passwordController;
   final TextEditingController confirmPasswordController;
   final TextEditingController phoneController;
@@ -64,27 +62,13 @@ class SignUpForm extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              StringsManager.emailAddress,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-            const GutterTiny(),
-            CustomTextFormField(
-              controller: emailController,
-              isEmail: true,
-            ),
-          ],
-        ),
-        const Gutter(),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
               StringsManager.phone,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             const GutterTiny(),
             CustomTextFormField(
               controller: phoneController,
+              isPhoneNumber: true,
             ),
           ],
         ),
