@@ -128,8 +128,9 @@ abstract class StringsManager {
   static String get startingDate => 'Starting date'.tr();
   static String get endingDate => 'Ending date'.tr();
   static String get editSubscription => 'Edit subscription'.tr();
-  static String get home => 'Home';
-  static String get more => 'More';
-  static String get shop => 'Shop';
-  static String get enterValidPhoneNumber => 'Enter valid phone number';
+  static String get home => 'Home'.tr();
+  static String get more => 'More'.tr();
+  static String get shop => 'Shop'.tr();
+  static String get enterValidPhoneNumber => 'Please Enter a valid phone number'.tr();
+  static String get confirm => 'Confirm'.tr();
 }

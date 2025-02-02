@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
-import 'package:washify_mobile/core/resources/image_paths.dart';
 import 'package:washify_mobile/core/router/app_routes.dart';
 import 'package:washify_mobile/core/router/route_services.dart';
 import 'package:washify_mobile/core/utils/custom_elevated_button.dart';
@@ -11,7 +10,6 @@ import '../../../../../core/resources/colors_managers.dart';
 import '../../../../../core/resources/strings_manager.dart';
 import '../../../authentication/presentation/widgets/progress_bar_widget.dart';
 import '../widgets/car_info_record.dart';
-import '../../../authentication/presentation/widgets/payment_method_widget.dart';
 import '../widgets/subscription_record.dart';
 
 class PaymentDetailsScreen extends StatelessWidget {
@@ -101,13 +99,13 @@ class PaymentDetailsScreen extends StatelessWidget {
                     );
                   },
                 ),
-                const Gutter(),
-                Text(
-                  StringsManager.payWith,
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        color: ColorsManager.mainColor,
-                      ),
-                ),
+                // const Gutter(),
+                // Text(
+                //   StringsManager.payWith,
+                //   style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                //         color: ColorsManager.mainColor,
+                //       ),
+                // ),
                 const GutterSmall(),
                 const Divider(),
                 const GutterSmall(),
@@ -115,13 +113,13 @@ class PaymentDetailsScreen extends StatelessWidget {
                   title: StringsManager.toPay,
                   value: '${carCubit.totalPay} EGP',
                 ),
-                const GutterLarge(),
-                const PaymentMethodWidget(
-                  imagePath: ImagePaths.visaPath,
-                ),
-                const PaymentMethodWidget(
-                  imagePath: ImagePaths.cashPath,
-                ),
+                // const GutterLarge(),
+                // const PaymentMethodWidget(
+                //   imagePath: ImagePaths.visaPath,
+                // ),
+                // const PaymentMethodWidget(
+                //   imagePath: ImagePaths.cashPath,
+                // ),
                 const Gutter(),
                 const Divider(),
                 const Gutter(),
@@ -147,7 +145,7 @@ class PaymentDetailsScreen extends StatelessWidget {
                   },
                   builder: (context, state) {
                     return CustomElevatedButton(
-                      title: StringsManager.payNow,
+                      title: StringsManager.confirm,
                       isLoading: state is CreateRequestServiceLoadingState,
                       onPressed: () async {
                         if (isEdit == 'true') {

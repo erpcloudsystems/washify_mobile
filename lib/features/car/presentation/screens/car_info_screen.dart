@@ -210,8 +210,7 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
           ),
           const Gutter(),
           CustomElevatedButton(
-            title:
-                '${StringsManager.checkOut} (${context.watch<CarCubit>().totalPay}EGP)',
+            title: StringsManager.next,
             onPressed: () {
               if (carCubit.requestServiceModels.isNotEmpty) {
                 RoutesService.pushNamed(AppRoutes.paymentDetailsScreen,

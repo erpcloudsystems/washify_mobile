@@ -110,5 +110,10 @@
     "Ending date": "تاريخ الانتهاء",
     "Edit subscription": "تعديل الإشتراك",
     "ar": "عربي",
-    "en": "English"
+    "en": "English",
+    "home": "الرئيسية",
+    "more": "المزيد",
+    "shop": "المتجر",
+    "enterValidPhoneNumber": "أدخل رقم هاتف صالح",
+    "confirm": "تأكيد"
 }

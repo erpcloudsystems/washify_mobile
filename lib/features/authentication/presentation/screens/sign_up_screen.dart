@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:washify_mobile/core/resources/colors_managers.dart';
 import 'package:washify_mobile/core/resources/strings_manager.dart';
-import 'package:washify_mobile/core/utils/custom_drop_down_widget.dart';
 import 'package:washify_mobile/core/utils/custom_elevated_button.dart';
 import 'package:washify_mobile/core/utils/custom_snack_bar.dart';
 import 'package:washify_mobile/features/authentication/logic/auth/auth_cubit.dart';
@@ -50,120 +49,100 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const ProgressBarWidget(),
-                  const Gutter(),
-                  Text(
-                    StringsManager.signUp,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  const GutterSmall(),
-                  Text(
-                    StringsManager.signUpDescription,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: ColorsManager.grey,
-                        ),
-                  ),
-                  const GutterSmall(),
-                  /*const SignUpWithSocialWidget(
-                    style: SignUpWithSocialWidgetStyle.signUp,
-                  ),
-                  const GutterSmall(),
-                  const OrSignUpWithDivider(),*/
-                  const GutterSmall(),
-                  SignUpForm(
-                    firstNameController: firstNameController,
-                    lastNameController: lastNameController,
-                    passwordController: passwordController,
-                    confirmPasswordController: confirmPasswordController,
-                    phoneController: phoneController,
-                  ),
-                  const Gutter(),
-                  BlocConsumer<AuthCubit, AuthState>(
-                    listenWhen: (previous, current) => previous != current,
-                    listener: (context, state) {
-                      if (state is AuthSignUpSuccessState) {
-                        if (mounted) {
-                          context
-                              .read<OtpCubit>()
-                              .sendOtp(email: phoneController.text.trim());
-                        }
-                        showSnackBar(context: context, message: state.message);
-                        RoutesService.pushNamed(
-                          AppRoutes.otpScreen,
-                          context: context,
-                          queryParameters: {
-                            'password': passwordController.text.trim(),
-                            'phone': phoneController.text.trim(),
-                          },
-                        );
-                        clearController();
-                      } else if (state is AuthSignUpErrorState) {
-                        showSnackBar(
-                            context: context,
-                            message: state.error,
-                            color: ColorsManager.red);
+          padding: const EdgeInsets.all(12),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const ProgressBarWidget(),
+                const Gutter(),
+                Text(
+                  StringsManager.signUp,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                const GutterSmall(),
+                Text(
+                  StringsManager.signUpDescription,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: ColorsManager.grey,
+                      ),
+                ),
+                const GutterSmall(),
+                /*const SignUpWithSocialWidget(
+                  style: SignUpWithSocialWidgetStyle.signUp,
+                ),
+                const GutterSmall(),
+                const OrSignUpWithDivider(),*/
+                const GutterSmall(),
+                SignUpForm(
+                  firstNameController: firstNameController,
+                  lastNameController: lastNameController,
+                  passwordController: passwordController,
+                  confirmPasswordController: confirmPasswordController,
+                  phoneController: phoneController,
+                ),
+                const Gutter(),
+                BlocConsumer<AuthCubit, AuthState>(
+                  listenWhen: (previous, current) => previous != current,
+                  listener: (context, state) {
+                    if (state is AuthSignUpSuccessState) {
+                      if (mounted) {
+                        context
+                            .read<OtpCubit>()
+                            .sendOtp(email: phoneController.text.trim());
                       }
-                    },
-                    buildWhen: (previous, current) => previous != current,
-                    builder: (context, state) {
-                      final referralSource =
-                          context.read<AuthCubit>().referralSource;
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            StringsManager.howDidYouFindAboutUs,
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                          CustomDropDownFormField(
-                            dropDownList: referralSource,
-                            hint: 'Friends & Family',
-                            isValidate: false,
-                          ),
-                          const Gutter(),
-                          CustomElevatedButton(
-                            isLoading: state is AuthSignUpLoadingState,
-                            title: StringsManager.signUp,
-                            onPressed: _signUp,
-                          ),
-                        ],
+                      showSnackBar(context: context, message: state.message);
+                      RoutesService.pushNamed(
+                        AppRoutes.otpScreen,
+                        context: context,
+                        queryParameters: {
+                          'password': passwordController.text.trim(),
+                          'phone': phoneController.text.trim(),
+                        },
                       );
-                    },
-                  ),
-                  const Gutter(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        StringsManager.alreadyHaveAnAccount,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                      const GutterTiny(),
-                      InkWell(
-                        onTap: () => RoutesService.pushReplacementNamed(
+                      clearController();
+                    } else if (state is AuthSignUpErrorState) {
+                      showSnackBar(
                           context: context,
-                          location: AppRoutes.loginScreen,
-                        ),
-                        child: Text(
-                          StringsManager.loginHere,
-                          style:
-                              Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    color: ColorsManager.mainColor,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                        ),
+                          message: state.error,
+                          color: ColorsManager.red);
+                    }
+                  },
+                  buildWhen: (previous, current) => previous != current,
+                  builder: (context, state) {
+                    return CustomElevatedButton(
+                      isLoading: state is AuthSignUpLoadingState,
+                      title: StringsManager.signUp,
+                      onPressed: _signUp,
+                    );
+                  },
+                ),
+                const Gutter(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      StringsManager.alreadyHaveAnAccount,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    const GutterTiny(),
+                    InkWell(
+                      onTap: () => RoutesService.pushReplacementNamed(
+                        context: context,
+                        location: AppRoutes.loginScreen,
                       ),
-                    ],
-                  )
-                ],
-              ),
+                      child: Text(
+                        StringsManager.loginHere,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: ColorsManager.mainColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                    ),
+                  ],
+                )
+              ],
             ),
           ),
         ),

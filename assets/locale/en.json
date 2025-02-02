@@ -110,5 +110,10 @@
     "Ending date": "Ending date",
     "Edit subscription" : "Edit subscription",
     "ar": "عربي",
-    "en": "English"
+    "en": "English",
+    "home" : "Home",
+    "more" : "More",
+    "shop": "Shop",
+    "enterValidPhoneNumber" : "Please Enter a valid phone number",
+    "confirm" : "Confirm"
 }

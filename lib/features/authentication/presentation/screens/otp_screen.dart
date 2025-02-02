@@ -17,10 +17,7 @@ import '../../../../core/resources/strings_manager.dart';
 import '../../../../core/utils/loading_dialogs.dart';
 
 class OtpScreen extends StatefulWidget {
-  const OtpScreen(
-      {super.key,
-      required this.password,
-      required this.phone});
+  const OtpScreen({super.key, required this.password, required this.phone});
   final String password;
   final String phone;
 
@@ -124,17 +121,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         '${StringsManager.didNotReceiveCode}?',
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
-                      Text(
-                        StringsManager.useOTPtoContinue,
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              color: ColorsManager.mainColor,
-                            ),
-                      ),
                       const GutterSmall(),
-                      Text(
-                        StringsManager.or,
-                        style: Theme.of(context).textTheme.titleSmall!,
-                      ),
                       if (state is SendOtpLoadingState)
                         const CustomLoadingWidget(),
                       if (state is! SendOtpLoadingState)
