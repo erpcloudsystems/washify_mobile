@@ -34,10 +34,12 @@ class CalenderWidgetState extends State<CalenderWidget> {
 
   Color _getColor(List<VisitModel> visits) {
     for (var index in visits) {
-      if (index.status != 'Pending') {
-        return ColorsManager.green;
-      } else {
+      if (index.status == 'Open') {
         return Colors.orange;
+      } else if (index.status == 'Completed') {
+        return Colors.green;
+      } else {
+        return Colors.red;
       }
     }
     return Colors.orange;

@@ -1,5 +1,9 @@
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:washify_mobile/core/global/dependencies_container.dart';
+import 'package:washify_mobile/core/resources/constance.dart';
+
 class AddressModel {
   final String? id;
   final String subscriptionPlan;
@@ -13,6 +17,7 @@ class AddressModel {
   final String? addressLine;
   final num price;
   final String? itemCode;
+  final String? customNotes;
   //final List<DaysWeekModel> weekDays;
   AddressModel({
     this.id,
@@ -27,6 +32,7 @@ class AddressModel {
     this.startDate,
     this.endDate,
     this.addressLine,
+    this.customNotes,
     //this.weekDays = const [],
   });
 
@@ -43,6 +49,7 @@ class AddressModel {
     String? startDate,
     String? endDate,
     String? addressLine,
+    String? customNotes,
   }) {
     return AddressModel(
       id: id ?? this.id,
@@ -57,6 +64,7 @@ class AddressModel {
       startDate: startDate ?? this.startDate,
       endDate: endDate ?? this.endDate,
       addressLine: addressLine ?? this.addressLine,
+      customNotes: customNotes ?? this.customNotes,
     );
   }
 
@@ -74,9 +82,12 @@ class AddressModel {
       "address_line1": addressLine,
       "country": "Egypt",
       "doctype": "Address",
-      'plate_code': plateCode,
+      'car': plateCode,
       'model': model,
       'brand': brand,
+      'territory': city,
+      'user_id': sl<SharedPreferences>().getString(userId),
+      'custom_notes': customNotes,
       //'blocked_days': selectedDays.toList(),
     };
   }

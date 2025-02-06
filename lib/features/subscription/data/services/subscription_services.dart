@@ -33,19 +33,19 @@ class SubscriptionServices implements BaseSubscriptionServices {
   Future<List<VisitModel>> getVisits() async {
     final response = await dio.get(
       endPoint: ApiConstance.getVisitsEndPoint,
-      // query: {
-      //   'fields': '["*"]',
-      //   'filters': '[["owner", "=", "$user"]]',
-      // },
+      query: {
+        'fields': '["date","status","name"]',
+        //'filters': '[["owner", "=", "$user"]]',
+      },
     ) as Response;
-    return List.from(response.data['message'])
+    return List.from(response.data['data'] ?? [])
         .map((item) => VisitModel.fromJson(item))
         .toList();
   }
-  
+
   @override
-  Future<SubscriptionModel> getSubscription(String id)async {
-     final response = await dio.get(
+  Future<SubscriptionModel> getSubscription(String id) async {
+    final response = await dio.get(
       endPoint: '${ApiConstance.getSubscriptionEndPoint}/$id',
     ) as Response;
     return SubscriptionModel.fromMap(response.data['data']);

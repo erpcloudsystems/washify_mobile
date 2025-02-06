@@ -32,6 +32,7 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
   final modelController = TextEditingController();
   final plateController = TextEditingController();
   final addressController = TextEditingController();
+  final notesController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   late final CarCubit carCubit;
 
@@ -45,6 +46,7 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
       modelController.text = widget.car!.model;
       plateController.text = widget.car!.plateCode;
       addressController.text = widget.car!.addressLine ?? '';
+      notesController.text = widget.car!.customNotes ?? '';
     }
   }
 
@@ -63,17 +65,19 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
       if (getSelectedSubscription() != null) {
         carCubit.addNewService(
           requestServiceModel: AddressModel(
-              id: widget.isEdit == 'true' ? widget.car!.id : null,
-              subscriptionPlan: getSelectedSubscription()!.id,
-              itemCode: getSelectedSubscription()!.itemCode,
-              timesPerWeek: getSelectedSubscription()!.timesPerWeek,
-              // weekDays: getSelectedSubscription()!.selectedDays,
-              city: widget.territory,
-              plateCode: plateController.text,
-              model: modelController.text,
-              brand: brandController.text,
-              price: getSelectedSubscription()!.price,
-              addressLine: addressController.text),
+            id: widget.isEdit == 'true' ? widget.car!.id : null,
+            subscriptionPlan: getSelectedSubscription()!.id,
+            itemCode: getSelectedSubscription()!.itemCode,
+            timesPerWeek: getSelectedSubscription()!.timesPerWeek,
+            // weekDays: getSelectedSubscription()!.selectedDays,
+            city: widget.territory,
+            plateCode: plateController.text,
+            model: modelController.text,
+            brand: brandController.text,
+            price: getSelectedSubscription()!.price,
+            addressLine: addressController.text,
+            customNotes: notesController.text,
+          ),
         );
 
         plateController.clear();
@@ -139,6 +143,7 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
               modelController: modelController,
               plateController: plateController,
               addressController: addressController,
+              notesController: notesController,
             ),
           ),
           const Gutter(),

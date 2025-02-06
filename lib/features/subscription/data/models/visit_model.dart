@@ -10,8 +10,8 @@ class VisitModel {
   });
 
   factory VisitModel.fromJson(Map<String, dynamic> json) => VisitModel(
-        id: json['name'],
-        status: json['completion_status'] ?? '',
-        date: json['scheduled_date'],
+        id: json['name'] ?? '',
+        status: json['status'] ?? '',
+        date: json['date'] ?? '',
       );
 }

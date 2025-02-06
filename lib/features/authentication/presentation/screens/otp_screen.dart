@@ -28,6 +28,7 @@ class OtpScreen extends StatefulWidget {
 class _OtpScreenState extends State<OtpScreen> {
   final countDownController = CountDownController();
   late final OtpCubit otpCubit;
+  final otpTextController = TextEditingController();
 
   @override
   void initState() {
@@ -100,6 +101,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       ),
                       Pinput(
                         length: 6,
+                        controller: otpTextController,
                         onCompleted: (pin) {
                           if (countDownController.getTime() != '0') {
                             verifyOtp(int.tryParse(pin)!);
@@ -129,6 +131,7 @@ class _OtpScreenState extends State<OtpScreen> {
                           onPressed: () async {
                             await otpCubit.sendOtp(email: widget.phone);
                             countDownController.restart();
+                            otpTextController.clear();
                           },
                           child: Text(
                             StringsManager.resend,

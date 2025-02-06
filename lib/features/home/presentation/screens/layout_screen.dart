@@ -2,6 +2,8 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:washify_mobile/core/resources/strings_manager.dart';
+import 'package:washify_mobile/core/router/app_routes.dart';
+import 'package:washify_mobile/core/router/route_services.dart';
 import 'package:washify_mobile/core/utils/under_develop_widget.dart';
 import 'package:washify_mobile/features/car/presentation/widgets/cars_list_view.dart';
 import 'package:washify_mobile/features/home/presentation/screens/home_screen.dart';
@@ -42,6 +44,18 @@ class _LayoutScreenState extends State<LayoutScreen> {
       appBar: _selectedIndex != 2
           ? AppBar(
               title: Text(headers[_selectedIndex]),
+              actions: [
+                if (_selectedIndex == 3)
+                  IconButton(
+                    icon: const Icon(Icons.add_box),
+                    onPressed: () {
+                      RoutesService.pushNamed(
+                        AppRoutes.locateScreen,
+                        context: context,
+                      );
+                    },
+                  ),
+              ],
             )
           : null,
       bottomNavigationBar: CurvedNavigationBar(

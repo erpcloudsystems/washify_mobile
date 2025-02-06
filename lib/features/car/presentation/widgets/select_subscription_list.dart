@@ -77,14 +77,14 @@ class _SelectSubscriptionListState extends State<SelectSubscriptionList> {
                   value: subscriptionCubit.subscriptions[index].isSelected,
                   onChanged: (value) {
                     setState(() {
-                      subscriptionCubit.subscriptions[index].toggleSelected();
-                      if (subscriptionCubit.subscriptions[index].isSelected) {
-                        subscriptionCubit.selectedSubscriptions
-                            .add(subscriptionCubit.subscriptions[index]);
-                      } else {
-                        subscriptionCubit.selectedSubscriptions
-                            .remove(subscriptionCubit.subscriptions[index]);
+                      for (var sub in subscriptionCubit.subscriptions) {
+                        sub.isSelected = false;
                       }
+                      subscriptionCubit.subscriptions[index].toggleSelected();
+
+                      subscriptionCubit.selectedSubscriptions.clear();
+                      subscriptionCubit.selectedSubscriptions
+                          .add(subscriptionCubit.subscriptions[index]);
                     });
                   },
                 ),

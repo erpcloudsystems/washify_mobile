@@ -9,17 +9,18 @@ import '../../../../core/utils/custom_search_drop_down.dart';
 import '../../logic/cubit/car_cubit.dart';
 
 class CarInfoForm extends StatelessWidget {
-  const CarInfoForm({
-    super.key,
-    required this.brandController,
-    required this.modelController,
-    required this.plateController,
-    required this.addressController,
-  });
+  const CarInfoForm(
+      {super.key,
+      required this.brandController,
+      required this.modelController,
+      required this.plateController,
+      required this.addressController,
+      required this.notesController});
   final TextEditingController brandController;
   final TextEditingController modelController;
   final TextEditingController plateController;
   final TextEditingController addressController;
+  final TextEditingController notesController;
 
   @override
   Widget build(BuildContext context) {
@@ -95,18 +96,32 @@ class CarInfoForm extends StatelessWidget {
           ),
           const GutterTiny(),
           Pinput(
-              keyboardType: TextInputType.text,
-              controller: plateController,
-              length: 8,
-              errorTextStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    color: ColorsManager.red,
-                  ),
-              validator: (value) {
-                if (value!.trim().isEmpty) {
-                  return StringsManager.emptyValidator;
-                }
-                return null;
-              }),
+            keyboardType: TextInputType.text,
+            controller: plateController,
+            length: 8,
+            errorTextStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: ColorsManager.red,
+                ),
+            validator: (value) {
+              if (value!.trim().isEmpty) {
+                return StringsManager.emptyValidator;
+              }
+              return null;
+            },
+          ),
+          const Gutter(),
+          Text(
+            StringsManager.notes,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: ColorsManager.mainColor,
+                ),
+          ),
+          const GutterTiny(),
+          CustomTextFormField(
+            controller: notesController,
+            maxLines: 3,
+            hintText: StringsManager.addAnyNotesHere,
+          ),
         ],
       );
     });

@@ -131,6 +131,9 @@ abstract class StringsManager {
   static String get home => 'Home'.tr();
   static String get more => 'More'.tr();
   static String get shop => 'Shop'.tr();
-  static String get enterValidPhoneNumber => 'Please Enter a valid phone number'.tr();
+  static String get enterValidPhoneNumber =>
+      'Please Enter a valid phone number'.tr();
   static String get confirm => 'Confirm'.tr();
+  static String get notes => 'Notes'.tr();
+  static String get addAnyNotesHere => 'Add any notes here...'.tr();
 }

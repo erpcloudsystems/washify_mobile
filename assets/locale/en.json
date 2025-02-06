@@ -108,12 +108,14 @@
     "Active": "Active",
     "Starting date": "Starting date",
     "Ending date": "Ending date",
-    "Edit subscription" : "Edit subscription",
+    "Edit subscription": "Edit subscription",
     "ar": "عربي",
     "en": "English",
-    "home" : "Home",
-    "more" : "More",
+    "home": "Home",
+    "more": "More",
     "shop": "Shop",
-    "enterValidPhoneNumber" : "Please Enter a valid phone number",
-    "confirm" : "Confirm"
+    "enterValidPhoneNumber": "Please Enter a valid phone number",
+    "confirm": "Confirm",
+    "notes": "Notes",
+    "addAnyNotesHere": "Add any notes here..."
 }
